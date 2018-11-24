@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardcoreHistoryBlog", "HardcoreHistoryBlog\HardcoreHistoryBlog.csproj", "{E0373EF8-2036-473F-AFCD-6DB100CB8B49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardcoreHistoryBlog2.5", "HardcoreHistoryBlog\HardcoreHistoryBlog2.5.csproj", "{E0373EF8-2036-473F-AFCD-6DB100CB8B49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
