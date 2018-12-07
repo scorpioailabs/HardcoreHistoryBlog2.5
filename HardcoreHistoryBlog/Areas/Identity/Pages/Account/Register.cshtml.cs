@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -40,6 +41,14 @@ namespace HardcoreHistoryBlog.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [DisplayName("First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DisplayName("Second Name")]
+            public string LastName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
