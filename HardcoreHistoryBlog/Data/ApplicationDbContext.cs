@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using HardcoreHistoryBlog.Models;
+using HardcoreHistoryBlog.Models.Blog_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using HardcoreHistoryBlog.Data;
 
 namespace HardcoreHistoryBlog.Data
 {
@@ -19,8 +19,14 @@ namespace HardcoreHistoryBlog.Data
             : base(options)
         {
         }
+            public DbSet<Blog> Blogs { get; set; }
+            public DbSet<Post> Posts { get; set; }
+            public DbSet<Tag> Tags { get; set; }
+            public DbSet<Category> Categories { get; set; }
+            public DbSet<Blogger> Bloggers { get; set; }
             public DbSet<Client> Clients { get; set; }
             public DbSet<Customer> Customers { get; set; }
+
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    base.OnModelCreating(modelBuilder);
