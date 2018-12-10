@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HardcoreHistoryBlog.Data
 {
-    //public class ApplicationDbContext : IdentityDbContext<
-    //    ApplicationUser>
     public class ApplicationDbContext : IdentityDbContext<
         ApplicationUser>
 
@@ -27,7 +25,7 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Like> Likes { get; set; }
             public DbSet<Blogger> Bloggers { get; set; }
             public DbSet<Client> Clients { get; set; }
-            public DbSet<Customer> Customers { get; set; }
+            public DbSet<Member> Customers { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

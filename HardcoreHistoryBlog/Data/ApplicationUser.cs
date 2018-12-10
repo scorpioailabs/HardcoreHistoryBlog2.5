@@ -12,8 +12,8 @@ namespace HardcoreHistoryBlog.Data
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual ICollection<Client> Clients { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Blogger> Bloggers { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
         public string FirstName { get; internal set; }
         public string LastName { get; internal set; }
 
