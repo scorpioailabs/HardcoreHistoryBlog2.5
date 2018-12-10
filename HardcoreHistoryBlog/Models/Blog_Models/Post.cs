@@ -29,9 +29,12 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual Category Category { get; set; }
 
         public virtual IList<Tag> Tags { get; set; }
-
+        public List<Comment> Comments { get; set; }
+        
         public int BlogForeignKey { get; set; }
         [ForeignKey("BlogForeignKey")]
         public Blog Blog { get; set; }
+
+        public List<Like> Likes { get; set; }
     }
 }

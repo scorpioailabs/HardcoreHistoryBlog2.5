@@ -53,8 +53,8 @@ namespace HardcoreHistoryBlog.Data
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,
-                                        "Member").Wait();
+                    userManager.AddToRoleAsync
+                        (user, "Member").Wait();
                 }
             }
 
@@ -74,8 +74,8 @@ namespace HardcoreHistoryBlog.Data
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,
-                                        "Member").Wait();
+                    userManager.AddToRoleAsync
+                        (user, "Member").Wait();
                 }
             }
 
