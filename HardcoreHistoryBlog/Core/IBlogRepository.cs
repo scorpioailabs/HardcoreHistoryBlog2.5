@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HardcoreHistoryBlog.Core
 {
-    interface IBlogRepository : IRepository<Post>
+    public interface IBlogRepository : IRepository<Post>
     {
         IEnumerable<Post> GetTopPosts(int count);
         IEnumerable<Post> GetPostsWithAuthors(int pageIndex, int pageSize);
