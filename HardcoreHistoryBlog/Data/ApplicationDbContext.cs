@@ -27,46 +27,42 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Client> Clients { get; set; }
             public DbSet<Member> Customers { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<PostTag>()
+                .HasKey(t => new { t.PostId, t.TagId });
 
-        //    modelBuilder.Entity<ApplicationUser>(b =>
-        //    {
-        //        // Each User can have many UserClaims
-        //        b.HasMany(e => e.Claims)
-        //            .WithOne()
-        //            .HasForeignKey(uc => uc.UserId)
-        //            .IsRequired();
+            builder.Entity<PostTag>()
+                .HasOne(pt => pt.Post)
+                .WithMany(p => p.PostTags)
+                .HasForeignKey(pt => pt.PostId);
 
-        //        // Each User can have many UserLogins
-        //        b.HasMany(e => e.Logins)
-        //            .WithOne()
-        //            .HasForeignKey(ul => ul.UserId)
-        //            .IsRequired();
+            builder.Entity<PostTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.PostTags)
+                .HasForeignKey(pt => pt.TagId);
 
-        //        // Each User can have many UserTokens
-        //        b.HasMany(e => e.Tokens)
-        //            .WithOne()
-        //            .HasForeignKey(ut => ut.UserId)
-        //            .IsRequired();
+            //builder.Entity<ApplicationUser>()
+            //    .HasMany(e => e.Claims)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-        //        // Each User can have many entries in the UserRole join table
-        //        b.HasMany(e => e.UserRoles)
-        //            .WithOne(e => e.User)
-        //            .HasForeignKey(ur => ur.UserId)
-        //            .IsRequired();
-        //    });
+            //builder.Entity<ApplicationUser>()
+            //    .HasMany(e => e.Logins)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<IdentityRole>(b =>
-            //{
-            //    // Each Role can have many entries in the UserRole join table
-            //    b.HasMany(e => e.UserRoles)
-            //        .WithOne(e => e.Role)
-            //        .HasForeignKey(ur => ur.RoleId)
-            //        .IsRequired();
-            //});
-
-        //}
+            //builder.Entity<ApplicationUser>()
+            //    .HasMany(e => e.Roles)
+            //    .WithOne()
+            //    .HasForeignKey(e => e.UserId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

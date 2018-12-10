@@ -11,6 +11,8 @@ namespace HardcoreHistoryBlog.Models
     {
         public int CommentId { get; set; }
         public string Content { get; set; }
+        public virtual DateTime CommentedOn { get; set; }
+        public virtual DateTime? Modified { get; set; }
 
         public int PostForeignKey { get; set; }
         [ForeignKey("PostForeignKey")]

@@ -11,6 +11,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual int TagId { get; set; }        
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual IList<Post> Posts { get; set; }
+        public List<PostTag> PostTags { get; set; }
     }
 }

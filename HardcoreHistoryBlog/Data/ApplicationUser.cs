@@ -17,59 +17,19 @@ namespace HardcoreHistoryBlog.Data
         public string FirstName { get; internal set; }
         public string LastName { get; internal set; }
 
-        //    //[DisplayName("First Name")]
-        //    //public string FirstName { get; set; }
-        //    //[DisplayName("Second Name")]
-        //    //public string LastName { get; set; }
+        ///// <summary>
+        ///// Navigation property for the roles this user belongs to.
+        ///// </summary>
+        //public virtual ICollection<IdentityUserRole<int>> Roles { get; } = new List<IdentityUserRole<int>>();
 
-        //    //[DisplayName("Email")]
-        //    //[DataType(DataType.EmailAddress)]
-        //    //public string Email { get; set; }
-        //    public virtual ICollection<ApplicationUserClaim> Claims { get; set; }
-        //    public virtual ICollection<ApplicationUserLogin> Logins { get; set; }
-        //    public virtual ICollection<ApplicationUserToken> Tokens { get; set; }
-        //    public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
+        ///// <summary>
+        ///// Navigation property for the claims this user possesses.
+        ///// </summary>
+        //public virtual ICollection<IdentityUserClaim<int>> Claims { get; } = new List<IdentityUserClaim<int>>();
 
-        //    //public virtual ICollection<Client> Clients { get; set; }
-        //    //public virtual ICollection<Customer> Customers { get; set; }
-        //    //public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
-        //    //public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
-        //    //public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
-        //    //public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
-
-        //}
-        //public class IdentityRole : IdentityRole
-        //{
-        //    public IdentityRole(string roleName) : base(roleName)
-        //    {
-        //    }
-
-        //    public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
-        //    public virtual ICollection<IdentityRoleClaim> RoleClaims { get; set; }
-        //}
-        //public class ApplicationUserRole : IdentityUserRole<string>
-        //{
-        //    public virtual ApplicationUser User { get; set; }
-        //    public virtual IdentityRole Role { get; set; }
-        //}
-        //public class ApplicationUserClaim : IdentityUserClaim<string>
-        //{
-        //    public virtual ApplicationUser User { get; set; }
-        //}
-
-        //public class ApplicationUserLogin : IdentityUserLogin<string>
-        //{
-        //    public virtual ApplicationUser User { get; set; }
-        //}
-
-        //public class IdentityRoleClaim : IdentityRoleClaim<string>
-        //{
-        //    public virtual IdentityRole Role { get; set; }
-        //}
-
-        //public class ApplicationUserToken : IdentityUserToken<string>
-        //{
-        //    public virtual ApplicationUser User { get; set; }
-        //}
+        ///// <summary>
+        ///// Navigation property for this users login accounts.
+        ///// </summary>
+        //public virtual ICollection<IdentityUserLogin<int>> Logins { get; } = new List<IdentityUserLogin<int>>();
     }
 }
