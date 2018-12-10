@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class init : Migration
+    public partial class init4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

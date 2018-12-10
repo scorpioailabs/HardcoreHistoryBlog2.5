@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181210190341_init")]
-    partial class init
+    [Migration("20181210194624_init4")]
+    partial class init4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
