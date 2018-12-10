@@ -11,5 +11,7 @@ namespace HardcoreHistoryBlog.Core
         IEnumerable<Post> GetTopPosts(int count);
         IEnumerable<Post> GetPostsWithAuthors(int pageIndex, int pageSize);
         IEnumerable<Post> GetMostRecentPosts(int count);
+        IEnumerable<Post> GetPostsWithCategories(int pageIndex, int pageSize);
+        IEnumerable<Post> GetPostsWithTags(int pageIndex, int pageSize);
     }
 }

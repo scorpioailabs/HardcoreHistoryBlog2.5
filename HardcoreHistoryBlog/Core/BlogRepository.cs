@@ -35,6 +35,24 @@ namespace HardcoreHistoryBlog.Core
                 .Take(pageSize)
                 .ToList();
         }
+        public IEnumerable<Post> GetPostsWithCategories(int pageIndex, int pageSize = 6)
+        {
+            return ApplicationDbContext.Posts
+                .Include(c => c.Category)
+                .OrderBy(c => c.Category)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+        public IEnumerable<Post> GetPostsWithTags(int pageIndex, int pageSize = 6)
+        {
+            return ApplicationDbContext.Posts
+                .Include(c => c.PostTags)
+                .OrderBy(c => c.PostTags)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
 
         public ApplicationDbContext ApplicationDbContext
         {
