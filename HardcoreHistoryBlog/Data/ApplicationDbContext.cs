@@ -41,27 +41,6 @@ namespace HardcoreHistoryBlog.Data
                 .HasOne(pt => pt.Tag)
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(pt => pt.TagId);
-
-            //builder.Entity<ApplicationUser>()
-            //    .HasMany(e => e.Claims)
-            //    .WithOne()
-            //    .HasForeignKey(e => e.UserId)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<ApplicationUser>()
-            //    .HasMany(e => e.Logins)
-            //    .WithOne()
-            //    .HasForeignKey(e => e.UserId)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<ApplicationUser>()
-            //    .HasMany(e => e.Roles)
-            //    .WithOne()
-            //    .HasForeignKey(e => e.UserId)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
