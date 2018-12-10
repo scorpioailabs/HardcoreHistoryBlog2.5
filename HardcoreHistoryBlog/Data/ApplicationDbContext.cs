@@ -24,8 +24,7 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Comment> Comments { get; set; }
             public DbSet<Like> Likes { get; set; }
             public DbSet<Blogger> Bloggers { get; set; }
-            public DbSet<Client> Clients { get; set; }
-            public DbSet<Member> Customers { get; set; }
+            public DbSet<Member> Members { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

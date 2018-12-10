@@ -18,6 +18,10 @@ namespace HardcoreHistoryBlog.Models
         public string FirstName { get; set; }
         [DisplayName("Second Name")]
         public string LastName { get; set; }
-    
+
+        [InverseProperty("Author")]
+        public List<Post> AuthoredPosts { get; set; }
+        [InverseProperty("Contributor")]
+        public List<Post> ContributedToPosts { get; set; }
     }
 }
