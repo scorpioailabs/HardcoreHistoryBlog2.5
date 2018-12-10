@@ -4,16 +4,14 @@ using HardcoreHistoryBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HardcoreHistoryBlog.Data.Migrations
+namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181210184115_blogmodels")]
-    partial class blogmodels
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,13 +135,9 @@ namespace HardcoreHistoryBlog.Data.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("ContributerBloggerId");
-
                     b.Property<int>("ContributorBloggerId");
 
                     b.Property<string>("Description");
-
-                    b.Property<string>("Meta");
 
                     b.Property<DateTime?>("Modified");
 
@@ -163,7 +157,7 @@ namespace HardcoreHistoryBlog.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ContributerBloggerId");
+                    b.HasIndex("ContributorBloggerId");
 
                     b.ToTable("Posts");
                 });
@@ -215,29 +209,6 @@ namespace HardcoreHistoryBlog.Data.Migrations
                     b.ToTable("Bloggers");
                 });
 
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Client", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Clients");
-                });
-
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
@@ -279,7 +250,7 @@ namespace HardcoreHistoryBlog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -412,7 +383,7 @@ namespace HardcoreHistoryBlog.Data.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blogger", "Author")
-                        .WithMany()
+                        .WithMany("AuthoredPosts")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -426,9 +397,10 @@ namespace HardcoreHistoryBlog.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HardcoreHistoryBlog.Models.Blogger", "Contributer")
-                        .WithMany()
-                        .HasForeignKey("ContributerBloggerId");
+                    b.HasOne("HardcoreHistoryBlog.Models.Blogger", "Contributor")
+                        .WithMany("ContributedToPosts")
+                        .HasForeignKey("ContributorBloggerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostTag", b =>
@@ -448,13 +420,6 @@ namespace HardcoreHistoryBlog.Data.Migrations
                 {
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "User")
                         .WithMany("Bloggers")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Client", b =>
-                {
-                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "User")
-                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 

@@ -18,6 +18,38 @@ namespace HardcoreHistoryBlog.Data
         {
             context.Database.EnsureCreated();
             {
+                if (!roleManager.RoleExistsAsync("Blogger").Result)
+                {
+                    IdentityRole role = new IdentityRole
+                    {
+                        Name = "Blogger"
+                    };
+                    IdentityResult roleResult = roleManager.
+                    CreateAsync(role).Result;
+                }
+
+
+                if (!roleManager.RoleExistsAsync
+                    ("Admin").Result)
+                {
+                    IdentityRole role = new IdentityRole
+                    {
+                        Name = "Admin"
+                    };
+                    IdentityResult roleResult = roleManager.
+                    CreateAsync(role).Result;
+                }
+
+                if (!roleManager.RoleExistsAsync
+                    ("Member").Result)
+                {
+                    IdentityRole role = new IdentityRole
+                    {
+                        Name = "Member"
+                    };
+                    IdentityResult roleResult = roleManager.
+                    CreateAsync(role).Result;
+                }
                 ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Member1@email.com",
@@ -140,39 +172,6 @@ namespace HardcoreHistoryBlog.Data
                     userManager.AddToRoleAsync(user,
                                         "Member").Wait();
                 }
-            }
-
-            if (!roleManager.RoleExistsAsync("Blogger").Result)
-            {
-                IdentityRole role = new IdentityRole
-                {
-                    Name = "Blogger"
-                };
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
-            }
-
-
-            if (!roleManager.RoleExistsAsync
-                ("Admin").Result)
-            {
-                IdentityRole role = new IdentityRole
-                {
-                    Name = "Admin"
-                };
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
-            }
-
-            if (!roleManager.RoleExistsAsync
-                ("Member").Result)
-            {
-                IdentityRole role = new IdentityRole
-                {
-                    Name = "Member"
-                };
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
             }
         }
 
