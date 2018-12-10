@@ -23,7 +23,7 @@ namespace HardcoreHistoryBlog.Core
             return Context.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetMostRecentPosts()
         {
             return Context.Set<TEntity>().ToList();
         }

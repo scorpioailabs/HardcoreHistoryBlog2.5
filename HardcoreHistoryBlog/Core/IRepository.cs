@@ -13,7 +13,7 @@ namespace HardcoreHistoryBlog.Core
     public interface IRepository<TEntity> where TEntity : class
     {
         TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetMostRecentPosts();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);

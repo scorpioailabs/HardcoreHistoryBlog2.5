@@ -42,5 +42,7 @@ namespace HardcoreHistoryBlog.Data
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(pt => pt.TagId);
         }
+
+        public DbSet<HardcoreHistoryBlog.Models.BlogViewModel> BlogViewModel { get; set; }
     }
 }

@@ -55,6 +55,7 @@ namespace HardcoreHistoryBlog
         .AddRazorPagesOptions(options =>
         {
             options.Conventions.AddPageRouteModelConvention("/Account", model => { });
+            options.Conventions.AddPageRouteModelConvention("/Blog", model => { });
             options.AllowAreas = true;
             options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
             options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
