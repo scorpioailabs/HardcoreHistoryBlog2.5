@@ -11,6 +11,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual int CategoryId { get; set; }
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual List<Post> Posts { get; set; }
+        public virtual List<PostCategory> PostCategories { get; set; } 
     }
 }
