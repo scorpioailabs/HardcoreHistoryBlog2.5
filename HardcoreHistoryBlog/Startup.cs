@@ -38,6 +38,10 @@ namespace HardcoreHistoryBlog
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<BlogDbContext>(options =>
+    options.UseSqlServer(
+        Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

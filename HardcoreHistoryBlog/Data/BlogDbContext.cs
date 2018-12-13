@@ -6,15 +6,19 @@ using HardcoreHistoryBlog.Models.Blog_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace HardcoreHistoryBlog.Data
 {
-    public class BlogDbContext : IdentityDbContext
-    {
-        public BlogDbContext(DbContextOptions<BlogDbContext> options)
+    public class BlogDbContext : IdentityDbContext<ApplicationUser>
+    { 
+
+                public BlogDbContext(DbContextOptions<BlogDbContext> options)
             : base(options)
-        {
-        }
+    {
+    }
+
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }

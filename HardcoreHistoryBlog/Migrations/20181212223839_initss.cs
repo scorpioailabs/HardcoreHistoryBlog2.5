@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class init : Migration
+    public partial class initss : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -479,6 +479,7 @@ namespace HardcoreHistoryBlog.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_postTags", x => new { x.PostId, x.TagId });
+                    table.UniqueConstraint("AK_postTags_PostId", x => x.PostId);
                     table.ForeignKey(
                         name: "FK_postTags_Posts_PostId",
                         column: x => x.PostId,
@@ -694,7 +695,7 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostForeignKey",
                 principalTable: "Posts",
                 principalColumn: "PostId",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Categories_CategoryId",

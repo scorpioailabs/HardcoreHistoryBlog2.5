@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BlogDbContext))]
+    partial class BlogDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -247,6 +247,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<int>("TagId");
 
                     b.HasKey("PostId", "TagId");
+
+                    b.HasAlternateKey("PostId");
 
                     b.HasIndex("TagId");
 

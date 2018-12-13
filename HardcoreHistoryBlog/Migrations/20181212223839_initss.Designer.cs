@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181212203153_users")]
-    partial class users
+    [DbContext(typeof(BlogDbContext))]
+    [Migration("20181212223839_initss")]
+    partial class initss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,6 +249,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<int>("TagId");
 
                     b.HasKey("PostId", "TagId");
+
+                    b.HasAlternateKey("PostId");
 
                     b.HasIndex("TagId");
 
