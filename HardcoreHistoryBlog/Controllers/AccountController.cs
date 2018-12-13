@@ -11,8 +11,6 @@ namespace HardcoreHistoryBlog.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IBloggerRepository bloggerRepository;
-        private readonly IBlogRepository blogRepository;
         
 
 
