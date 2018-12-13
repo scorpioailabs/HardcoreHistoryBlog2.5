@@ -50,7 +50,7 @@ namespace HardcoreHistoryBlog.Data
                     IdentityResult roleResult = roleManager.
                     CreateAsync(role).Result;
                 }
-                Blogger user = new Blogger
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Member1@email.com",
                     Email = "Member1@email.com",
@@ -72,7 +72,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer1").Result == null)
             {
-                Member user = new Member
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Customer1@email.com",
                     Email = "Customer1@email.com",
@@ -93,7 +93,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer2").Result == null)
             {
-                Member user = new Member
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Customer2@email.com",
                     Email = "Customer2@email.com",
@@ -114,7 +114,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer3").Result == null)
             {
-                Member user = new Member 
+                ApplicationUser user = new ApplicationUser 
                 {
                     UserName = "Customer3@email.com",
                     Email = "Customer3@email.com",
@@ -135,7 +135,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer4").Result == null)
             {
-                Member user = new Member
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Customer4@email.com",
                     Email = "Customer4@email.com",
@@ -156,7 +156,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer5").Result == null)
             {
-                Member user = new Member
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = "Customer5@email.com",
                     Email = "Customer5@email.com",

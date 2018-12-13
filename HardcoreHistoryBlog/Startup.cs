@@ -38,7 +38,7 @@ namespace HardcoreHistoryBlog
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<BlogDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         Configuration.GetConnectionString("DefaultConnection")));
 

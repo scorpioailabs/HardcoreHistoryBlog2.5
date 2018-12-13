@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class initss : Migration
+    public partial class initwithrepos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -473,19 +473,20 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "postTags",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(nullable: false),
+                    PostId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PostId1 = table.Column<int>(nullable: true),
                     TagId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_postTags", x => new { x.PostId, x.TagId });
-                    table.UniqueConstraint("AK_postTags_PostId", x => x.PostId);
+                    table.PrimaryKey("PK_postTags", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_postTags_Posts_PostId",
-                        column: x => x.PostId,
+                        name: "FK_postTags_Posts_PostId1",
+                        column: x => x.PostId1,
                         principalTable: "Posts",
                         principalColumn: "PostId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_postTags_Tags_TagId",
                         column: x => x.TagId,
@@ -660,6 +661,11 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_postTags_PostId1",
+                table: "postTags",
+                column: "PostId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_postTags_TagId",
                 table: "postTags",
                 column: "TagId");
@@ -695,7 +701,7 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostForeignKey",
                 principalTable: "Posts",
                 principalColumn: "PostId",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Categories_CategoryId",

@@ -9,8 +9,8 @@ namespace HardcoreHistoryBlog.Core
 {
     public class MemberRepository
     {
-        private readonly BlogDbContext context;
-        public MemberRepository(BlogDbContext context)
+        private readonly ApplicationDbContext context;
+        public MemberRepository(ApplicationDbContext context)
         {
             if (context == null) throw new ArgumentNullException("context");
         }

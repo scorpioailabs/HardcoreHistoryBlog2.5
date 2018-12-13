@@ -4,16 +4,14 @@ using HardcoreHistoryBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    [DbContext(typeof(BlogDbContext))]
-    [Migration("20181212223839_initss")]
-    partial class initss
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,13 +242,17 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostTag", b =>
                 {
-                    b.Property<int>("PostId");
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId1");
 
                     b.Property<int>("TagId");
 
-                    b.HasKey("PostId", "TagId");
+                    b.HasKey("PostId");
 
-                    b.HasAlternateKey("PostId");
+                    b.HasIndex("PostId1");
 
                     b.HasIndex("TagId");
 
@@ -639,8 +641,7 @@ namespace HardcoreHistoryBlog.Migrations
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
                         .WithMany("PostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PostId1");
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Tag", "Tag")
                         .WithMany("PostTags")
