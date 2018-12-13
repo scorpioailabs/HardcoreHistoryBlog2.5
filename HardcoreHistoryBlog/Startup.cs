@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using HardcoreHistoryBlog.Models;
 
 namespace HardcoreHistoryBlog
 {
@@ -37,6 +38,10 @@ namespace HardcoreHistoryBlog
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,22 +12,36 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
     public class Post
     {
         public virtual int PostId { get; set; }
+        
         public virtual string Title { get; set; }
+        [Required(ErrorMessage = "Title is required")]
+
         public virtual string Short_Description { get; set; }
         public virtual string Description { get; set; }
 
+        [ForeignKey("AuthorForeignKey")]
         public int AuthorId { get; set; }
-        public Blogger Author { get; set; }
+        public Author Author { get; set; }
 
+        [ForeignKey("BloggerForeignKey")]
         public int ContributorBloggerId { get; set; }
-        public Blogger Contributor { get; set; }
+        public Contributor Contributor { get; set; }
 
         public virtual bool Published { get; set; }
+
+        [DisplayName("Posted On")]
         public virtual DateTime PostedOn { get; set; }
+
+        [DisplayName("Updated On")]
         public virtual DateTime? Modified { get; set; }
 
+        [Required(ErrorMessage = "At least one Category is required")]
+        [DisplayName("Category:")]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        [Required(ErrorMessage = "Tag is required")]
+        [DisplayName("Tags:")]
         public List<PostTag> PostTags { get; set; }
         public List<Comment> Comments { get; set; }
 
@@ -34,16 +50,19 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public Blog Blog { get; set; }
 
         public List<Like> Likes { get; set; }
+        public virtual IEnumerable<Category> Categories { get; set; }
     }
     public class Author
-    {
-        public int AuthorBloggerId { get; set; }
-        public virtual Blogger Blogger { get; set; }
 
+    {
+        [ForeignKey("BloggerForeignKey")]
+        public int Id { get; set; }  
+        public virtual Blogger Blogger { get; set; }
     }
     public class Contributor
     {
-        public int ContributorBloggerId { get; set; }
+        [ForeignKey("BloggerForeignKey")]
+        public int Id { get; set; }  
         public virtual Blogger Blogger { get; set; }
     }
 }
