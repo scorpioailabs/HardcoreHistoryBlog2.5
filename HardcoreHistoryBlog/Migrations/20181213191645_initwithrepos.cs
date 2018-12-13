@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class firstseeder : Migration
+    public partial class initwithrepos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -324,7 +324,7 @@ namespace HardcoreHistoryBlog.Migrations
                     Modified = table.Column<DateTime>(type: "DateTime2", nullable: true),
                     Update_time = table.Column<DateTime>(nullable: true),
                     MemberId = table.Column<int>(nullable: false),
-                    PostId = table.Column<int>(nullable: false),
+                    PostForeignKey = table.Column<int>(nullable: false),
                     Publish = table.Column<bool>(nullable: false),
                     MemberDetailsId = table.Column<string>(nullable: true)
                 },
@@ -591,9 +591,9 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "MemberDetailsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_PostId",
+                name: "IX_Comments_PostForeignKey",
                 table: "Comments",
-                column: "PostId");
+                column: "PostForeignKey");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributor_BloggerId",
@@ -696,9 +696,9 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "ContributorDetailsId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Posts_PostId",
+                name: "FK_Comments_Posts_PostForeignKey",
                 table: "Comments",
-                column: "PostId",
+                column: "PostForeignKey",
                 principalTable: "Posts",
                 principalColumn: "PostId",
                 onDelete: ReferentialAction.NoAction);

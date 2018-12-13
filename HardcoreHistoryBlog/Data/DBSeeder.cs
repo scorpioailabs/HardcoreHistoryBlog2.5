@@ -114,7 +114,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer3").Result == null)
             {
-                ApplicationUser user = new ApplicationUser
+                ApplicationUser user = new ApplicationUser 
                 {
                     UserName = "Customer3@email.com",
                     Email = "Customer3@email.com",

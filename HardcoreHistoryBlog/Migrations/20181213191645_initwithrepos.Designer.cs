@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181213191044_firstseeder")]
-    partial class firstseeder
+    [Migration("20181213191645_initwithrepos")]
+    partial class initwithrepos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -378,7 +378,7 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("DateTime2");
 
-                    b.Property<int>("PostId");
+                    b.Property<int>("PostForeignKey");
 
                     b.Property<bool>("Publish");
 
@@ -388,7 +388,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasIndex("MemberDetailsId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("PostForeignKey");
 
                     b.ToTable("Comments");
                 });
@@ -693,7 +693,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId")
+                        .HasForeignKey("PostForeignKey")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

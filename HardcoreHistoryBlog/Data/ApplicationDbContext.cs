@@ -29,6 +29,22 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Blogger> Bloggers { get; set; }
             public DbSet<Member> Members { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
+        //    builder.Entity<PostTag>()
+        //        .HasKey(t => new { t.PostId, t.TagId });
+
+        //    builder.Entity<PostTag>()
+        //        .HasOne(pt => pt.Post)
+        //        .WithMany(p => p.PostTags)
+        //        .HasForeignKey(pt => pt.PostId);
+
+        //    builder.Entity<PostTag>()
+        //        .HasOne(pt => pt.Tag)
+        //        .WithMany(t => t.PostTags)
+        //        .HasForeignKey(pt => pt.TagId);
+        //}
 
         public DbSet<HardcoreHistoryBlog.Models.BlogViewModel> BlogViewModel { get; set; }
     }
