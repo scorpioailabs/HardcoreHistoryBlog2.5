@@ -15,3 +15,4 @@ namespace HardcoreHistoryBlog.Core
         IEnumerable<Post> GetPostsWithTags(int pageIndex, int pageSize);
     }
 }
+

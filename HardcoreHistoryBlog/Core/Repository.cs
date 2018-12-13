@@ -54,6 +54,6 @@ namespace HardcoreHistoryBlog.Core
         }
 
 
-        
+
     }
 }

@@ -21,7 +21,7 @@ namespace HardcoreHistoryBlog.Core
             return ApplicationDbContext.Posts.OrderByDescending(c => c.Likes).Take(count).ToList();
         }
 
-        public IEnumerable<Post> GetMostRecentPosts(int count) 
+        public IEnumerable<Post> GetMostRecentPosts(int count)
         {
             return ApplicationDbContext.Posts.OrderByDescending(c => c.PostedOn).Take(count).ToList();
         }
