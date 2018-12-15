@@ -11,7 +11,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         [Key]
         public int PostId { get; set; }
         public Post Post { get; set; }
-
+        public string Name { get; set; }   
         public int TagId { get; set; }
         public Tag Tag { get; set; }
     }

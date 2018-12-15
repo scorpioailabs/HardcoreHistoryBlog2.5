@@ -53,7 +53,6 @@ namespace HardcoreHistoryBlog.Core
                 .Take(pageSize)
                 .ToList();
         }
-
         public ApplicationDbContext ApplicationDbContext
         {
             get { return Context as ApplicationDbContext; }

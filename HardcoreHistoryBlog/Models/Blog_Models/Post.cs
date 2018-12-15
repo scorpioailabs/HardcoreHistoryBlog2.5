@@ -17,7 +17,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         [Required(ErrorMessage = "Title is required")]
 
         public virtual string Short_Description { get; set; }
-        public virtual string Description { get; set; }
+        public virtual string Content { get; set; } 
 
         [ForeignKey("AuthorForeignKey")]
         public int AuthorId { get; set; }
@@ -38,6 +38,18 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         [Required(ErrorMessage = "At least one Category is required")]
         [DisplayName("Category:")]
         public int CategoryId { get; set; }
+
+        internal void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AddToPosts(Post post)
+        {
+            throw new NotImplementedException();
+        }
+        public int GetPost { get; set; } 
+
         public virtual Category Category { get; set; }
 
         [Required(ErrorMessage = "Tag is required")]

@@ -14,6 +14,7 @@ namespace HardcoreHistoryBlog.Core
     : base(context)
         {
         }
+
         public IEnumerable<Comment> GetComments(int pageIndex, int pageSize = 6)
         {
             return ApplicationDbContext.Comments

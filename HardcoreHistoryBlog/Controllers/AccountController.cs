@@ -6,22 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using HardcoreHistoryBlog.Data;
 using HardcoreHistoryBlog.Core;
+using HardcoreHistoryBlog.Models;
 
 namespace HardcoreHistoryBlog.Controllers
 {
     public class AccountController : Controller
     {
-        
 
-
-
-
-        public IActionResult Index()
+        private readonly IBlogRepository repositoryBlog;
+        private readonly ICommentRepository repositoryComment; 
+        public AccountController (IBlogRepository repoPost, ICommentRepository repoComment)
         {
-            return View();
+            repositoryBlog = repoPost;
+            repositoryComment = repoComment;
         }
-        public IActionResult Me()
+
+        [Authorize(Roles = "Blogger")]
+        public ActionResult Index()
         {
+            DateTime Last24Hours = DateTime.Now.Date.AddHours(-24);
+            DashboardVM model = new DashboardVM();
             return View();
         }
 
