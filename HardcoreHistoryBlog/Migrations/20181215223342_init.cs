@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class firstseed : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -325,6 +325,7 @@ namespace HardcoreHistoryBlog.Migrations
                     Update_time = table.Column<DateTime>(nullable: true),
                     MemberId = table.Column<int>(nullable: false),
                     PostId = table.Column<int>(nullable: false),
+                    FK_Comments_Posts_PostId = table.Column<int>(nullable: false),
                     Publish = table.Column<bool>(nullable: false),
                     MemberDetailsId = table.Column<string>(nullable: true)
                 },
@@ -347,7 +348,7 @@ namespace HardcoreHistoryBlog.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     Short_Description = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
                     AuthorId = table.Column<int>(nullable: false),
                     ContributorBloggerId = table.Column<int>(nullable: false),
                     ContributorId = table.Column<int>(nullable: true),
@@ -355,6 +356,7 @@ namespace HardcoreHistoryBlog.Migrations
                     PostedOn = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
+                    GetPost = table.Column<int>(nullable: false),
                     BlogForeignKey = table.Column<int>(nullable: false),
                     BlogViewModelId = table.Column<int>(nullable: true),
                     BloggerId = table.Column<string>(nullable: true),
@@ -476,6 +478,7 @@ namespace HardcoreHistoryBlog.Migrations
                     PostId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PostId1 = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     TagId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -586,14 +589,14 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_FK_Comments_Posts_PostId",
+                table: "Comments",
+                column: "FK_Comments_Posts_PostId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_MemberDetailsId",
                 table: "Comments",
                 column: "MemberDetailsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_PostId",
-                table: "Comments",
-                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contributor_BloggerId",
@@ -696,12 +699,12 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "ContributorDetailsId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Posts_PostId",
+                name: "FK_Comments_Posts_FK_Comments_Posts_PostId",
                 table: "Comments",
-                column: "PostId",
+                column: "FK_Comments_Posts_PostId",
                 principalTable: "Posts",
                 principalColumn: "PostId",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Categories_CategoryId",

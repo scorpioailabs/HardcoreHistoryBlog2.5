@@ -28,7 +28,16 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Widget> Widgets { get; set; }
             public DbSet<Blogger> Bloggers { get; set; }
             public DbSet<Member> Members { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Comment>()
+                .HasOne(pt => pt.Post)
+                .WithMany(c => c.Comments)
+                .HasForeignKey("FK_Comments_Posts_PostId")
+                .OnDelete(DeleteBehavior.ClientSetNull); // sets null
 
+            base.OnModelCreating(modelbuilder);
+        }
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
         //    base.OnModelCreating(builder);

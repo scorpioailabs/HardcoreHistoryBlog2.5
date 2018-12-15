@@ -181,11 +181,13 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<int>("CategoryId");
 
+                    b.Property<string>("Content");
+
                     b.Property<int>("ContributorBloggerId");
 
                     b.Property<int?>("ContributorId");
 
-                    b.Property<string>("Description");
+                    b.Property<int>("GetPost");
 
                     b.Property<string>("MemberId");
 
@@ -245,6 +247,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
 
                     b.Property<int?>("PostId1");
 
@@ -369,6 +373,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<int>("FK_Comments_Posts_PostId");
+
                     b.Property<string>("MemberDetailsId");
 
                     b.Property<int>("MemberId");
@@ -384,9 +390,9 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("MemberDetailsId");
+                    b.HasIndex("FK_Comments_Posts_PostId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("MemberDetailsId");
 
                     b.ToTable("Comments");
                 });
@@ -563,7 +569,7 @@ namespace HardcoreHistoryBlog.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Category", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
-                        .WithMany("Categories")
+                        .WithMany("GetCategories")
                         .HasForeignKey("PostId");
                 });
 
@@ -640,7 +646,7 @@ namespace HardcoreHistoryBlog.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostTag", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
-                        .WithMany("PostTags")
+                        .WithMany("postTags")
                         .HasForeignKey("PostId1");
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Tag", "Tag")
@@ -685,14 +691,13 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comment", b =>
                 {
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("FK_Comments_Posts_PostId");
+
                     b.HasOne("HardcoreHistoryBlog.Models.Member", "MemberDetails")
                         .WithMany()
                         .HasForeignKey("MemberDetailsId");
-
-                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
-                        .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
