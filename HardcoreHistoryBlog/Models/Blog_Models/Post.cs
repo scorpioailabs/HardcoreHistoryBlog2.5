@@ -41,20 +41,21 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         internal void SaveChanges()
         {
-            throw new NotImplementedException();
+            throw new Exception();
         }
 
         internal void AddToPosts(Post post)
         {
-            throw new NotImplementedException();
+            AddToPosts(post);
         }
+
         public int GetPost { get; set; } 
 
         public virtual Category Category { get; set; }
 
         [Required(ErrorMessage = "Tag is required")]
         [DisplayName("Tags:")]
-        public List<PostTag> PostTags { get; set; }
+        public List<PostTag> postTags { get; set; } 
         public List<Comment> Comments { get; set; }
 
         public int BlogForeignKey { get; set; }
@@ -62,7 +63,8 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public Blog Blog { get; set; }
 
         public List<Like> Likes { get; set; }
-        public virtual IEnumerable<Category> Categories { get; set; }
+        public virtual IEnumerable<Category> GetCategories { get; set; }
+
     }
     public class Author
 

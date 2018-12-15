@@ -47,8 +47,8 @@ namespace HardcoreHistoryBlog.Core
         public IEnumerable<Post> GetPostsWithTags(int pageIndex, int pageSize = 6)
         {
             return ApplicationDbContext.Posts
-                .Include(c => c.PostTags)
-                .OrderBy(c => c.PostTags)
+                .Include(c => c.postTags)
+                .OrderBy(c => c.postTags)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
