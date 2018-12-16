@@ -38,22 +38,6 @@ namespace HardcoreHistoryBlog.Data
 
             base.OnModelCreating(modelbuilder);
         }
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
-        //    builder.Entity<PostTag>()
-        //        .HasKey(t => new { t.PostId, t.TagId });
-
-        //    builder.Entity<PostTag>()
-        //        .HasOne(pt => pt.Post)
-        //        .WithMany(p => p.PostTags)
-        //        .HasForeignKey(pt => pt.PostId);
-
-        //    builder.Entity<PostTag>()
-        //        .HasOne(pt => pt.Tag)
-        //        .WithMany(t => t.PostTags)
-        //        .HasForeignKey(pt => pt.TagId);
-        //}
         public DbSet<HardcoreHistoryBlog.Models.BlogViewModel> BlogViewModel { get; set; }
     }
 }
