@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using HardcoreHistoryBlog.Data;
 
 namespace HardcoreHistoryBlog.Models.Blog_Models
 {
@@ -14,6 +15,5 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public Post Post { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-
     }
 }

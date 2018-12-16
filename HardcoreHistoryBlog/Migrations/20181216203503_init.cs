@@ -31,16 +31,15 @@ namespace HardcoreHistoryBlog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Blogs",
+                name: "Blog",
                 columns: table => new
                 {
                     BlogId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Url = table.Column<string>(nullable: true)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogId);
+                    table.PrimaryKey("PK_Blog", x => x.BlogId);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,8 +272,10 @@ namespace HardcoreHistoryBlog.Migrations
                     Published = table.Column<bool>(nullable: false),
                     PostedOn = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
+                    Category = table.Column<string>(nullable: false),
+                    Tag = table.Column<string>(nullable: true),
                     GetPost = table.Column<int>(nullable: false),
+                    CategoriesCategoryId = table.Column<int>(nullable: true),
                     BlogForeignKey = table.Column<int>(nullable: true),
                     AuthorId = table.Column<string>(nullable: true)
                 },
@@ -288,9 +289,9 @@ namespace HardcoreHistoryBlog.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Posts_Blogs_BlogForeignKey",
+                        name: "FK_Posts_Blog_BlogForeignKey",
                         column: x => x.BlogForeignKey,
-                        principalTable: "Blogs",
+                        principalTable: "Blog",
                         principalColumn: "BlogId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -371,7 +372,7 @@ namespace HardcoreHistoryBlog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PostCategory",
+                name: "postCategories",
                 columns: table => new
                 {
                     PostId = table.Column<int>(nullable: false)
@@ -381,15 +382,15 @@ namespace HardcoreHistoryBlog.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostCategory", x => x.PostId);
+                    table.PrimaryKey("PK_postCategories", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_PostCategory_Categories_CategoryId",
+                        name: "FK_postCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostCategory_Posts_PostId1",
+                        name: "FK_postCategories_Posts_PostId1",
                         column: x => x.PostId1,
                         principalTable: "Posts",
                         principalColumn: "PostId",
@@ -510,13 +511,13 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostForeignKey");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostCategory_CategoryId",
-                table: "PostCategory",
+                name: "IX_postCategories_CategoryId",
+                table: "postCategories",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostCategory_PostId1",
-                table: "PostCategory",
+                name: "IX_postCategories_PostId1",
+                table: "postCategories",
                 column: "PostId1");
 
             migrationBuilder.CreateIndex(
@@ -530,9 +531,9 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "BlogForeignKey");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_CategoryId",
+                name: "IX_Posts_CategoriesCategoryId",
                 table: "Posts",
-                column: "CategoryId");
+                column: "CategoriesCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_postTags_PostId1",
@@ -563,12 +564,12 @@ namespace HardcoreHistoryBlog.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Posts_Categories_CategoryId",
+                name: "FK_Posts_Categories_CategoriesCategoryId",
                 table: "Posts",
-                column: "CategoryId",
+                column: "CategoriesCategoryId",
                 principalTable: "Categories",
                 principalColumn: "CategoryId",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -604,7 +605,7 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "Likes");
 
             migrationBuilder.DropTable(
-                name: "PostCategory");
+                name: "postCategories");
 
             migrationBuilder.DropTable(
                 name: "postTags");
@@ -631,7 +632,7 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Blogs");
+                name: "Blog");
 
             migrationBuilder.DropTable(
                 name: "Categories");

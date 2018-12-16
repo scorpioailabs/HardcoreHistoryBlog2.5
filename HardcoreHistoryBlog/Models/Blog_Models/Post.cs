@@ -48,7 +48,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         [Required(ErrorMessage = "Tag is required")]
         [DisplayName("Tags:")]
-        public List<PostTag> postTags { get; set; } 
+        public List<Tag> postTags { get; set; } 
         public List<Comment> Comments { get; set; }
 
         [ForeignKey("BlogForeignKey")]
@@ -56,6 +56,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public List<Like> Likes { get; set; }
         public virtual IEnumerable<Category> GetCategories { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
 
         public virtual Client Author { get; set; }  
     }

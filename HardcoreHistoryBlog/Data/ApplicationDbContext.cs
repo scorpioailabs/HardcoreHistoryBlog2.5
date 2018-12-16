@@ -24,6 +24,7 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Tag> Tags { get; set; }
             public DbSet<PostTag> postTags { get; set; }
             public DbSet<Category> Categories { get; set; }
+            public DbSet<PostCategory> postCategories { get; set; }
             public DbSet<Comment> Comments { get; set; }
             public DbSet<Settings> Settings { get; set; }
             public DbSet<Like> Likes { get; set; }

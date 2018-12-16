@@ -4,14 +4,16 @@ using HardcoreHistoryBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181216205847_re-seedededed")]
+    partial class reseedededed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,8 +189,6 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<DateTime?>("Modified");
 
-                    b.Property<int?>("PostId1");
-
                     b.Property<DateTime>("PostedOn");
 
                     b.Property<bool>("Published");
@@ -207,8 +207,6 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasIndex("BlogForeignKey");
 
                     b.HasIndex("CategoriesCategoryId");
-
-                    b.HasIndex("PostId1");
 
                     b.ToTable("Posts");
                 });
@@ -523,10 +521,6 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Category", "Categories")
                         .WithMany()
                         .HasForeignKey("CategoriesCategoryId");
-
-                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
-                        .WithMany("Posts")
-                        .HasForeignKey("PostId1");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostCategory", b =>

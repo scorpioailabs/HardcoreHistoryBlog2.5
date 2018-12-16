@@ -169,7 +169,17 @@ namespace HardcoreHistoryBlog.Data
 
             if (!context.Posts.Any())
             {
-                context.Posts.Add(new Post() { Title = "My first post", Short_Description = "Test post in Hardcore History", Content = "The Mongols- A short, bloody account.", Category = "Steppes", PostedOn = DateTime.Now, Tag = "Mongols", Published = true });
+                context.Posts.Add(new Post() { Title = "My first post", Short_Description = "Test post in Hardcore History", Content = "The Mongols- A short, bloody account.", PostedOn = DateTime.Now, Tag = "Mongols", Category = "Medieval History", GetPost = 1, Published = true });
+                context.SaveChanges();
+            }
+            if(!context.Tags.Any())
+            {
+                context.Tags.Add(new Tag() { Name = "Mongols" });
+                context.SaveChanges();
+            }
+            if(!context.Categories.Any())
+            {
+                context.Categories.Add(new Category() { Name = "Medieval History" });
                 context.SaveChanges();
             }
         }

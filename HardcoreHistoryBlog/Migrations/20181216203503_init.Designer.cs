@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181216171051_init")]
+    [Migration("20181216203503_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,11 +123,9 @@ namespace HardcoreHistoryBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Url");
-
                     b.HasKey("BlogId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blog");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Category", b =>
@@ -180,7 +178,10 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<int?>("BlogForeignKey");
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int?>("CategoriesCategoryId");
+
+                    b.Property<string>("Category")
+                        .IsRequired();
 
                     b.Property<string>("Content");
 
@@ -195,6 +196,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("Short_Description")
                         .IsRequired();
 
+                    b.Property<string>("Tag");
+
                     b.Property<string>("Title");
 
                     b.HasKey("PostId");
@@ -203,7 +206,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasIndex("BlogForeignKey");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoriesCategoryId");
 
                     b.ToTable("Posts");
                 });
@@ -224,7 +227,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasIndex("PostId1");
 
-                    b.ToTable("PostCategory");
+                    b.ToTable("postCategories");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostTag", b =>
@@ -504,17 +507,16 @@ namespace HardcoreHistoryBlog.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Client", "Author")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Blog", "Blog")
                         .WithMany("Posts")
                         .HasForeignKey("BlogForeignKey");
 
-                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Category", "Category")
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Category", "Categories")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoriesCategoryId");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostCategory", b =>
@@ -558,7 +560,7 @@ namespace HardcoreHistoryBlog.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comment", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Customer", "Customers")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("CustomersId");
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
