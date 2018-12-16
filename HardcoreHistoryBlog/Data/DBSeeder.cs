@@ -20,6 +20,7 @@ namespace HardcoreHistoryBlog.Data
         {
             context.Database.Migrate();
             {
+                
 
                 if (!roleManager.RoleExistsAsync
                     ("Admin").Result)
@@ -164,6 +165,12 @@ namespace HardcoreHistoryBlog.Data
                     userManager.AddToRoleAsync(user,
                                         "Customer").Wait();
                 }
+            }
+
+            if (!context.Posts.Any())
+            {
+                context.Posts.Add(new Post() { Title = "My first post", Short_Description = "Test post in Hardcore History", Content = "The Mongols- A short, bloody account.", Category = "Steppes", PostedOn = DateTime.Now, Tag = "Mongols", Published = true });
+                context.SaveChanges();
             }
         }
 

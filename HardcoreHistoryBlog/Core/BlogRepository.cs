@@ -38,8 +38,8 @@ namespace HardcoreHistoryBlog.Core
         public IEnumerable<Post> GetPostsWithCategories(int pageIndex, int pageSize = 6)
         {
             return ApplicationDbContext.Posts
-                .Include(c => c.Category)
-                .OrderBy(c => c.Category)
+                .Include(c => c.Categories)
+                .OrderBy(c => c.Categories)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

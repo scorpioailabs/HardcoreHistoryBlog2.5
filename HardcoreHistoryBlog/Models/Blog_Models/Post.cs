@@ -29,7 +29,8 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         [Required(ErrorMessage = "At least one Category is required")]
         [DisplayName("Category:")]
-        public int CategoryId { get; set; }
+        public string Category { get; set; }
+        public string Tag { get; set; }
 
         internal void SaveChanges()
         {
@@ -43,7 +44,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public int GetPost { get; set; } 
 
-        public virtual Category Category { get; set; }
+        public virtual Category Categories { get; set; }
 
         [Required(ErrorMessage = "Tag is required")]
         [DisplayName("Tags:")]
@@ -63,5 +64,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
     {
         public virtual ApplicationUser Author { get; set; } 
         public virtual ApplicationRole Role { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

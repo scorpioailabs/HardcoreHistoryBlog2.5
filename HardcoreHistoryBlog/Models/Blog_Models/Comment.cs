@@ -40,5 +40,6 @@ namespace HardcoreHistoryBlog.Models
     {
         public virtual ApplicationUser Customers { get; set; }
         public virtual ApplicationRole Role { get; set; } 
+        public virtual ICollection<Comment> Comments { get; set; } 
     }
 }

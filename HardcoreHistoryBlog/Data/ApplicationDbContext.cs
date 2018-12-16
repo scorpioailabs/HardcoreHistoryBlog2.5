@@ -28,17 +28,17 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Settings> Settings { get; set; }
             public DbSet<Like> Likes { get; set; }
             public DbSet<Widget> Widgets { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelbuilder.Entity<Comment>()
+            builder.Entity<Comment>()
                 .HasOne(pt => pt.Post)
                 .WithMany(c => c.Comments)
                 .HasForeignKey("FK_Comments_Posts_PostId")
                 .OnDelete(DeleteBehavior.ClientSetNull); // sets null
 
-            base.OnModelCreating(modelbuilder);
+            base.OnModelCreating(builder);
 
-            modelbuilder.Entity<ApplicationUser>(b =>
+            builder.Entity<ApplicationUser>(b =>
             {
                 // Each User can have many UserClaims
                 b.HasMany(e => e.Claims)
@@ -64,6 +64,12 @@ namespace HardcoreHistoryBlog.Data
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
+
+            {
+                builder.Entity<Post>().ToTable("Posts");
+                builder.Entity<Comment>().ToTable("Comments");
+                builder.Entity<Blog>().ToTable("Blog");
+            }
         }
     }
 }
