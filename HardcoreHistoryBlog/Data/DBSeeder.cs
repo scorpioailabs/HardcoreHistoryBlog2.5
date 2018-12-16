@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,13 +15,13 @@ namespace HardcoreHistoryBlog.Data
 
 
         public static void SeedDb
-            (ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+            (ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
             {
                 if (!roleManager.RoleExistsAsync("Blogger").Result)
                 {
-                    IdentityRole role = new IdentityRole
+                    ApplicationRole role = new ApplicationRole
                     {
                         Name = "Blogger"
                     };
@@ -32,7 +33,7 @@ namespace HardcoreHistoryBlog.Data
                 if (!roleManager.RoleExistsAsync
                     ("Admin").Result)
                 {
-                    IdentityRole role = new IdentityRole
+                    ApplicationRole role = new ApplicationRole
                     {
                         Name = "Admin"
                     };
@@ -43,7 +44,7 @@ namespace HardcoreHistoryBlog.Data
                 if (!roleManager.RoleExistsAsync
                     ("Member").Result)
                 {
-                    IdentityRole role = new IdentityRole
+                    ApplicationRole role = new ApplicationRole
                     {
                         Name = "Member"
                     };

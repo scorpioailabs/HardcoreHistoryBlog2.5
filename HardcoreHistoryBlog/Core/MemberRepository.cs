@@ -33,21 +33,21 @@ namespace HardcoreHistoryBlog.Core
 
         public bool Save(Member member)
         {
-            if (member.MemberId == 0)
+            if (member.Id == null)
             {
-                Member _member = new Member();
-                _member.FirstName = member.FirstName;
-                _member.LastName = member.LastName;
-                _member.Email = member.Email;
+                Member _member = new Member
+                {
+                    FirstName = member.FirstName,
+                    LastName = member.LastName,
+                    Email = member.Email,
 
-                _member.Password = member.Password;
+                    PasswordHash = member.PasswordHash,
 
-                _member.Last_Login = member.Last_Login;
-                _member.RoleId = member.RoleId;
-                _member.CommentedOnPosts = member.CommentedOnPosts;
+                    CommentedOnPosts = member.CommentedOnPosts
+                };
 
                 context.Members.Add(_member);
-                _member.MemberId = member.MemberId;
+                _member.Id = member.Id;
 
                 int res = context.SaveChanges();
 
@@ -64,16 +64,14 @@ namespace HardcoreHistoryBlog.Core
             }
             else
             {
-                Member dbEntry = context.Members.Find(member.MemberId);
+                Member dbEntry = context.Members.Find(member.Id);
                 if (dbEntry != null)
                 {
-                    dbEntry.MemberId = member.MemberId;
+                    dbEntry.Id = member.Id;
                     dbEntry.FirstName = member.FirstName;
                     dbEntry.LastName = member.LastName;
                     dbEntry.Email = member.Email;
-                    dbEntry.Password = member.Password;
-                    dbEntry.Last_Login = member.Last_Login;
-                    dbEntry.RoleId = member.RoleId;
+                    dbEntry.PasswordHash = member.PasswordHash;
                     dbEntry.CommentedOnPosts = member.CommentedOnPosts;
                 }
 
@@ -85,7 +83,7 @@ namespace HardcoreHistoryBlog.Core
                 {
                     Succeeded = false;
                 }
-                member.MemberId = dbEntry.MemberId;
+                member.Id = dbEntry.Id;
             }
             return Succeeded;
         }

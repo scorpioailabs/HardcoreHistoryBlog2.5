@@ -43,7 +43,7 @@ namespace HardcoreHistoryBlog
     options.UseSqlServer(
         Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>().AddRoles<IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc(config =>
@@ -79,7 +79,7 @@ namespace HardcoreHistoryBlog
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             //initializing custom roles 
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             string[] roleNames = { "Admin", "Blogger", "Member" };
             IdentityResult roleResult;
@@ -90,7 +90,7 @@ namespace HardcoreHistoryBlog
                 var roleExist = await RoleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole (roleName));
+                    roleResult = await RoleManager.CreateAsync(new ApplicationRole (roleName));
                 }
             }
 
@@ -119,7 +119,7 @@ namespace HardcoreHistoryBlog
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ApplicationDbContext 
-            context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole>roleManager)
+            context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole>roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

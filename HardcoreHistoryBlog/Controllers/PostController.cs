@@ -23,7 +23,7 @@ namespace HardcoreHistoryBlog.Controllers
         }
 
         [AutoValidateAntiforgeryToken]
-        [Authorize(Roles = "Blogger")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Update(int? id, string title, string content, DateTime dateTime, string tags)
         {
 

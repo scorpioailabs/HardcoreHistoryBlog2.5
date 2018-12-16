@@ -23,8 +23,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public int AuthorId { get; set; }
         public Author Author { get; set; }
 
-        [ForeignKey("BloggerForeignKey")]
-        public int ContributorBloggerId { get; set; }
+        [ForeignKey("ContributorForeignKey")]
         public Contributor Contributor { get; set; }
 
         public virtual bool Published { get; set; }
@@ -58,7 +57,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public List<PostTag> postTags { get; set; } 
         public List<Comment> Comments { get; set; }
 
-        public int BlogForeignKey { get; set; }
         [ForeignKey("BlogForeignKey")]
         public Blog Blog { get; set; }
 

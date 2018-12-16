@@ -21,11 +21,8 @@ namespace HardcoreHistoryBlog.Controllers
             repositoryComment = repoComment;
         }
 
-        [Authorize(Roles = "Blogger")]
         public ActionResult Index()
         {
-            DateTime Last24Hours = DateTime.Now.Date.AddHours(-24);
-            DashboardVM model = new DashboardVM();
             return View();
         }
 

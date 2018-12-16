@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HardcoreHistoryBlog.Data
 {
@@ -16,5 +17,7 @@ namespace HardcoreHistoryBlog.Data
         public virtual ICollection<Member> Members { get; set; }
         public string FirstName { get; internal set; }
         public string LastName { get; internal set; }
+        [ForeignKey("Role")]
+        public virtual ApplicationRole ApplicationRole { get; internal set; }
     }
 }
