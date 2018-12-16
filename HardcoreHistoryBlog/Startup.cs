@@ -94,7 +94,7 @@ namespace HardcoreHistoryBlog
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = { "Admin", "Blogger", "Member" };
+            string[] roleNames = { "Admin", "Customer" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -153,20 +153,3 @@ namespace HardcoreHistoryBlog
     }
 }
 
-        //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-        //loggerFactory.AddDebug();
-        //app.UseHttpsRedirection();
-        //app.UseCookiePolicy();
-        //app.UseStaticFiles();​
-        //app.UseAuthentication();
-        //app.UseMvc(routes =>
-        //{
-        //    routes.MapRoute(
-        //      name: "default",
-        //      template: "{controller=Home}/{action=Index}/{id?}");
-        //});
-        //CreateRoles(serviceProvider).Wait();
-
-//    }
-//    }
-//}

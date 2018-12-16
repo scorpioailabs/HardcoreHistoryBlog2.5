@@ -24,9 +24,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public DateTime Updated_On { get; set; }
 
         [DisplayName("Updated by")]
-        public int AuthorId { get; set; }  
-
-        public virtual Author AuthorDetails { get; set; }
-        public virtual Contributor ContributorDetails { get; set; }
-}
+        public virtual Client Author { get; set; }   
+    }
 }

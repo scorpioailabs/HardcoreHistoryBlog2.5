@@ -13,11 +13,13 @@ namespace HardcoreHistoryBlog.Data
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual ICollection<Blogger> Bloggers { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
         public string FirstName { get; internal set; }
         public string LastName { get; internal set; }
         [ForeignKey("Role")]
         public virtual ApplicationRole ApplicationRole { get; internal set; }
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+        public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+        public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
+        public virtual ICollection<IdentityUserRole<string>> UserRoles { get; set; }
     }
 }

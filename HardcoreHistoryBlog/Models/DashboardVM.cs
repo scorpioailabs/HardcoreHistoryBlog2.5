@@ -7,7 +7,6 @@ namespace HardcoreHistoryBlog.Models
 {
     public class DashboardVM
     {
-        public Blogger Blogger { get; set; }
         public int NumberOfNewPosts { get; set; }
         public int NumberOfUnapprovedComments { get; set; }
     }

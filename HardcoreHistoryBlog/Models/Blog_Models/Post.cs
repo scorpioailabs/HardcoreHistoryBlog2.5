@@ -19,13 +19,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual string Short_Description { get; set; }
         public virtual string Content { get; set; } 
 
-        [ForeignKey("AuthorForeignKey")]
-        public int AuthorId { get; set; }
-        public Author Author { get; set; }
-
-        [ForeignKey("ContributorForeignKey")]
-        public Contributor Contributor { get; set; }
-
         public virtual bool Published { get; set; }
 
         [DisplayName("Posted On")]
@@ -63,18 +56,12 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public List<Like> Likes { get; set; }
         public virtual IEnumerable<Category> GetCategories { get; set; }
 
+        public virtual Client Author { get; set; }  
     }
-    public class Author
 
+    public class Client : ApplicationUser
     {
-        [ForeignKey("BloggerForeignKey")]
-        public int Id { get; set; }  
-        public virtual Blogger Blogger { get; set; }
-    }
-    public class Contributor
-    {
-        [ForeignKey("BloggerForeignKey")]
-        public int Id { get; set; }  
-        public virtual Blogger Blogger { get; set; }
+        public virtual ApplicationUser Author { get; set; } 
+        public virtual ApplicationRole Role { get; set; }
     }
 }

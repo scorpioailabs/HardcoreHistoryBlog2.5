@@ -35,9 +35,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         [DisplayName("Updated By:")]
         public int UserId { get; set; }
         [DisplayName("Last Category")]
-
-        public virtual Author AuthorDetails { get; set; }
-        public virtual Contributor ContributorDetails { get; set; }
-        public virtual Member MemberDetails { get; set; }
+        public virtual Category LastTopic { get; set; }   
     }
 }

@@ -16,7 +16,6 @@ namespace HardcoreHistoryBlog.Migrations
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ParentRoleId = table.Column<string>(nullable: true)
                 },
@@ -102,8 +101,8 @@ namespace HardcoreHistoryBlog.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    Member_UserId = table.Column<string>(nullable: true)
+                    AuthorId = table.Column<string>(nullable: true),
+                    CustomersId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -115,14 +114,14 @@ namespace HardcoreHistoryBlog.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_AspNetUsers_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_Member_UserId",
-                        column: x => x.Member_UserId,
+                        name: "FK_AspNetUsers_AspNetUsers_CustomersId",
+                        column: x => x.CustomersId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -214,85 +213,6 @@ namespace HardcoreHistoryBlog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Author",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BloggerId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Author", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Author_AspNetUsers_BloggerId",
-                        column: x => x.BloggerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contributor",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BloggerId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contributor", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Contributor_AspNetUsers_BloggerId",
-                        column: x => x.BloggerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    HomeImage = table.Column<string>(nullable: false),
-                    HomeImageText = table.Column<string>(nullable: false),
-                    NumberOfLastPost = table.Column<int>(nullable: false),
-                    Categories = table.Column<int>(nullable: false),
-                    PostNumberInPage = table.Column<int>(nullable: false),
-                    NumberOfTopPost = table.Column<int>(nullable: false),
-                    Update_Time = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    AuthorDetailsId = table.Column<int>(nullable: true),
-                    ContributorDetailsId = table.Column<int>(nullable: true),
-                    MemberDetailsId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Settings_Author_AuthorDetailsId",
-                        column: x => x.AuthorDetailsId,
-                        principalTable: "Author",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Settings_Contributor_ContributorDetailsId",
-                        column: x => x.ContributorDetailsId,
-                        principalTable: "Contributor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Settings_AspNetUsers_MemberDetailsId",
-                        column: x => x.MemberDetailsId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Widgets",
                 columns: table => new
                 {
@@ -301,22 +221,15 @@ namespace HardcoreHistoryBlog.Migrations
                     WidgetName = table.Column<string>(nullable: false),
                     WidgetContent = table.Column<string>(nullable: false),
                     Updated_On = table.Column<DateTime>(nullable: false),
-                    AuthorId = table.Column<int>(nullable: false),
-                    ContributorDetailsId = table.Column<int>(nullable: true)
+                    AuthorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Widgets", x => x.WidgetId);
                     table.ForeignKey(
-                        name: "FK_Widgets_Author_AuthorId",
+                        name: "FK_Widgets_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "Author",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Widgets_Contributor_ContributorDetailsId",
-                        column: x => x.ContributorDetailsId,
-                        principalTable: "Contributor",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -335,14 +248,14 @@ namespace HardcoreHistoryBlog.Migrations
                     PostId = table.Column<int>(nullable: false),
                     FK_Comments_Posts_PostId = table.Column<int>(nullable: false),
                     Publish = table.Column<bool>(nullable: false),
-                    MemberDetailsId = table.Column<string>(nullable: true)
+                    CustomersId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_MemberDetailsId",
-                        column: x => x.MemberDetailsId,
+                        name: "FK_Comments_AspNetUsers_CustomersId",
+                        column: x => x.CustomersId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -357,76 +270,28 @@ namespace HardcoreHistoryBlog.Migrations
                     Title = table.Column<string>(nullable: true),
                     Short_Description = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<int>(nullable: false),
-                    ContributorForeignKey = table.Column<int>(nullable: true),
                     Published = table.Column<bool>(nullable: false),
                     PostedOn = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
                     GetPost = table.Column<int>(nullable: false),
                     BlogForeignKey = table.Column<int>(nullable: true),
-                    BlogViewModelId = table.Column<int>(nullable: true),
-                    BloggerId = table.Column<string>(nullable: true),
-                    BloggerId1 = table.Column<string>(nullable: true),
-                    MemberId = table.Column<string>(nullable: true)
+                    AuthorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_Author_AuthorId",
+                        name: "FK_Posts_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "Author",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Posts_Blogs_BlogForeignKey",
                         column: x => x.BlogForeignKey,
                         principalTable: "Blogs",
                         principalColumn: "BlogId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_BloggerId",
-                        column: x => x.BloggerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_BloggerId1",
-                        column: x => x.BloggerId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_Contributor_ContributorForeignKey",
-                        column: x => x.ContributorForeignKey,
-                        principalTable: "Contributor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_MemberId",
-                        column: x => x.MemberId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BlogViewModel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PostId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BlogViewModel", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BlogViewModel_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -531,15 +396,37 @@ namespace HardcoreHistoryBlog.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    HomeImage = table.Column<string>(nullable: false),
+                    HomeImageText = table.Column<string>(nullable: false),
+                    NumberOfLastPost = table.Column<int>(nullable: false),
+                    Categories = table.Column<int>(nullable: false),
+                    PostNumberInPage = table.Column<int>(nullable: false),
+                    NumberOfTopPost = table.Column<int>(nullable: false),
+                    Update_Time = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    LastTopicCategoryId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Settings_Categories_LastTopicCategoryId",
+                        column: x => x.LastTopicCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoles_ParentRoleId",
-                table: "AspNetRoles",
-                column: "ParentRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -547,6 +434,11 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoles_ParentRoleId",
+                table: "AspNetRoles",
+                column: "ParentRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -583,24 +475,14 @@ namespace HardcoreHistoryBlog.Migrations
                 filter: "[Role] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_UserId",
+                name: "IX_AspNetUsers_AuthorId",
                 table: "AspNetUsers",
-                column: "UserId");
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_Member_UserId",
+                name: "IX_AspNetUsers_CustomersId",
                 table: "AspNetUsers",
-                column: "Member_UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Author_BloggerId",
-                table: "Author",
-                column: "BloggerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BlogViewModel_PostId",
-                table: "BlogViewModel",
-                column: "PostId");
+                column: "CustomersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_PostId",
@@ -608,19 +490,14 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_CustomersId",
+                table: "Comments",
+                column: "CustomersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_FK_Comments_Posts_PostId",
                 table: "Comments",
                 column: "FK_Comments_Posts_PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_MemberDetailsId",
-                table: "Comments",
-                column: "MemberDetailsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contributor_BloggerId",
-                table: "Contributor",
-                column: "BloggerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_CommentForeignKey",
@@ -653,34 +530,9 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "BlogForeignKey");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_BlogViewModelId",
-                table: "Posts",
-                column: "BlogViewModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_BloggerId",
-                table: "Posts",
-                column: "BloggerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_BloggerId1",
-                table: "Posts",
-                column: "BloggerId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Posts_CategoryId",
                 table: "Posts",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_ContributorForeignKey",
-                table: "Posts",
-                column: "ContributorForeignKey");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_MemberId",
-                table: "Posts",
-                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_postTags_PostId1",
@@ -693,29 +545,14 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settings_AuthorDetailsId",
+                name: "IX_Settings_LastTopicCategoryId",
                 table: "Settings",
-                column: "AuthorDetailsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_ContributorDetailsId",
-                table: "Settings",
-                column: "ContributorDetailsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_MemberDetailsId",
-                table: "Settings",
-                column: "MemberDetailsId");
+                column: "LastTopicCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Widgets_AuthorId",
                 table: "Widgets",
                 column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Widgets_ContributorDetailsId",
-                table: "Widgets",
-                column: "ContributorDetailsId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Comments_Posts_FK_Comments_Posts_PostId",
@@ -732,14 +569,6 @@ namespace HardcoreHistoryBlog.Migrations
                 principalTable: "Categories",
                 principalColumn: "CategoryId",
                 onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Posts_BlogViewModel_BlogViewModelId",
-                table: "Posts",
-                column: "BlogViewModelId",
-                principalTable: "BlogViewModel",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -749,28 +578,8 @@ namespace HardcoreHistoryBlog.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Author_AspNetUsers_BloggerId",
-                table: "Author");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Contributor_AspNetUsers_BloggerId",
-                table: "Contributor");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Posts_AspNetUsers_BloggerId",
+                name: "FK_Posts_AspNetUsers_AuthorId",
                 table: "Posts");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Posts_AspNetUsers_BloggerId1",
-                table: "Posts");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Posts_AspNetUsers_MemberId",
-                table: "Posts");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_BlogViewModel_Posts_PostId",
-                table: "BlogViewModel");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Categories_Posts_PostId",
@@ -822,19 +631,10 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Author");
-
-            migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "BlogViewModel");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Contributor");
         }
     }
 }

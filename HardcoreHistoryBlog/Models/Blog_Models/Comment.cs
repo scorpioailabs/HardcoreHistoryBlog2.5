@@ -1,4 +1,5 @@
-﻿using HardcoreHistoryBlog.Models.Blog_Models;
+﻿using HardcoreHistoryBlog.Data;
+using HardcoreHistoryBlog.Models.Blog_Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,8 +32,13 @@ namespace HardcoreHistoryBlog.Models
         [DisplayName("Published")]
         public bool Publish { get; set; }
 
-        virtual public Member MemberDetails { get; set; }
-        
+        virtual public Customer Customers { get; set; }
         public List<Like> Likes { get; set; }        
+    }
+
+    public class Customer : ApplicationUser
+    {
+        public virtual ApplicationUser Customers { get; set; }
+        public virtual ApplicationRole Role { get; set; } 
     }
 }

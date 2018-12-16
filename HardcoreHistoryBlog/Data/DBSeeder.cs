@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Models;
+using HardcoreHistoryBlog.Models.Blog_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,16 +20,6 @@ namespace HardcoreHistoryBlog.Data
         {
             context.Database.Migrate();
             {
-                if (!roleManager.RoleExistsAsync("Blogger").Result)
-                {
-                    ApplicationRole role = new ApplicationRole
-                    {
-                        Name = "Blogger"
-                    };
-                    IdentityResult roleResult = roleManager.
-                    CreateAsync(role).Result;
-                }
-
 
                 if (!roleManager.RoleExistsAsync
                     ("Admin").Result)
@@ -42,16 +33,16 @@ namespace HardcoreHistoryBlog.Data
                 }
 
                 if (!roleManager.RoleExistsAsync
-                    ("Member").Result)
+                    ("Customer").Result)
                 {
                     ApplicationRole role = new ApplicationRole
                     {
-                        Name = "Member"
+                        Name = "Customer"
                     };
                     IdentityResult roleResult = roleManager.
                     CreateAsync(role).Result;
                 }
-                ApplicationUser user = new ApplicationUser
+                Client user = new Client 
                 {
                     UserName = "Member1@email.com",
                     Email = "Member1@email.com",
@@ -65,7 +56,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user,
-                    "Blogger").Wait();
+                    "Admin").Wait();
                 }
             }
 
@@ -87,7 +78,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync
-                        (user, "Member").Wait();
+                        (user, "Customer").Wait();
                 }
             }
 
@@ -108,7 +99,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync
-                        (user, "Member").Wait();
+                        (user, "Customer").Wait();
                 }
             }
 
@@ -129,7 +120,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user,
-                                        "Member").Wait();
+                                        "Customer").Wait();
                 }
             }
 
@@ -150,7 +141,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user,
-                                        "Member").Wait();
+                                        "Customer").Wait();
                 }
             }
 
@@ -171,7 +162,7 @@ namespace HardcoreHistoryBlog.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user,
-                                        "Member").Wait();
+                                        "Customer").Wait();
                 }
             }
         }

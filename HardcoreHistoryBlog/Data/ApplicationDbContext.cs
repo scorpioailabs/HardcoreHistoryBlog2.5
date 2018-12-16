@@ -10,7 +10,9 @@ using Microsoft.EntityFrameworkCore;
 namespace HardcoreHistoryBlog.Data
 {
     public class ApplicationDbContext : IdentityDbContext<
-        ApplicationUser>
+                ApplicationUser, ApplicationRole, string,
+        IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>,
+        IdentityRoleClaim<string>, IdentityUserToken<string>>
 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -26,8 +28,6 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Settings> Settings { get; set; }
             public DbSet<Like> Likes { get; set; }
             public DbSet<Widget> Widgets { get; set; }
-            public DbSet<Blogger> Bloggers { get; set; }
-            public DbSet<Member> Members { get; set; }
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<Comment>()
@@ -37,7 +37,33 @@ namespace HardcoreHistoryBlog.Data
                 .OnDelete(DeleteBehavior.ClientSetNull); // sets null
 
             base.OnModelCreating(modelbuilder);
+
+            modelbuilder.Entity<ApplicationUser>(b =>
+            {
+                // Each User can have many UserClaims
+                b.HasMany(e => e.Claims)
+                    .WithOne()
+                    .HasForeignKey(uc => uc.UserId)
+                    .IsRequired();
+
+                // Each User can have many UserLogins
+                b.HasMany(e => e.Logins)
+                    .WithOne()
+                    .HasForeignKey(ul => ul.UserId)
+                    .IsRequired();
+
+                // Each User can have many UserTokens
+                b.HasMany(e => e.Tokens)
+                    .WithOne()
+                    .HasForeignKey(ut => ut.UserId)
+                    .IsRequired();
+
+                // Each User can have many entries in the UserRole join table
+                b.HasMany(e => e.UserRoles)
+                    .WithOne()
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
         }
-        public DbSet<HardcoreHistoryBlog.Models.BlogViewModel> BlogViewModel { get; set; }
     }
 }
