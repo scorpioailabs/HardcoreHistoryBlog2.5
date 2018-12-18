@@ -25,20 +25,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostedOn" class="control-label"></label>
-                <input asp-for="PostedOn" class="form-control" />
-                <span asp-validation-for="PostedOn" class="text-danger"></span>
+                <label asp-for="DateTimePosted" class="control-label"></label>
+                <input asp-for="DateTimePosted" class="form-control" />
+                <span asp-validation-for="DateTimePosted" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Modified" class="control-label"></label>
@@ -54,11 +47,6 @@
                 <label asp-for="Tag" class="control-label"></label>
                 <input asp-for="Tag" class="form-control" />
                 <span asp-validation-for="Tag" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GetPost" class="control-label"></label>
-                <input asp-for="GetPost" class="form-control" />
-                <span asp-validation-for="GetPost" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

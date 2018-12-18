@@ -18,12 +18,8 @@ namespace HardcoreHistoryBlog.Controllers
         {
             _context = context;
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
 
-        //GET: Posts
+        // GET: Posts
         public async Task<IActionResult> Index()
         {
             return View(await _context.Posts.ToListAsync());
@@ -58,13 +54,13 @@ namespace HardcoreHistoryBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Title,Short_Description,Content,Published,PostedOn,Modified,Category,Tag,GetPost")] Post post)
+        public async Task<IActionResult> Post([Bind("PostId,Title,Short_Description,Content,Category,Tag")] Post post)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                _context.Posts.Add(new Post() { });
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Post));
             }
             return View(post);
         }
@@ -90,7 +86,7 @@ namespace HardcoreHistoryBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostId,Title,Short_Description,Content,Published,PostedOn,Modified,Category,Tag,GetPost")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("PostId,Title,Short_Description,Content,Category,Tag")] Post post)
         {
             if (id != post.PostId)
             {

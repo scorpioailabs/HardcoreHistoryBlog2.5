@@ -1,9 +1,6 @@
 ﻿@model HardcoreHistoryBlog.Models.Blog_Models.Post
-
-@{
-    ViewData["Title"] = "Create";
-}
-
+@using (Html.BeginForm("Post", "Posts", FormMethod.Post, new { id = "post" }))
+{
 <h2>Create</h2>
 
 <h4>Post</h4>
@@ -24,25 +21,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostedOn" class="control-label"></label>
-                <input asp-for="PostedOn" class="form-control" />
-                <span asp-validation-for="PostedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Modified" class="control-label"></label>
-                <input asp-for="Modified" class="form-control" />
-                <span asp-validation-for="Modified" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
@@ -55,12 +35,7 @@
                 <span asp-validation-for="Tag" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GetPost" class="control-label"></label>
-                <input asp-for="GetPost" class="form-control" />
-                <span asp-validation-for="GetPost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Post!" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -73,3 +48,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+        }

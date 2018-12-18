@@ -23,7 +23,7 @@ namespace HardcoreHistoryBlog.Core
 
         public IEnumerable<Post> GetMostRecentPosts(int count)
         {
-            return ApplicationDbContext.Posts.OrderByDescending(c => c.PostedOn).Take(count).ToList();
+            return ApplicationDbContext.Posts.OrderByDescending(c => c.DateTimePosted).Take(count).ToList();
         }
 
         public IEnumerable<Post> GetPostsWithAuthors(int pageIndex, int pageSize = 6)
