@@ -58,7 +58,8 @@ namespace HardcoreHistoryBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Posts.Add(new Post() { });
+                var Post = new Post { Url = Url };
+                _context.Posts.Add(post); 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Post));
             }
@@ -97,6 +98,7 @@ namespace HardcoreHistoryBlog.Controllers
             {
                 try
                 {
+                    post.Modified = DateTime.Now;
                     _context.Update(post);
                     await _context.SaveChangesAsync();
                 }

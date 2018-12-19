@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181216203503_init")]
-    partial class init
+    [Migration("20181219190707_initsss")]
+    partial class initsss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,13 +185,11 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("GetPost");
-
                     b.Property<DateTime?>("Modified");
 
-                    b.Property<DateTime>("PostedOn");
+                    b.Property<int?>("PostId1");
 
-                    b.Property<bool>("Published");
+                    b.Property<DateTime>("Posted");
 
                     b.Property<string>("Short_Description")
                         .IsRequired();
@@ -207,6 +205,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasIndex("BlogForeignKey");
 
                     b.HasIndex("CategoriesCategoryId");
+
+                    b.HasIndex("PostId1");
 
                     b.ToTable("Posts");
                 });
@@ -294,7 +294,11 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("PostId");
+
                     b.HasKey("TagId");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Tags");
                 });
@@ -517,6 +521,10 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Category", "Categories")
                         .WithMany()
                         .HasForeignKey("CategoriesCategoryId");
+
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
+                        .WithMany("Posts")
+                        .HasForeignKey("PostId1");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostCategory", b =>
@@ -534,7 +542,7 @@ namespace HardcoreHistoryBlog.Migrations
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.PostTag", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
-                        .WithMany("postTags")
+                        .WithMany()
                         .HasForeignKey("PostId1");
 
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Tag", "Tag")
@@ -548,6 +556,13 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Category", "LastTopic")
                         .WithMany()
                         .HasForeignKey("LastTopicCategoryId");
+                });
+
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Tag", b =>
+                {
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
+                        .WithMany("postTags")
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Widget", b =>

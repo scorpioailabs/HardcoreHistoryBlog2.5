@@ -183,15 +183,11 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("GetPost");
-
                     b.Property<DateTime?>("Modified");
 
                     b.Property<int?>("PostId1");
 
-                    b.Property<DateTime>("PostedOn");
-
-                    b.Property<bool>("Published");
+                    b.Property<DateTime>("Posted");
 
                     b.Property<string>("Short_Description")
                         .IsRequired();

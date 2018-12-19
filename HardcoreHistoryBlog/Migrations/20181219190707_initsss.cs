@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class init : Migration
+    public partial class initsss : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,20 +40,6 @@ namespace HardcoreHistoryBlog.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Blog", x => x.BlogId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
-                {
-                    TagId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.TagId);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,15 +255,14 @@ namespace HardcoreHistoryBlog.Migrations
                     Title = table.Column<string>(nullable: true),
                     Short_Description = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: true),
-                    Published = table.Column<bool>(nullable: false),
-                    PostedOn = table.Column<DateTime>(nullable: false),
+                    Posted = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
                     Category = table.Column<string>(nullable: false),
                     Tag = table.Column<string>(nullable: true),
-                    GetPost = table.Column<int>(nullable: false),
                     CategoriesCategoryId = table.Column<int>(nullable: true),
                     BlogForeignKey = table.Column<int>(nullable: true),
-                    AuthorId = table.Column<string>(nullable: true)
+                    AuthorId = table.Column<string>(nullable: true),
+                    PostId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -293,6 +278,12 @@ namespace HardcoreHistoryBlog.Migrations
                         column: x => x.BlogForeignKey,
                         principalTable: "Blog",
                         principalColumn: "BlogId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_Posts_PostId1",
+                        column: x => x.PostId1,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -345,30 +336,24 @@ namespace HardcoreHistoryBlog.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "postTags",
+                name: "Tags",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PostId1 = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
                     TagId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    PostId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_postTags", x => x.PostId);
+                    table.PrimaryKey("PK_Tags", x => x.TagId);
                     table.ForeignKey(
-                        name: "FK_postTags_Posts_PostId1",
-                        column: x => x.PostId1,
+                        name: "FK_Tags_Posts_PostId",
+                        column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_postTags_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "TagId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -422,6 +407,33 @@ namespace HardcoreHistoryBlog.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "postTags",
+                columns: table => new
+                {
+                    PostId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PostId1 = table.Column<int>(nullable: true),
+                    TagId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_postTags", x => x.PostId);
+                    table.ForeignKey(
+                        name: "FK_postTags_Posts_PostId1",
+                        column: x => x.PostId1,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_postTags_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "TagId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -536,6 +548,11 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "CategoriesCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostId1",
+                table: "Posts",
+                column: "PostId1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_postTags_PostId1",
                 table: "postTags",
                 column: "PostId1");
@@ -549,6 +566,11 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "IX_Settings_LastTopicCategoryId",
                 table: "Settings",
                 column: "LastTopicCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_PostId",
+                table: "Tags",
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Widgets_AuthorId",

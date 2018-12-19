@@ -6,20 +6,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HardcoreHistoryBlog.Models.Blog_Models
 {
     public class Post
     {
-        public virtual int PostId { get; set; }
+        internal IUrlHelper Url;
 
+        public virtual int PostId { get; set; }
         public virtual string Title { get; set; }
         [Required(ErrorMessage = "Title is required")]
         public virtual string Short_Description { get; set; }
         [DataType(DataType.MultilineText)]
         public virtual string Content { get; set; }
-        public DateTime DateTimePosted { get; set; }
-        public virtual DateTime? Modified { get; set; }
+        public DateTime Posted { get; set; }
+        public DateTime? Modified { get; set; }
         [Required(ErrorMessage = "At least one Category is required")]
         [DisplayName("Category:")]
         public string Category { get; set; }
@@ -38,15 +40,8 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public Post()
         {
-
-        }
-
-        public Post(int id, string title, string content, DateTime? customDate)
-        {
-            this.PostId = id;
-            this.Title = title;
-            this.Content = content;
-            this.DateTimePosted = customDate ?? DateTime.Now;
+            this.Posted = DateTime.Now;
+            this.Modified = DateTime.Now;
         }
     }
 
