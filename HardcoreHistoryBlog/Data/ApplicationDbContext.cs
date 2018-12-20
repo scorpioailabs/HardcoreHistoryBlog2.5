@@ -19,58 +19,49 @@ namespace HardcoreHistoryBlog.Data
             : base(options)
         {
         }
-            public DbSet<Blog> Blogs { get; set; }
+
             public DbSet<Post> Posts { get; set; }
-            public DbSet<Tag> Tags { get; set; }
-            public DbSet<PostTag> postTags { get; set; }
-            public DbSet<Category> Categories { get; set; }
-            public DbSet<PostCategory> postCategories { get; set; }
-            public DbSet<Comment> Comments { get; set; }
-            public DbSet<Settings> Settings { get; set; }
-            public DbSet<Like> Likes { get; set; }
-            public DbSet<Widget> Widgets { get; set; }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Comment>()
-                .HasOne(pt => pt.Post)
-                .WithMany(c => c.Comments)
-                .HasForeignKey("FK_Comments_Posts_PostId")
-                .OnDelete(DeleteBehavior.ClientSetNull); // sets null
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.Entity<Comment>()
+        //        .HasOne(pt => pt.Post)
+        //        .WithMany(c => c.Comments)
+        //        .HasForeignKey("FK_Comments_Posts_id")
+        //        .OnDelete(DeleteBehavior.ClientSetNull); // sets null
 
-            base.OnModelCreating(builder);
+        //    base.OnModelCreating(builder);
 
-            builder.Entity<ApplicationUser>(b =>
-            {
-                // Each User can have many UserClaims
-                b.HasMany(e => e.Claims)
-                    .WithOne()
-                    .HasForeignKey(uc => uc.UserId)
-                    .IsRequired();
+        //    builder.Entity<ApplicationUser>(b =>
+        //    {
+        //        // Each User can have many UserClaims
+        //        b.HasMany(e => e.Claims)
+        //            .WithOne()
+        //            .HasForeignKey(uc => uc.UserId)
+        //            .IsRequired();
 
-                // Each User can have many UserLogins
-                b.HasMany(e => e.Logins)
-                    .WithOne()
-                    .HasForeignKey(ul => ul.UserId)
-                    .IsRequired();
+        //        // Each User can have many UserLogins
+        //        b.HasMany(e => e.Logins)
+        //            .WithOne()
+        //            .HasForeignKey(ul => ul.UserId)
+        //            .IsRequired();
 
-                // Each User can have many UserTokens
-                b.HasMany(e => e.Tokens)
-                    .WithOne()
-                    .HasForeignKey(ut => ut.UserId)
-                    .IsRequired();
+        //        // Each User can have many UserTokens
+        //        b.HasMany(e => e.Tokens)
+        //            .WithOne()
+        //            .HasForeignKey(ut => ut.UserId)
+        //            .IsRequired();
 
-                // Each User can have many entries in the UserRole join table
-                b.HasMany(e => e.UserRoles)
-                    .WithOne()
-                    .HasForeignKey(ur => ur.UserId)
-                    .IsRequired();
-            });
+        //        // Each User can have many entries in the UserRole join table
+        //        b.HasMany(e => e.UserRoles)
+        //            .WithOne()
+        //            .HasForeignKey(ur => ur.UserId)
+        //            .IsRequired();
+        //    });
 
-            {
-                builder.Entity<Post>().ToTable("Posts");
-                builder.Entity<Comment>().ToTable("Comments");
-                builder.Entity<Blog>().ToTable("Blog");
-            }
-        }
+        //    {
+        //        builder.Entity<Post>().ToTable("Posts");
+        //        builder.Entity<Comment>().ToTable("Comments");
+        //    }
+        //}
     }
 }

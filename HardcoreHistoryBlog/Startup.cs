@@ -13,6 +13,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using HardcoreHistoryBlog.Models;
+using HardcoreHistoryBlog.Core;
 
 namespace HardcoreHistoryBlog
 {
@@ -41,6 +42,7 @@ namespace HardcoreHistoryBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository, Repository>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

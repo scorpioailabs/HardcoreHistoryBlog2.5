@@ -10,17 +10,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HardcoreHistoryBlog.Core
     {
-        public interface IRepository<TEntity> where TEntity : class
+        public interface IRepository
         {
-            TEntity Get(int id);
-            IEnumerable<TEntity> GetMostRecentPosts();
-            IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+            Post GetPost(int id); 
+            List<Post> GetAllPosts(int id);
 
-            void Add(TEntity entity);
-            void AddRange(IEnumerable<TEntity> entities);
+            void AddPost(Post post);
+            void UpdatePost(Post post);
+            void RemovePost(int id);
 
-            void Remove(TEntity entity);
-            void RemoveRange(IEnumerable<TEntity> entities);
+            Task<bool> SaveChangesAsync();
+
         }
     }
 

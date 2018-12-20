@@ -10,50 +10,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HardcoreHistoryBlog.Core
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository : IRepository
     {
-        protected readonly DbContext Context;
+        private ApplicationDbContext _context;
 
-        public Repository(DbContext context)
+        public Repository(ApplicationDbContext context)
         {
-            Context = context;
-        }
-        public TEntity Get(int id)
-        {
-            return Context.Set<TEntity>().Find(id);
-        }
-
-        public IEnumerable<TEntity> GetMostRecentPosts()
-        {
-            return Context.Set<TEntity>().ToList();
-        }
-
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
-        {
-            return Context.Set<TEntity>().Where(predicate);
-        }
-
-        public void Add(TEntity entity)
-        {
-            Context.Set<TEntity>().Add(entity);
-        }
-
-        public void AddRange(IEnumerable<TEntity> entities)
-        {
-            Context.Set<TEntity>().AddRange(entities);
-        }
-
-        public void Remove(TEntity entity)
-        {
-            Context.Set<TEntity>().Remove(entity);
-        }
-
-        public void RemoveRange(IEnumerable<TEntity> entities)
-        {
-            Context.Set<TEntity>().RemoveRange(entities);
+            _context = context;
         }
 
 
+        public void AddPost(Post post)
+        {
+            _context.Posts.Add(post);
+        }
 
+        public List<Post> GetAllPosts(int id)
+        {
+            return _context.Posts.ToList();
+        }
+
+        public Post GetPost(int id)
+        {
+            return _context.Posts.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void RemovePost(int id)
+        {
+            _context.Posts.Remove(GetPost(id));
+        }
+
+
+        public void UpdatePost(Post post)
+        {
+            _context.Posts.Update(post);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

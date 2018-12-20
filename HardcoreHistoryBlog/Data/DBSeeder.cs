@@ -166,22 +166,6 @@ namespace HardcoreHistoryBlog.Data
                                         "Customer").Wait();
                 }
             }
-
-            if (!context.Posts.Any())
-            {
-                context.Posts.Add(new Post() { Title = "My first post", Short_Description = "Test post in Hardcore History", Content = "The Mongols- A short, bloody account.", Tag = "Mongols", Category = "Medieval History" });
-                context.SaveChanges();
-            }
-            if(!context.Tags.Any())
-            {
-                context.Tags.Add(new Tag() { Name = "Mongols" });
-                context.SaveChanges();
-            }
-            if(!context.Categories.Any())
-            {
-                context.Categories.Add(new Category() { Name = "Medieval History" });
-                context.SaveChanges();
-            }
         }
 
     }
