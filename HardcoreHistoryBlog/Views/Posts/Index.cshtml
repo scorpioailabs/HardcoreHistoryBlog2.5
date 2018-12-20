@@ -1,7 +1,23 @@
-﻿@model HardcoreHistoryBlog.Models.Blog_Models.Post
-
+﻿@using HardcoreHistoryBlog.Models.Blog_Models
+@model IEnumerable<Post>
 @{
-    ViewData["Title"] = "Index";
+
 }
 
-<h2>Index</h2>
+<h2>Hardcore History</h2>
+
+<div>
+    <ul>
+        @foreach (var post in Model)
+        {
+            <li>
+                <a asp-controller="Posts" asp-action="Post" asp-route-id="@post.Id">
+                    @post.Title
+                </a>
+                <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">
+                    Edit                
+                </a>
+            </li>
+        }
+    </ul>
+</div>

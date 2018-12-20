@@ -18,23 +18,42 @@ namespace HardcoreHistoryBlog.Controllers
         {
             _repo = repo;  
         }
+
+
         public IActionResult Index()
         {
-            return View();
+            var posts = _repo.GetAllPosts();
+            return View(posts);
         }
 
-        public IActionResult Post()
+        public IActionResult Post(int id)
         {
-            return View();
+            var post = _repo.GetPost(id);
+            return View(post);
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
+        {
+            var post = _repo.GetPost((int)id);  //casting int
+            return View(post);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Post post)
+        {
+            _repo.UpdatePost(post);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View(new Post());
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Post post)
+        public async Task<IActionResult> Create(Post post) 
         {
             _repo.AddPost(post);
 
