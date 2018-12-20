@@ -166,6 +166,12 @@ namespace HardcoreHistoryBlog.Data
                                         "Customer").Wait();
                 }
             }
+
+            if (!context.Posts.Any())
+            {
+                context.Posts.Add(new Post() { Title = "My first post", Short_Description = "Test post in Hardcore History", Content = "The Mongols- A short, bloody account."});
+                context.SaveChanges();
+            }
         }
 
     }
