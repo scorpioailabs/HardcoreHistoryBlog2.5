@@ -5,19 +5,26 @@
 }
 
 <h2>Hardcore History</h2>
-
+<div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
 <div>
     <ul>
         @foreach (var post in Model)
         {
-            <li>
-                <a asp-controller="Posts" asp-action="Post" asp-route-id="@post.Id">
-                    @post.Title
-                </a>
-                <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">
-                    Edit                
-                </a>
-            </li>
+        <li>
+            <a asp-controller="Posts" asp-action="Post" asp-route-id="@post.Id">
+                @post.Title
+            </a>
+            <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">
+                Edit
+            </a>
+            <a asp-controller="Posts" asp-action="Remove" asp-route-id="@post.Id">
+                Remove
+            </a>            
+        </li>
         }
     </ul>
 </div>

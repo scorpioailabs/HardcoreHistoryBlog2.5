@@ -52,6 +52,7 @@ namespace HardcoreHistoryBlog.Controllers
         {
             return View(new Post());
         }
+        
         [HttpPost]
         public async Task<IActionResult> Create(Post post) 
         {
@@ -63,6 +64,13 @@ namespace HardcoreHistoryBlog.Controllers
                 return View(post);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            _repo.RemovePost((int)id);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
     }
 }

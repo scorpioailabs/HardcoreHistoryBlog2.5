@@ -57,7 +57,6 @@ namespace HardcoreHistoryBlog
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IRepository, Repository>();
-
             services.AddMvc(config =>
             {
                 // using Microsoft.AspNetCore.Mvc.Authorization;
