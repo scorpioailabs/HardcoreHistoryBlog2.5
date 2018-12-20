@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HardcoreHistoryBlog.Core;
 using HardcoreHistoryBlog.Models.Blog_Models;
 using Microsoft.AspNetCore.Mvc;
+using HardcoreHistoryBlog.Data; 
 
 namespace HardcoreHistoryBlog.Controllers
 {

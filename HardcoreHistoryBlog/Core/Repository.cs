@@ -22,6 +22,7 @@ namespace HardcoreHistoryBlog.Core
 
         public void AddPost(Post post)
         {
+
             _context.Posts.Add(post);
         }
 

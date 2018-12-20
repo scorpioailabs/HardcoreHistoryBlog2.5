@@ -54,10 +54,6 @@ namespace HardcoreHistoryBlog
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IRepository, Repository>();
@@ -76,7 +72,7 @@ namespace HardcoreHistoryBlog
         .AddRazorPagesOptions(options =>
         {
             options.Conventions.AddPageRouteModelConvention("/Account", model => { });
-            options.Conventions.AddPageRouteModelConvention("/Blog", model => { });
+            options.Conventions.AddPageRouteModelConvention("/Posts", model => { });
             options.AllowAreas = true;
             options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
             options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
