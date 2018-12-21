@@ -1,7 +1,30 @@
-﻿
+﻿@using HardcoreHistoryBlog.Models.Blog_Models
+@model IEnumerable<Post>
 @{
-    ViewData["Title"] = "Index";
+
 }
 
-<h2>Admin Dashboard</h2>
-
+<h2>Hardcore History Admin</h2>
+<div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
+<div>
+    <ul>
+        @foreach (var post in Model)
+        {
+        <li>
+            <a asp-controller="Panel" asp-action="Post" asp-route-id="@post.Id">
+                @post.Title
+            </a>
+            <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
+                Edit
+            </a>
+            <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
+                Remove
+            </a>            
+        </li>
+        }
+    </ul>
+</div>

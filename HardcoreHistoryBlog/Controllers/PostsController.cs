@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using HardcoreHistoryBlog.Core;
 using HardcoreHistoryBlog.Models.Blog_Models;
 using Microsoft.AspNetCore.Mvc;
-using HardcoreHistoryBlog.Data; 
+using HardcoreHistoryBlog.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -13,12 +14,16 @@ namespace HardcoreHistoryBlog.Controllers
     {
 
         private IRepository _repo;
+        private IFileManager _fileManager;
 
-        public PostsController(IRepository repo)
+        public PostsController( 
+            IFileManager fileManager,
+            IRepository repo
+            )
         {
-            _repo = repo;  
+            _fileManager = fileManager;
+            _repo = repo;
         }
-
 
         public IActionResult Index()
         {
@@ -32,44 +37,11 @@ namespace HardcoreHistoryBlog.Controllers
             return View(post);
         }
 
-        [HttpGet]
-        public IActionResult Edit(int id)
+        [HttpGet("/Image/{image}")]
+        public IActionResult Image(string image)
         {
-            var post = _repo.GetPost((int)id);  //casting int
-            return View(post);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(Post post)
-        {
-            _repo.UpdatePost(post);
-            await _repo.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View(new Post());
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> Create(Post post) 
-        {
-            _repo.AddPost(post);
-
-            if (await _repo.SaveChangesAsync())
-                return RedirectToAction("Index");
-            else
-                return View(post);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Remove(int id)
-        {
-            _repo.RemovePost((int)id);
-            await _repo.SaveChangesAsync();
-            return RedirectToAction("Index");
+            var mime = image.Substring(image.LastIndexOf('.')+1);
+            return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
 
     }

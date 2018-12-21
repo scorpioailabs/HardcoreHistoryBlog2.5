@@ -6,12 +6,7 @@
 
 <h2>@Model.Title</h2>
 <p>@Model.Short_Description</p>
-
-@if(!String.IsNullOrEmpty(Model.Image))
-{
-    var image_path = $"/Image/{Model.Image}";
-        <img src= "@image_path"/>
-}
 <p>@Model.Content</p>
 
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
 

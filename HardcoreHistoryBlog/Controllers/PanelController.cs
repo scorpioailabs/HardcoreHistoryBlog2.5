@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HardcoreHistoryBlog.Core;
+using HardcoreHistoryBlog.Data;
+using HardcoreHistoryBlog.Models.Blog_Models;
+using HardcoreHistoryBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +13,86 @@ namespace HardcoreHistoryBlog.Controllers
 {
     public class PanelController : Controller
     {
-        [Authorize(Roles ="Admin")]
-        public IActionResult Index() 
+
+        private IRepository _repo;
+        private IFileManager _fileManager;  
+
+        public PanelController(
+            IFileManager fileManager,
+            IRepository repo
+            ) 
         {
-            return View();
+            _fileManager = fileManager;
+            _repo = repo;
+        }
+
+        [Authorize(Roles ="Admin")]
+
+
+        public IActionResult Index()
+        {
+            var posts = _repo.GetAllPosts();
+            return View(posts);
+        }
+
+        public IActionResult Post(int id)
+        {
+            var post = _repo.GetPost(id);
+            return View(post);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var post = _repo.GetPost((int)id);
+            return View(new PostViewModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Post post)
+        {
+            _repo.UpdatePost(post);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+
+        {
+            return View(new PostViewModel());
+        }              
+
+        [HttpPost]
+        public async Task<IActionResult> Create(PostViewModel vm)
+        {
+            var post = new Post
+            {
+                Id = vm.Id,
+                Title = vm.Title,
+                Content = vm.Content,
+                Image = await _fileManager.SaveImage(vm.Image)
+
+            };
+            _repo.AddPost(post);
+
+            if (await _repo.SaveChangesAsync())
+                return RedirectToAction("Index");
+            else
+                return View(post);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            _repo.RemovePost((int)id);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
     }
