@@ -49,7 +49,14 @@ namespace HardcoreHistoryBlog.Controllers
             {
                 Id = post.Id,
                 Title = post.Title,
-                Content = post.Content
+                Short_Description = post.Short_Description,
+                CurrentImage = post.Image,
+                Content = post.Content,
+                Category = post.Category,
+                Tags = post.Tags
+
+                
+
             });
         }
 
@@ -76,6 +83,9 @@ namespace HardcoreHistoryBlog.Controllers
                 Id = vm.Id,
                 Title = vm.Title,
                 Content = vm.Content,
+                Short_Description = vm.Short_Description,
+                Category = vm.Category,
+                Tags = vm.Tags, 
                 Image = await _fileManager.SaveImage(vm.Image)
 
             };

@@ -1,6 +1,9 @@
 ﻿@using HardcoreHistoryBlog.Models.Blog_Models
 @model IEnumerable<Post>
 @{
+    ViewBag.Title = "Hardcore History Blog";
+    ViewBag.Description = "A blog for history enthusiasts, we're hardcore about history";
+    ViewBag.Keywords = "Hardcore History Blog";
 
 }
 
@@ -10,11 +13,11 @@
     <ul>
         @foreach (var post in Model)
         {
-        <li>
-            <a asp-controller="Posts" asp-action="Post" asp-route-id="@post.Id">
-                @post.Title
-            </a>         
-        </li>
+            <li>
+                <a asp-controller="Posts" asp-action="Post" asp-route-id="@post.Id">
+                    @post.Title
+                </a>
+            </li>
         }
     </ul>
 </div>

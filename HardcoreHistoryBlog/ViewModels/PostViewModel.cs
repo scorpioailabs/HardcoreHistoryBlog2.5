@@ -13,9 +13,13 @@ namespace HardcoreHistoryBlog.ViewModels
         [Required(ErrorMessage = "Title is required")]
         public virtual string Title { get; set; } = "";
         public virtual string Short_Description { get; set; } = "";
+        public string CurrentImage { get; set; } = "";
         public IFormFile Image { get; set; }
 
         [DataType(DataType.MultilineText)]
         public virtual string Content { get; set; } = "";
+
+        public string Category { get; set; } = "";
+        public string Tags { get; set; } = "";
     }
 }

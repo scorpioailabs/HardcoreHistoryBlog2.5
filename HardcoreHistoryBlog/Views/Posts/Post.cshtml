@@ -1,17 +1,22 @@
 ﻿@using HardcoreHistoryBlog.Models.Blog_Models
 @model Post
 @{
-
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Short_Description;
+    ViewBag.Keywords = $"{Model.Tags?.Replace(",", " ")} {Model.Category}";
 }
 
 <h2>@Model.Title</h2>
+<p>@Model.Category</p>
 <p>@Model.Short_Description</p>
-
-@if(!String.IsNullOrEmpty(Model.Image))
+@if (!String.IsNullOrEmpty(Model.Image))
 {
     var image_path = $"/Image/{Model.Image}";
-        <img src= "@image_path"/>
+    <img src="@image_path" />
 }
 <p>@Model.Content</p>
+
+
+
 
 

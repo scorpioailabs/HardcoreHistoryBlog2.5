@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Content\blog\" />
+    <Folder Include="Content\static\" />
   </ItemGroup>
 
   <ItemGroup>

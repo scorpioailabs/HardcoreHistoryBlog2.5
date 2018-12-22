@@ -19,7 +19,10 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public string Image { get; set; } = "";
 
         [DataType(DataType.MultilineText)]
-        public virtual string Content { get; set; }
+        public virtual string Content { get; set; } = "";
+
+        public string Category { get; set; } = "";
+        public string Tags { get; set; } = "";
 
         public DateTime Posted { get; set; } = DateTime.Now;
         public DateTime? Modified { get; set; } = DateTime.Now;
