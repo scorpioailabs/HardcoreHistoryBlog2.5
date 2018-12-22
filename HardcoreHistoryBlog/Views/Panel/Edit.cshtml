@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="CurrentImage"/>
+                <input asp-for="CurrentImage" />
                 <input asp-for="Image" />
             </div>
             <div class="form-group">
@@ -59,4 +59,9 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@*<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="application/x-javascript">
+    tinymce.init({selector:'#TypeHere'});
+</script>*@
+
 }

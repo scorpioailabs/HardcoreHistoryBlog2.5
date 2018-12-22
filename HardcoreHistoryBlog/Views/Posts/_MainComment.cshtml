@@ -1,0 +1,18 @@
+﻿@using HardcoreHistoryBlog
+@using HardcoreHistoryBlog.Models
+@using HardcoreHistoryBlog.Models.Blog_Models
+@using HardcoreHistoryBlog.Models.Comments
+@using HardcoreHistoryBlog.ViewModels 
+@model CommentViewModel
+
+@{
+
+}
+<div>
+    <form method="post" asp-controller="Posts" asp-action="Comment">
+        <input asp-for="PostId" type="hidden" />
+        <input asp-for="MainCommentId" type="hidden" />
+        <input asp-for="Message"/>
+        <button type="submit">Submit</button>
+    </form>
+</div>

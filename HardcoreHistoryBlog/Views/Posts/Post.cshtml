@@ -1,4 +1,7 @@
-﻿@using HardcoreHistoryBlog.Models.Blog_Models
+﻿@using HardcoreHistoryBlog.Models
+@using HardcoreHistoryBlog.Models.Blog_Models
+@using HardcoreHistoryBlog.Models.Comments
+@using HardcoreHistoryBlog.ViewModels
 @model Post
 @{
     ViewBag.Title = Model.Title;
@@ -15,6 +18,38 @@
     <img src="@image_path" />
 }
 <p>@Model.Content</p>
+<div class="comment-section">
+    @{
+        await Html.RenderPartialAsync("_MainComment", new CommentViewModel
+        {
+            PostId = Model.Id,
+            MainCommentId = 0
+        });
+    }
+    @foreach (var c in Model.MainComments)
+    {
+        <p>
+            @c.Message --- @c.Created
+        </p>
+        <div style="margin-left:20px">
+            <h4>Sub Comments</h4>
+            @{
+                await Html.RenderPartialAsync("_MainComment", new CommentViewModel
+                {
+                    PostId = Model.Id,
+                    MainCommentId = c.Id
+                });
+            }
+            @foreach (var sc in c.SubComments)
+            {
+            <p>
+                @sc.Message --- @sc.Created
+            </p>
+            }
+                
+        </div>
+    }
+</div>
 
 
 

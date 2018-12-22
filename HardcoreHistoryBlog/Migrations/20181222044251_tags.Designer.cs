@@ -4,14 +4,16 @@ using HardcoreHistoryBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181222044251_tags")]
+    partial class tags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,48 +140,6 @@ namespace HardcoreHistoryBlog.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.MainComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("Edited");
-
-                    b.Property<string>("Message");
-
-                    b.Property<int?>("PostId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("MainComments");
-                });
-
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.SubComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("Edited");
-
-                    b.Property<int>("MainCommentId");
-
-                    b.Property<string>("Message");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MainCommentId");
-
-                    b.ToTable("SubComments");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -294,21 +254,6 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole", "ApplicationRole")
                         .WithOne("ApplicationUser")
                         .HasForeignKey("HardcoreHistoryBlog.Data.ApplicationUser", "Role");
-                });
-
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.MainComment", b =>
-                {
-                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
-                        .WithMany("MainComments")
-                        .HasForeignKey("PostId");
-                });
-
-            modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.SubComment", b =>
-                {
-                    b.HasOne("HardcoreHistoryBlog.Models.Comments.MainComment")
-                        .WithMany("SubComments")
-                        .HasForeignKey("MainCommentId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -8,6 +8,7 @@ using HardcoreHistoryBlog.Models.Blog_Models;
 using HardcoreHistoryBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -54,15 +55,23 @@ namespace HardcoreHistoryBlog.Controllers
                 Content = post.Content,
                 Category = post.Category,
                 Tags = post.Tags
-
-                
-
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Post post)
+        public async Task<IActionResult> Edit(PostViewModel vm)
         {
+            var post = new Post
+            {
+                Id = vm.Id,
+                Title = vm.Title,
+                Content = vm.Content,
+                Short_Description = vm.Short_Description,
+                Category = vm.Category,
+                Tags = vm.Tags,
+                Image = await _fileManager.SaveImage(vm.Image)
+            };
+
             _repo.UpdatePost(post);
             await _repo.SaveChangesAsync();
             return RedirectToAction("Index");

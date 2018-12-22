@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Data;
+using HardcoreHistoryBlog.Models.Comments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HardcoreHistoryBlog.Models.Blog_Models
@@ -26,6 +27,8 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public DateTime Posted { get; set; } = DateTime.Now;
         public DateTime? Modified { get; set; } = DateTime.Now;
+
+        public List<MainComment> MainComments { get; set; } 
     }
 
     public class Client : ApplicationUser
