@@ -5,12 +5,12 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Core;
 using HardcoreHistoryBlog.Data;
+using HardcoreHistoryBlog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using static HardcoreHistoryBlog.Models.AccountVMs;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -43,7 +43,7 @@ namespace HardcoreHistoryBlog.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]
@@ -51,29 +51,25 @@ namespace HardcoreHistoryBlog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register (RegisterViewModel vm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(vm);
             {
+
                 var user = new ApplicationUser { UserName = vm.Email, Email = vm.Email, FirstName = vm.FirstName, LastName = vm.LastName };
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: Request.Scheme);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index");
+                    await _signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home");
 
                 }
                 else
                     foreach (var error in result.Errors)
-                        {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                        }
-            }
-            return RedirectToAction("Index");
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+
+            return View(vm);
         }
         
     }

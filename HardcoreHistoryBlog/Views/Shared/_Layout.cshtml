@@ -35,7 +35,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a></li>
-                    <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category ="Ancient History">Ancient History</a></li>
+                    <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a></li>
                     <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a></li>
                     <li><a asp-area="" asp-controller="Panel" asp-action="Index">Admin</a> </li>
                 </ul>
@@ -45,7 +45,7 @@
     </nav>
 
     <partial name="_CookieConsentPartial" />
-
+   
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -57,6 +57,9 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+        <link href="@Url.Content("~/Content/Css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">

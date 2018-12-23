@@ -29,7 +29,7 @@
     @foreach (var c in Model.MainComments)
     {
         <p>
-            @c.Message --- @c.Created --- @c.CustomerId
+            @c.Message --- @c.Created 
         </p>
         <div style="margin-left:20px">
             <h4>Sub Comments</h4>
@@ -43,7 +43,7 @@
             @foreach (var sc in c.SubComments)
             {
             <p>
-                @sc.Message --- @sc.Created --- @sc.CustomerId
+                @sc.Message --- @sc.Created 
             </p>
             }
                 

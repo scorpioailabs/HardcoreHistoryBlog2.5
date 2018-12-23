@@ -25,6 +25,7 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Post> Posts { get; set; }
             public DbSet<MainComment> MainComments { get; set; }
             public DbSet<SubComment> SubComments { get; set; } 
+            public DbSet<HardcoreHistoryBlog.Models.RegisterViewModel> RegisterViewModel { get; set; }
             
 
         //protected override void OnModelCreating(ModelBuilder builder)
