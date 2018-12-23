@@ -19,18 +19,18 @@ namespace HardcoreHistoryBlog.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly IRepository _repo;
-        private readonly IUserRepository _repoUser;
+        //private readonly IRepository _repo;
+        //private readonly IUserRepository _repoUser;
 
-        public AccountController(IRepository repo, IUserRepository repoUser, SignInManager<ApplicationUser> signInManager,
+        public AccountController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
 
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _repo = repo;
-            _repoUser = repoUser;
+            //_repo = repo;
+            //_repoUser = repoUser;
         }
 
         public IActionResult Index()
@@ -73,7 +73,7 @@ namespace HardcoreHistoryBlog.Controllers
                         ModelState.AddModelError(string.Empty, error.Description);
                         }
             }
-            return RedirectToAction("Register");
+            return RedirectToAction("Index");
         }
         
     }

@@ -44,6 +44,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual ApplicationRole Role { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Like> Likes { get; set; } 
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 
 }

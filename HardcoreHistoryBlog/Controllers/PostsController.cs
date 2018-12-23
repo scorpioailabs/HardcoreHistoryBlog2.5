@@ -47,6 +47,8 @@ namespace HardcoreHistoryBlog.Controllers
             var mime = image.Substring(image.LastIndexOf('.')+1);
             return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
+
+        [Authorize(Roles ="Customer,Blogger")]
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel vm)
         {

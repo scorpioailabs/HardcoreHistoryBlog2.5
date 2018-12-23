@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HardcoreHistoryBlog.ViewModels
 {
-    public class CommentViewModel
+    public class CommentedByViewModel
     {
         [Required]
         public int PostId { get; set; }
@@ -15,6 +15,8 @@ namespace HardcoreHistoryBlog.ViewModels
         public int MainCommentId { get; set; }
         [Required]
         public string Message { get; set; }
-        public string CustomerId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

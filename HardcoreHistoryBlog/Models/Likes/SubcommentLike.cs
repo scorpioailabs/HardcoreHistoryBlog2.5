@@ -8,6 +8,5 @@ namespace HardcoreHistoryBlog.Models.Likes
     public class SubcommentLike : Like
     {
         public int SubcommentId { get; set; } 
-        public int CustomerId { get; set; }
     }
 }

@@ -33,7 +33,6 @@ namespace HardcoreHistoryBlog.Models
 
         [BindProperty]
         public RegisterViewModel Input { get;  set; } 
-        [Table("AspNetUsers")]
         public class RegisterViewModel : PageModel
         {
             [Required]

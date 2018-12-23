@@ -65,7 +65,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer1").Result == null)
             {
-                ApplicationUser user = new ApplicationUser
+                Customer user = new Customer
                 {
                     UserName = "Customer1@email.com",
                     Email = "Customer1@email.com",
@@ -86,7 +86,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer2").Result == null)
             {
-                ApplicationUser user = new ApplicationUser
+                Customer user = new Customer
                 {
                     UserName = "Customer2@email.com",
                     Email = "Customer2@email.com",
@@ -107,7 +107,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer3").Result == null)
             {
-                ApplicationUser user = new ApplicationUser 
+                Customer user = new Customer 
                 {
                     UserName = "Customer3@email.com",
                     Email = "Customer3@email.com",
@@ -128,7 +128,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer4").Result == null)
             {
-                ApplicationUser user = new ApplicationUser
+                Customer user = new Customer
                 {
                     UserName = "Customer4@email.com",
                     Email = "Customer4@email.com",
@@ -149,7 +149,7 @@ namespace HardcoreHistoryBlog.Data
             if (userManager.FindByNameAsync
         ("Customer5").Result == null)
             {
-                ApplicationUser user = new ApplicationUser
+                Customer user = new Customer
                 {
                     UserName = "Customer5@email.com",
                     Email = "Customer5@email.com",

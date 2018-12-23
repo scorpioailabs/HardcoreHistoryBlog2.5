@@ -59,6 +59,9 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -108,6 +111,8 @@ namespace HardcoreHistoryBlog.Migrations
                         .HasFilter("[Role] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
@@ -117,6 +122,8 @@ namespace HardcoreHistoryBlog.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Category");
+
+                    b.Property<string>("ClientId");
 
                     b.Property<string>("Content");
 
@@ -135,6 +142,8 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
                     b.ToTable("Posts");
                 });
 
@@ -144,7 +153,11 @@ namespace HardcoreHistoryBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ClientId");
+
                     b.Property<DateTime>("Created");
+
+                    b.Property<string>("CustomerId");
 
                     b.Property<DateTime>("Edited");
 
@@ -153,6 +166,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<int?>("PostId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("PostId");
 
@@ -165,7 +180,11 @@ namespace HardcoreHistoryBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ClientId");
+
                     b.Property<DateTime>("Created");
+
+                    b.Property<string>("CustomerId");
 
                     b.Property<DateTime>("Edited");
 
@@ -174,6 +193,8 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("Message");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("MainCommentId");
 
@@ -282,6 +303,19 @@ namespace HardcoreHistoryBlog.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Client", b =>
+                {
+                    b.HasBaseType("HardcoreHistoryBlog.Data.ApplicationUser");
+
+                    b.Property<string>("AuthorId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Client");
+
+                    b.HasDiscriminator().HasValue("Client");
+                });
+
             modelBuilder.Entity("HardcoreHistoryBlog.Data.ApplicationRole", b =>
                 {
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole", "ParentRole")
@@ -296,8 +330,19 @@ namespace HardcoreHistoryBlog.Migrations
                         .HasForeignKey("HardcoreHistoryBlog.Data.ApplicationUser", "Role");
                 });
 
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
+                {
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Client")
+                        .WithMany("Posts")
+                        .HasForeignKey("ClientId");
+                });
+
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.MainComment", b =>
                 {
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
                         .WithMany("MainComments")
                         .HasForeignKey("PostId");
@@ -305,6 +350,10 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.SubComment", b =>
                 {
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("HardcoreHistoryBlog.Models.Comments.MainComment")
                         .WithMany("SubComments")
                         .HasForeignKey("MainCommentId")
@@ -370,6 +419,13 @@ namespace HardcoreHistoryBlog.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Client", b =>
+                {
+                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
         }
