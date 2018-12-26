@@ -28,7 +28,7 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public DateTime Posted { get; set; } = DateTime.Now;
         public DateTime? Modified { get; set; } = DateTime.Now;
-
+        public string ClientFirstName { get; set; }
         public List<MainComment> MainComments { get; set; }
     }
 

@@ -15,16 +15,5 @@ namespace HardcoreHistoryBlog.Data
             : base(name)
         { }
 
-        public ApplicationRole(string name, string description)
-            : base(name)
-        {
-            this.Description = description;
-        }
-
-        public string Description { get; set; }
-
-        public virtual ApplicationRole ParentRole { get; set; }
-
-        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

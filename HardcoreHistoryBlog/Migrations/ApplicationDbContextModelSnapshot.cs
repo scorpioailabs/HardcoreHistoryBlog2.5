@@ -24,10 +24,10 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);
@@ -35,16 +35,14 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("ParentRoleId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.HasIndex("ParentRoleId");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -87,8 +85,6 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("Role");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -106,10 +102,6 @@ namespace HardcoreHistoryBlog.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("Role")
-                        .IsUnique()
-                        .HasFilter("[Role] IS NOT NULL");
-
                     b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
@@ -122,6 +114,8 @@ namespace HardcoreHistoryBlog.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Category");
+
+                    b.Property<string>("ClientFirstName");
 
                     b.Property<string>("ClientId");
 
@@ -201,6 +195,28 @@ namespace HardcoreHistoryBlog.Migrations
                     b.ToTable("SubComments");
                 });
 
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.RegisterViewModel", b =>
+                {
+                    b.Property<string>("FirstName")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConfirmPassword");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("FirstName");
+
+                    b.ToTable("RegisterViewModel");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -273,11 +289,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
@@ -309,7 +321,11 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("AuthorId");
 
+                    b.Property<string>("RoleId");
+
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Client");
 
@@ -318,16 +334,9 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("HardcoreHistoryBlog.Data.ApplicationRole", b =>
                 {
-                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole", "ParentRole")
-                        .WithMany()
-                        .HasForeignKey("ParentRoleId");
-                });
-
-            modelBuilder.Entity("HardcoreHistoryBlog.Data.ApplicationUser", b =>
-                {
-                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole", "ApplicationRole")
-                        .WithOne("ApplicationUser")
-                        .HasForeignKey("HardcoreHistoryBlog.Data.ApplicationUser", "Role");
+                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser")
+                        .WithMany("Roles")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
@@ -394,10 +403,6 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -426,6 +431,10 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+
+                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

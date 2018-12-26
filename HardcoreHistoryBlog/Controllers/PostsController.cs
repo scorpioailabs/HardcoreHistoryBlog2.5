@@ -48,7 +48,7 @@ namespace HardcoreHistoryBlog.Controllers
             return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
 
-        [Authorize(Roles ="Customer,Blogger")]
+        [Authorize(Roles ="Customer,Blogger,Admin")]
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel vm)
         {
@@ -84,5 +84,14 @@ namespace HardcoreHistoryBlog.Controllers
             await _repo.SaveChangesAsync();
             return RedirectToAction("Post", new { id = vm.PostId });
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> RemoveComment (int id)
+        {
+            _repo.RemoveComment(id);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Post");
+        }
+
     }
 }

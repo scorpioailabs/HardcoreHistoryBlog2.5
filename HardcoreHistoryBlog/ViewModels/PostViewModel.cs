@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HardcoreHistoryBlog.Data;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,5 +22,6 @@ namespace HardcoreHistoryBlog.ViewModels
 
         public string Category { get; set; } = "";
         public string Tags { get; set; } = "";
+        public string ClientFirstName { get; set; }
     }
 }

@@ -9,46 +9,125 @@
     ViewBag.Keywords = $"{Model.Tags?.Replace(",", " ")} {Model.Category}";
 }
 
-<h2>@Model.Title</h2>
-<p>@Model.Category</p>
-<p>@Model.Short_Description</p>
-@if (!String.IsNullOrEmpty(Model.Image))
-{
-    var image_path = $"/Image/{Model.Image}";
-    <img src="@image_path" />
-}
-<p>@Model.Content</p>
-<div class="comment-section">
-    @{
-        await Html.RenderPartialAsync("_MainComment", new CommentViewModel
-        {
-            PostId = Model.Id,
-            MainCommentId = 0
-        });
-    }
-    @foreach (var c in Model.MainComments)
-    {
-        <p>
-            @c.Message --- @c.Created 
-        </p>
-        <div style="margin-left:20px">
-            <h4>Sub Comments</h4>
-            @{
-                await Html.RenderPartialAsync("_MainComment", new CommentViewModel
-                {
-                    PostId = Model.Id,
-                    MainCommentId = c.Id
-                });
-            }
-            @foreach (var sc in c.SubComments)
-            {
-            <p>
-                @sc.Message --- @sc.Created 
-            </p>
-            }
-                
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @Model.Title
+                <small>@Model.Short_Description</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
+                <li>@Model.Title</li>
+            </ol>
         </div>
-    }
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-8">
+            <hr>
+            <p>
+                <i class="fa fa-clock-o"></i>@Model.Posted<a href="~/css/bootstraptheme.css">@Model.Title</a>
+            </p>
+            <hr>
+
+            @if (!String.IsNullOrEmpty(Model.Image))
+            {
+                var image_path = $"/Image/{Model.Image}";
+                <img class="img-responsive" src="@image_path" />
+            }
+            <hr>
+            <p class="lead">
+                @Model.Content
+
+            </p>
+            <strong>This post was by @Model.ClientFirstName</strong>
+            <ul>
+                <h4>Other topics you might find interesting!</h4>
+                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a></li>
+                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a></li>
+                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a></li>
+            </ul>
+            <hr>
+            <div class="well">
+                <h4>Leave a Comment:</h4>
+                @{
+                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
+                }
+
+                @foreach (var c in Model.MainComments)
+                {
+                    <p>@c.Message</p>
+                    <small>@c.Edited</small>
+                    <a asp-controller="Posts" asp-action="RemoveComment">
+                        Remove
+                    </a>
+                }
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="well">
+                <h4>Blog Search</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="well">
+                <h4>Popular Blog Categories</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#dinosaurs">Dinosaurs</a>
+                            </li>
+                            <li>
+                                <a href="#spaceships">Spaceships</a>
+                            </li>
+                            <li>
+                                <a href="#fried-foods">Fried Foods</a>
+                            </li>
+                            <li>
+                                <a href="#wild-animals">Wild Animals</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#alien-abductions">Alien Abductions</a>
+                            </li>
+                            <li>
+                                <a href="#business-casual">Business Casual</a>
+                            </li>
+                            <li>
+                                <a href="#robots">Robots</a>
+                            </li>
+                            <li>
+                                <a href="#fireworks">Fireworks</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <h4>Side Widgets</h4>
+                <p>put side widgets <strong>here</strong></p>
+
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
 
 

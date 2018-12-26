@@ -42,7 +42,7 @@ namespace HardcoreHistoryBlog.Core
                 _user.Email = user.Email;
                 _user.PasswordHash = user.PasswordHash;
 
-                _user.UserRoles = user.UserRoles;
+                _user.Roles = user.Roles;
                 _context.Users.Add(_user);
                 user.Id = _user.Id;
 
@@ -67,7 +67,7 @@ namespace HardcoreHistoryBlog.Core
                     dbEntry.FirstName = user.FirstName;
                     dbEntry.LastName = user.LastName;
                     dbEntry.PasswordHash = user.PasswordHash;
-                    dbEntry.UserRoles = user.UserRoles;
+                    dbEntry.Roles = user.Roles;
 
                     if (_context.SaveChanges() > 0)
                     {

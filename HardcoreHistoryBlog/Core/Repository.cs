@@ -72,5 +72,15 @@ namespace HardcoreHistoryBlog.Core
         {
             _context.SubComments.Add(comment);
         }
+        public MainComment GetComment(int id)
+        {
+            return _context.MainComments
+                .Include(c => c.Id) 
+                .FirstOrDefault(c => c.Id == id);
+        }
+        public void RemoveComment(int id)
+        {
+            _context.MainComments.Remove(GetComment(id));
+        }
     }
 }

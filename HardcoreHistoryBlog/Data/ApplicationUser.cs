@@ -15,11 +15,9 @@ namespace HardcoreHistoryBlog.Data
     {
         public string FirstName { get; internal set; }
         public string LastName { get; internal set; }
-        [ForeignKey("Role")]
-        public virtual ApplicationRole ApplicationRole { get; internal set; }
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
         public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
-        public virtual ICollection<IdentityUserRole<string>> UserRoles { get; set; }
+        public virtual IEnumerable<ApplicationRole> Roles { get; set; }
     }
 }

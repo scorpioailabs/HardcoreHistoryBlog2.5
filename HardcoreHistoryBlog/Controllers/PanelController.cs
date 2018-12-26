@@ -91,6 +91,7 @@ namespace HardcoreHistoryBlog.Controllers
             var post = new Post
             {
                 Id = vm.Id,
+                ClientFirstName = vm.ClientFirstName, 
                 Title = vm.Title,
                 Content = vm.Content,
                 Short_Description = vm.Short_Description,
