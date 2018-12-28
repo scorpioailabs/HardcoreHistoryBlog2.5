@@ -10,22 +10,25 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 using PagedList;
+using Microsoft.AspNetCore.Identity;
 
 namespace HardcoreHistoryBlog.Controllers
 {
     public class PanelController : Controller
     {
-
+        private readonly UserManager<ApplicationUser> _userManager;
         private IRepository _repo;
         private IFileManager _fileManager;  
 
         public PanelController(
             IFileManager fileManager,
-            IRepository repo
+            IRepository repo,
+            UserManager<ApplicationUser> userManager
             ) 
         {
             _fileManager = fileManager;
             _repo = repo;
+            _userManager = userManager;
         }
 
         [Authorize(Roles ="Admin")]
@@ -124,6 +127,36 @@ namespace HardcoreHistoryBlog.Controllers
         public IActionResult Admins()
         {
             return View();
+        }
+        
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View(new UsersViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(UsersViewModel vm)   
+        {
+            if (!ModelState.IsValid) return View(vm);
+            {
+
+                var user = new ApplicationUser { UserName = vm.Email, Email = vm.Email, FirstName = vm.FirstName, LastName = vm.LastName };
+                var result = await _userManager.CreateAsync(user, vm.Password);
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(user, "Customer").Wait();
+                    _repo.AddUser(user);
+                    return RedirectToAction("Index", "Panel");
+                }
+                else
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+            }
+
+            return View(vm);
         }
     }
 }

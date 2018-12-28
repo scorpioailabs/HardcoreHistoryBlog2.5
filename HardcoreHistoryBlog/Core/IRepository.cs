@@ -24,6 +24,7 @@ namespace HardcoreHistoryBlog.Core
         void AddSubComment(SubComment comment);
         void RemoveComment(int id);
         void GetUsers();
+        void AddUser(ApplicationUser user);
 
 
         Task<bool> SaveChangesAsync();

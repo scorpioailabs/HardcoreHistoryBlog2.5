@@ -90,7 +90,14 @@ namespace HardcoreHistoryBlog.Core
 
         public void GetUsers()
         {
-            var Users = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
+            var customers = _userManager.GetUsersInRoleAsync("Customer").Result;
+            var admins = _userManager.GetUsersInRoleAsync("Admin").Result;
+
+        }
+
+        public void AddUser(ApplicationUser user)
+        {
+            _context.Add(user);
         }
     }
 }

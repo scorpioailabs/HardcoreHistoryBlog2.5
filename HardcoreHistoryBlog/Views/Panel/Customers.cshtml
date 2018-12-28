@@ -40,8 +40,14 @@
                     <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<ul>
+    <li>
+        <a asp-controller="Panel" asp-action="CreateUser">Create a new User</a> 
+    </li>
+</ul>
