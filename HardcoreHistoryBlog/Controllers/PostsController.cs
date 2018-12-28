@@ -9,6 +9,7 @@ using HardcoreHistoryBlog.Data;
 using Microsoft.AspNetCore.Authorization;
 using HardcoreHistoryBlog.Models.Comments;
 using HardcoreHistoryBlog.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -17,14 +18,17 @@ namespace HardcoreHistoryBlog.Controllers
 
         private IRepository _repo;
         private IFileManager _fileManager;
+        UserManager<ApplicationUser> _userManager;
 
         public PostsController( 
             IFileManager fileManager,
-            IRepository repo
+            IRepository repo,
+            UserManager<ApplicationUser> userManager
             )
         {
             _fileManager = fileManager;
             _repo = repo;
+            _userManager = userManager;
 
         }
 
@@ -60,13 +64,16 @@ namespace HardcoreHistoryBlog.Controllers
             var post = _repo.GetPost(vm.PostId);
             if (vm.MainCommentId == 0)
             {
+                var user = await _userManager.GetUserAsync(User);
+                var email = user.Email;
                 post.MainComments = post.MainComments ?? new List<MainComment>();
 
                 post.MainComments.Add(new MainComment
                 {
                     Message = vm.Message,
                     Created = DateTime.Now,
-                    Edited = DateTime.Now
+                    Edited = DateTime.Now,
+                    By = user.FirstName
                 });
                 _repo.UpdatePost(post);
             }
@@ -92,6 +99,8 @@ namespace HardcoreHistoryBlog.Controllers
             await _repo.SaveChangesAsync();
             return RedirectToAction("Post");
         }
+
+        
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace HardcoreHistoryBlog.ViewModels
 {
-    public class UsersViewModel 
+    [Bind]
+    public class UsersViewModel
+        
     {
+
         [Key]
         public string UserId { get; set; }
 

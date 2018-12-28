@@ -91,13 +91,19 @@ namespace HardcoreHistoryBlog.Core
         public void GetUsers()
         {
             var customers = _userManager.GetUsersInRoleAsync("Customer").Result;
-            var admins = _userManager.GetUsersInRoleAsync("Admin").Result;
+            var admins = _userManager.GetUsersInRoleAsync("Admin").Result;              
+
 
         }
 
         public void AddUser(ApplicationUser user)
         {
             _context.Add(user);
+        }
+
+        public void UpdateUser(ApplicationUser user) 
+        {
+            _context.Update(user);
         }
     }
 }

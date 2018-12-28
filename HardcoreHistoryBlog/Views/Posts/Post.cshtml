@@ -62,11 +62,16 @@
 
                 @foreach (var c in Model.MainComments)
                 {
-                    <p>@c.Message</p>
-                    <small>@c.Edited</small>
+
+                    <p> @c.Message </p>
+
+                    <p2><i>@c.By</i></p2>
+
+                    <p3><small>-- @c.Edited</small></p3>
                     <a asp-controller="Posts" asp-action="RemoveComment">
                         Remove
                     </a>
+
                 }
 
             </div>

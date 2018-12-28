@@ -158,5 +158,33 @@ namespace HardcoreHistoryBlog.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string email)
+        {
+
+            ApplicationUser appUser = new ApplicationUser();
+            appUser = await _userManager.FindByEmailAsync(email);
+            
+            return View(new UsersViewModel
+            {
+                Username = appUser.Email,
+                Email = appUser.Email,
+                FirstName = appUser.FirstName,
+                LastName = appUser.LastName
+            });
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(UsersViewModel vm)
+
+        {
+            var user = new ApplicationUser { UserName = vm.Email, Email = vm.Email, FirstName = vm.FirstName, LastName = vm.LastName };
+
+            _repo.UpdateUser(user);
+            await _repo.SaveChangesAsync();
+            return RedirectToAction("Index");   
+        }
     }
 }
