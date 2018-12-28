@@ -59,9 +59,9 @@ namespace HardcoreHistoryBlog.Controllers
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {
+                    _userManager.AddToRoleAsync(user, "Customer").Wait();
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
-
                 }
                 else
                     foreach (var error in result.Errors)
