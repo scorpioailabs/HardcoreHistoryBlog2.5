@@ -14,6 +14,6 @@ namespace HardcoreHistoryBlog.Data
         public ApplicationRole(string name)
             : base(name)
         { }
-
+        public ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }

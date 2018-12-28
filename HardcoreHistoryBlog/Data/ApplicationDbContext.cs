@@ -7,12 +7,13 @@ using HardcoreHistoryBlog.Models.Comments;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HardcoreHistoryBlog.ViewModels;
 
 namespace HardcoreHistoryBlog.Data
 {
     public class ApplicationDbContext : IdentityDbContext<
                 ApplicationUser, ApplicationRole, string,
-        IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>,
+        IdentityUserClaim<string>, ApplicationUserRole, IdentityUserLogin<string>,
         IdentityRoleClaim<string>, IdentityUserToken<string>>
 
     {
@@ -26,49 +27,29 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<MainComment> MainComments { get; set; }
             public DbSet<SubComment> SubComments { get; set; } 
             public DbSet<HardcoreHistoryBlog.Models.RegisterViewModel> RegisterViewModel { get; set; }
-            
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    builder.Entity<Comment>()
-        //        .HasOne(pt => pt.Post)
-        //        .WithMany(c => c.Comments)
-        //        .HasForeignKey("FK_Comments_Posts_id")
-        //        .OnDelete(DeleteBehavior.ClientSetNull); // sets null
 
-        //    base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        //    builder.Entity<ApplicationUser>(b =>
-        //    {
-        //        // Each User can have many UserClaims
-        //        b.HasMany(e => e.Claims)
-        //            .WithOne()
-        //            .HasForeignKey(uc => uc.UserId)
-        //            .IsRequired();
+            builder.Entity<ApplicationUserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
 
-        //        // Each User can have many UserLogins
-        //        b.HasMany(e => e.Logins)
-        //            .WithOne()
-        //            .HasForeignKey(ul => ul.UserId)
-        //            .IsRequired();
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
 
-        //        // Each User can have many UserTokens
-        //        b.HasMany(e => e.Tokens)
-        //            .WithOne()
-        //            .HasForeignKey(ut => ut.UserId)
-        //            .IsRequired();
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+        }
 
-        //        // Each User can have many entries in the UserRole join table
-        //        b.HasMany(e => e.UserRoles)
-        //            .WithOne()
-        //            .HasForeignKey(ur => ur.UserId)
-        //            .IsRequired();
-        //    });
 
-        //    {
-        //        builder.Entity<Post>().ToTable("Posts");
-        //        builder.Entity<Comment>().ToTable("Comments");
-        //    }
-        //}
+        public DbSet<HardcoreHistoryBlog.ViewModels.UsersViewModel> UsersViewModel { get; set; }
     }
 }

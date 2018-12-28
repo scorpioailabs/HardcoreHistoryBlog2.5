@@ -49,7 +49,11 @@
                     <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a></li>
                     <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a></li>
                     <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a></li>
-                    <li><a asp-area="" asp-controller="Panel" asp-action="Index">Admin</a> </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-area="" asp-controller="Panel" asp-action="Index">Admin</a> </li>
+                    }
+
                 </ul>
             </div>
 

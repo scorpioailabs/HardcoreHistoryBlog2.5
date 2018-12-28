@@ -8,6 +8,7 @@ using HardcoreHistoryBlog.Models.Blog_Models;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using HardcoreHistoryBlog.Models.Comments;
+using Microsoft.AspNetCore.Identity;
 
 namespace HardcoreHistoryBlog.Core
 {
@@ -19,6 +20,8 @@ namespace HardcoreHistoryBlog.Core
         {
             _context = context;
         }
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
 
         public void AddPost(Post post)
@@ -81,6 +84,13 @@ namespace HardcoreHistoryBlog.Core
         public void RemoveComment(int id)
         {
             _context.MainComments.Remove(GetComment(id));
+        }
+
+        public IEnumerable<ApplicationUser> Users { get; set; }
+
+        public void GetUsers()
+        {
+            var Users = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
         }
     }
 }

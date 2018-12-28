@@ -14,17 +14,24 @@
     <ul>
         @foreach (var post in Model)
         {
-        <li>
-            <a asp-controller="Panel" asp-action="Post" asp-route-id="@post.Id">
-                @post.Title
-            </a>
-            <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
-                Edit
-            </a>
-            <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
-                Remove
-            </a>            
-        </li>
+            <li>
+                <a asp-controller="Panel" asp-action="Post" asp-route-id="@post.Id">
+                    @post.Title
+                </a>
+                <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
+                    Edit
+                </a>
+                <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
+                    Remove
+                </a>
+
+            </li>
         }
     </ul>
+    <a asp-controller="Panel" asp-action="Customers">
+        Customers
+    </a>
+    <a asp-controller="Panel" asp-action="Admins">
+        Admins
+    </a>
 </div>

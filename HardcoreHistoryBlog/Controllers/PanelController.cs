@@ -116,5 +116,14 @@ namespace HardcoreHistoryBlog.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Customers()    
+        {
+            return View();
+        }
+        
+        public IActionResult Admins()
+        {
+            return View();
+        }
     }
 }

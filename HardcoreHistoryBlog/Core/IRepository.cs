@@ -23,6 +23,7 @@ namespace HardcoreHistoryBlog.Core
         void RemovePost(int id);
         void AddSubComment(SubComment comment);
         void RemoveComment(int id);
+        void GetUsers();
 
 
         Task<bool> SaveChangesAsync();

@@ -4,23 +4,26 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using HardcoreHistoryBlog.Data;
 
 namespace HardcoreHistoryBlog.ViewModels
 {
-    public class UsersViewModel
+    public class UsersViewModel 
     {
-        public int Id { get; set; }
+        [Key]
+        public string UserId { get; set; }
 
+        [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
+        [Required]
         [DisplayName("Second Name")]
         public string LastName { get; set; }
 
-        public string Username { get; set; }
-
+        [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
     }
 }

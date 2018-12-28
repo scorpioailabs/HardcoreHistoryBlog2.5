@@ -55,7 +55,9 @@ namespace HardcoreHistoryBlog
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IFileManager, FileManager>();
             services.AddMvc(config =>

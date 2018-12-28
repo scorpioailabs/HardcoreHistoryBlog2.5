@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HardcoreHistoryBlog.Core;
 using HardcoreHistoryBlog.Data;
 using HardcoreHistoryBlog.Models;
+using HardcoreHistoryBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -71,6 +72,8 @@ namespace HardcoreHistoryBlog.Controllers
 
             return View(vm);
         }
-        
+
+
+
     }
 }
