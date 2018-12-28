@@ -186,5 +186,8 @@ namespace HardcoreHistoryBlog.Controllers
             await _repo.SaveChangesAsync();
             return RedirectToAction("Index");   
         }
+
+
+
     }
 }
