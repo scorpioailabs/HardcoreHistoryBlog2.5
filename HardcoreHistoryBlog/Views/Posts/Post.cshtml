@@ -28,46 +28,53 @@
         </div>
 
         <div class="row">
-        <div class="col-lg-8">
+            <div class="col-lg-8">
 
-            @if (!String.IsNullOrEmpty(Model.Image))
-            {
-                var image_path = $"/Image/{Model.Image}";
-                <img class="img-responsive" src="@image_path" />
-            }
-            <hr>
-            <p class="lead">
-                @Model.Content
-
-            </p>
-
-            <div class="well-sm">
-                <h4><i class="fa fa-fire"></i> Popular Posts:</h4>
-                <ul>
-                    <li><a asp-controller="Posts" asp-route-id="2">The 4th Khan of the Mongols</a></li>
-                </ul>
-            </div>
-
-            <div class="well">
-                <h4>Leave a Comment:</h4>
-                @{
-                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
-                }
-
-                @foreach (var c in Model.MainComments)
+                @if (!String.IsNullOrEmpty(Model.Image))
                 {
-                    <p>
-                    </p>
-                    <p> @c.Message </p>
-                    <p2><strong>@c.By</strong></p2>
-                    <p3><small>-- @c.Edited</small></p3>
-                    <a asp-controller="Posts" asp-action="RemoveComment">
-                        Remove
-                    </a>
-
+                    var image_path = $"/Image/{Model.Image}";
+                    <img class="img-responsive" src="@image_path" />
                 }
+                <hr>
+                <p class="lead">
+                    @Model.Content
 
+                </p>
+
+                <div class="well-sm">
+                    <h4><i class="fa fa-fire"></i> Popular Posts:</h4>
+                    <ul>
+                        <li><a asp-controller="Posts" asp-route-id="2">The 4th Khan of the Mongols</a></li>
+                    </ul>
                 </div>
+
+
+
+                <!-- the comment box -->
+                <div class="well">
+                    <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
+                    </form>
+                </div>
+                <script src="https://apis.google.com/js/plusone.js">
+                </script>
+
+                <hr>
+                <!-- the comments -->
+                <h3>
+                    @foreach (var c in Model.MainComments)
+                    {
+
+                        <i class="fa fa-comment"></i> @c.By <i>says:</i>
+                        <p>@c.Message</p>
+                        <small>@c.Edited</small>
+
+                    }
+                </h3>
 
             </div>
 
