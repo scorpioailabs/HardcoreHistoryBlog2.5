@@ -16,11 +16,9 @@ namespace HardcoreHistoryBlog.ViewModels
         public virtual string Short_Description { get; set; } = "";
         public string CurrentImage { get; set; } = "";
         public IFormFile Image { get; set; }
-
+        [DataType(DataType.MultilineText)]
         public virtual string Content { get; set; } = "";
-
         public string Category { get; set; } = "";
         public string Tags { get; set; } = "";
-        public string ClientFirstName { get; set; }
     }
 }

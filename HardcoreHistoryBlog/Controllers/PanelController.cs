@@ -94,7 +94,6 @@ namespace HardcoreHistoryBlog.Controllers
             var post = new Post
             {
                 Id = vm.Id,
-                ClientFirstName = vm.ClientFirstName, 
                 Title = vm.Title,
                 Content = vm.Content,
                 Short_Description = vm.Short_Description,
@@ -158,36 +157,6 @@ namespace HardcoreHistoryBlog.Controllers
 
             return View(vm);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> EditUser(string email)
-        {
-
-            ApplicationUser appUser = new ApplicationUser();
-            appUser = await _userManager.FindByEmailAsync(email);
-            
-            return View(new UsersViewModel
-            {
-                Username = appUser.Email,
-                Email = appUser.Email,
-                FirstName = appUser.FirstName,
-                LastName = appUser.LastName
-            });
-        }
-
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditUser(UsersViewModel vm)
-
-        {
-            var user = new ApplicationUser { UserName = vm.Email, Email = vm.Email, FirstName = vm.FirstName, LastName = vm.LastName };
-
-            _repo.UpdateUser(user);
-            await _repo.SaveChangesAsync();
-            return RedirectToAction("Index");   
-        }
-
-
 
     }
 }

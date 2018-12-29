@@ -29,9 +29,9 @@ namespace HardcoreHistoryBlog
      .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
+            //{
+            //    builder.AddUserSecrets<Startup>();
+            //}
 
             Configuration = builder.Build();
         }

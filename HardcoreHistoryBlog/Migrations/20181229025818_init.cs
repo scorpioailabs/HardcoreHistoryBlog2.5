@@ -4,38 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HardcoreHistoryBlog.Migrations
 {
-    public partial class madness : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -56,20 +28,43 @@ namespace HardcoreHistoryBlog.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
-                    AuthorId = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RegisterViewModel",
+                columns: table => new
+                {
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(maxLength: 100, nullable: false),
+                    ConfirmPassword = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RegisterViewModel", x => x.FirstName);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersViewModel",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(maxLength: 100, nullable: false),
+                    ConfirmPassword = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersViewModel", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,18 +184,62 @@ namespace HardcoreHistoryBlog.Migrations
                     Tags = table.Column<string>(nullable: true),
                     Posted = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    ClientFirstName = table.Column<string>(nullable: true),
-                    ClientId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_ClientId",
-                        column: x => x.ClientId,
+                        name: "FK_Posts_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,23 +251,23 @@ namespace HardcoreHistoryBlog.Migrations
                     Message = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Edited = table.Column<DateTime>(nullable: false),
-                    ClientId = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<string>(nullable: true),
+                    By = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
                     PostId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MainComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MainComments_AspNetUsers_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_MainComments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MainComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -242,25 +281,25 @@ namespace HardcoreHistoryBlog.Migrations
                     Message = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Edited = table.Column<DateTime>(nullable: false),
-                    ClientId = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    By = table.Column<string>(nullable: true),
                     MainCommentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubComments_AspNetUsers_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_SubComments_MainComments_MainCommentId",
                         column: x => x.MainCommentId,
                         principalTable: "MainComments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SubComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -318,24 +357,9 @@ namespace HardcoreHistoryBlog.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AuthorId",
-                table: "AspNetUsers",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_RoleId",
-                table: "AspNetUsers",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserTokens_ApplicationUserId",
                 table: "AspNetUserTokens",
                 column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MainComments_ClientId",
-                table: "MainComments",
-                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MainComments_PostId",
@@ -343,59 +367,28 @@ namespace HardcoreHistoryBlog.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_ClientId",
-                table: "Posts",
-                column: "ClientId");
+                name: "IX_MainComments_UserId",
+                table: "MainComments",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubComments_ClientId",
-                table: "SubComments",
-                column: "ClientId");
+                name: "IX_Posts_UserId",
+                table: "Posts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubComments_MainCommentId",
                 table: "SubComments",
                 column: "MainCommentId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId",
-                principalTable: "AspNetRoles",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId",
-                principalTable: "AspNetRoles",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_AspNetRoles_RoleId",
-                table: "AspNetUsers",
-                column: "RoleId",
-                principalTable: "AspNetRoles",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.CreateIndex(
+                name: "IX_SubComments_UserId",
+                table: "SubComments",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUsers_AspNetRoles_RoleId",
-                table: "AspNetUsers");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -418,13 +411,16 @@ namespace HardcoreHistoryBlog.Migrations
                 name: "SubComments");
 
             migrationBuilder.DropTable(
+                name: "UsersViewModel");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "MainComments");
 
             migrationBuilder.DropTable(
                 name: "Posts");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

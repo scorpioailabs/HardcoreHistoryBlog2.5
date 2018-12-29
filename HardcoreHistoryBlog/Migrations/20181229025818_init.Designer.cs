@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HardcoreHistoryBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181228222854_texteditor")]
-    partial class texteditor
+    [Migration("20181229025818_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,8 +125,6 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Category");
 
-                    b.Property<string>("ClientFirstName");
-
                     b.Property<string>("Content");
 
                     b.Property<string>("Image");
@@ -142,7 +140,11 @@ namespace HardcoreHistoryBlog.Migrations
                     b.Property<string>("Title")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -354,6 +356,13 @@ namespace HardcoreHistoryBlog.Migrations
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HardcoreHistoryBlog.Models.Blog_Models.Post", b =>
+                {
+                    b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.MainComment", b =>

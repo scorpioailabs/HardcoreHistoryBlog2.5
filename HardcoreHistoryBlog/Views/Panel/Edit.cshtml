@@ -8,7 +8,7 @@
 <h4>Post</h4>
 <hr />
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -58,7 +58,10 @@
 </div>
 
 @section Scripts {
-    <script src="~/Trumbowyg-master/Trumbowyg-master/dist/trumbowyg.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @*<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+        <script type="application/x-javascript">
+            tinymce.init({selector:'#TypeHere'});
+        </script>*@
+
 }

@@ -28,9 +28,6 @@
     <Content Update="Views\Panel\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Panel\Edit.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Views\Panel\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

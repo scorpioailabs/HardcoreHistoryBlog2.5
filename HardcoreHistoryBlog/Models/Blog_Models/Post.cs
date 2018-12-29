@@ -28,8 +28,9 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
 
         public DateTime Posted { get; set; } = DateTime.Now;
         public DateTime? Modified { get; set; } = DateTime.Now;
-        public string ClientFirstName { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public List<MainComment> MainComments { get; set; }
+        public string UserId { get; set; }
     }
 
     public class Client : ApplicationUser
