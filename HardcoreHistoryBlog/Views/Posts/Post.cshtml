@@ -8,15 +8,14 @@
     ViewBag.Description = Model.Short_Description;
     ViewBag.Keywords = $"{Model.Tags?.Replace(",", " ")} {Model.Category}";
 }
-
-
-<div class="container">
+<link href="~/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
                 @Model.Title
-                <small>@Model.Short_Description</small>
-            </h1>  
+                <small>by Admin</small>
+            </h1>
             <ol class="breadcrumb">
                 <li>
                     @Html.ActionLink("Home", "Index", "Home")/
@@ -24,17 +23,12 @@
                 <li>@Html.ActionLink("Posts", "Index", "Posts")/</li>
                 <li>@Model.Title</li>
             </ol>
+            <p><i class="fa fa-calendar"></i>  @Model.Posted</p>
+            <p><i class="fa fa-tags"></i>Tags: <span class="badge badge-info">@Model.Tags</span></p>
         </div>
-    </div>
 
-
-    <div class="row">
+        <div class="row">
         <div class="col-lg-8">
-            <hr>
-            <p>
-                <i class="icon-clock"></i>  @Model.Posted<a href="~/css/bootstraptheme.css">  @Model.Title</a>
-            </p>
-            <hr>
 
             @if (!String.IsNullOrEmpty(Model.Image))
             {
@@ -46,14 +40,14 @@
                 @Model.Content
 
             </p>
-            <strong>This post was by @Model.ClientFirstName</strong>
-            <ul>
-                <h4>Other topics you might find interesting!</h4>
-                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a></li>
-                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a></li>
-                <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a></li>
-            </ul>
-            <hr>
+
+            <div class="well-sm">
+                <h4><i class="fa fa-fire"></i> Popular Posts:</h4>
+                <ul>
+                    <li><a asp-controller="Posts" asp-route-id="2">The 4th Khan of the Mongols</a></li>
+                </ul>
+            </div>
+
             <div class="well">
                 <h4>Leave a Comment:</h4>
                 @{
@@ -73,65 +67,184 @@
 
                 }
 
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="well">
-                <h4>Blog Search</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
                 </div>
-            </div>
-            <div class="well">
-                <h4>Popular Blog Categories</h4>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#dinosaurs">Dinosaurs</a>
-                            </li>
-                            <li>
-                                <a href="#spaceships">Spaceships</a>
-                            </li>
-                            <li>
-                                <a href="#fried-foods">Fried Foods</a>
-                            </li>
-                            <li>
-                                <a href="#wild-animals">Wild Animals</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#alien-abductions">Alien Abductions</a>
-                            </li>
-                            <li>
-                                <a href="#business-casual">Business Casual</a>
-                            </li>
-                            <li>
-                                <a href="#robots">Robots</a>
-                            </li>
-                            <li>
-                                <a href="#fireworks">Fireworks</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="well">
-                <h4>Side Widgets</h4>
-                <p>put side widgets <strong>here</strong></p>
 
             </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-lg-4">
+                <div class="well">
+                    <!-- ADDED HERE-->
+                    <!-- Search Widget -->
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#">Medieval History</a>
+                            </li>
+                            <li>
+                                <a href="#">Ancient Civilizations</a>
+                            </li>
+                            <li>
+                                <a href="#">Modern History</a>
+                            </li>
+                        </ul>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#">Far Eastern Civ</a>
+                            </li>
+                            <li>
+                                <a href="#">Hardcore Trivia</a>
+                            </li>
+                            <li>
+                                <a href="#">Books</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header"><i class="fa fa-book"></i>Featured Books</h5>
+                    <div class="card-body">
+                        <div class="cuadro_intro_hover " style="background-color:#cccccc;">
+                            <p style="text-align:center; margin-top:20px;">
+                                <img src="~/images/book1.jpg" height="250" width="175" class="img-responsive" alt="The Silk Roads: A New History of the World">
+                            </p>
+                            <div class="caption">
+                                <div class="blur"></div>
+                                <div class="caption-text">
+                                    <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">The Silk Roads: A New History of the World</h3>
+                                    <p>All hardcore fans of the Silk Road would be silly not to buy this fantastic book from Peter Frankopan</p>
+                                    <a class=" btn btn-default" href="#"><i class="fa fa-plus"></i> INFO</span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cuadro_intro_hover " style="background-color:#cccccc;">
+                            <p style="text-align:center; margin-top:20px;">
+                                <img src="~/images/spqr.jpg" height="250" width="175" class="img-responsive" alt="SPQR">
+                            </p>
+                            <div class="caption">
+                                <div class="blur"></div>
+                                <div class="caption-text">
+                                    <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">SPQR</h3>
+                                    <p>In my opinion one of the best Modern-day takes on the Illuastrious Roman Empire</p>
+                                    <a class=" btn btn-default" href="#"><i class="fa fa-plus"></i> INFO</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /well -->
+                <div class="card my-4">
+                    <h4><i class="fa fa-tags"></i> Popular Tags:</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Nomads"><span class="badge badge-info">Nomads</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Mongols"><span class="badge badge-info">Mongols</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Asyrians"><span class="badge badge-info">Asyrians</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Anatolia"><span class="badge badge-info">Anatolia</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Ertugrul"><span class="badge badge-info">Ertugrul</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Ottomans"><span class="badge badge-info">Ottomans</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Vikings"><span class="badge badge-info">Vikings</span></a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-tag="Visgoths"><span class="badge badge-info">Visgoths</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+</div>
+
+                <script type="text/javascript">
+                    (function () {
+                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                        po.src = 'https://apis.google.com/js/platform.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

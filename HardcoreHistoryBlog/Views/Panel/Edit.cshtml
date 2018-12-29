@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea id= asp-for="Content" class="form-control"></textarea>
+                <textarea asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,8 +61,4 @@
     <script src="~/Trumbowyg-master/Trumbowyg-master/dist/trumbowyg.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-    <script src="~/Trumbowyg-master/Trumbowyg-master/dist/trumbowyg.min.js"></script>
-    <script>
-        $('#editor').trumbowyg();
-    </script>
 }
