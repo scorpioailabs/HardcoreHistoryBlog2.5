@@ -73,7 +73,8 @@ namespace HardcoreHistoryBlog.Controllers
                     Message = vm.Message,
                     Created = DateTime.Now,
                     Edited = DateTime.Now,
-                    By = user.FirstName
+                    By = user.FirstName,
+                    UserId = user.Id 
                 });
                 _repo.UpdatePost(post);
             }

@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using HardcoreHistoryBlog.Models.Comments;
 
 namespace HardcoreHistoryBlog.Data
 {
@@ -19,6 +20,6 @@ namespace HardcoreHistoryBlog.Data
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
         public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
         public virtual IEnumerable<ApplicationRole> Roles { get; set; }
-        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public ICollection<ApplicationUserRole> UserRoles { get; set; } 
     }
 }

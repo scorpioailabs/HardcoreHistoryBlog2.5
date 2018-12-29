@@ -19,9 +19,9 @@
             </h1>  
             <ol class="breadcrumb">
                 <li>
-                    @Html.ActionLink("Home", "Index", "Home")
+                    @Html.ActionLink("Home", "Index", "Home")/
                 </li>
-                <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
+                <li>@Html.ActionLink("Posts", "Index", "Posts")/</li>
                 <li>@Model.Title</li>
             </ol>
         </div>
@@ -32,7 +32,7 @@
         <div class="col-lg-8">
             <hr>
             <p>
-                <i class="fa fa-clock-o"></i>@Model.Posted<a href="~/css/bootstraptheme.css">@Model.Title</a>
+                <i class="icon-clock"></i>  @Model.Posted<a href="~/css/bootstraptheme.css">  @Model.Title</a>
             </p>
             <hr>
 
@@ -62,11 +62,10 @@
 
                 @foreach (var c in Model.MainComments)
                 {
-
+                    <p>
+                    </p>
                     <p> @c.Message </p>
-
-                    <p2><i>@c.By</i></p2>
-
+                    <p2><strong>@c.By</strong></p2>
                     <p3><small>-- @c.Edited</small></p3>
                     <a asp-controller="Posts" asp-action="RemoveComment">
                         Remove
@@ -133,7 +132,7 @@
         </div>
     </div>
     </div>
-</div>
+
 
 
 

@@ -20,7 +20,6 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public virtual string Short_Description { get; set; }
         public string Image { get; set; } = "";
 
-        [DataType(DataType.MultilineText)]
         public virtual string Content { get; set; } = "";
 
         public string Category { get; set; } = "";
