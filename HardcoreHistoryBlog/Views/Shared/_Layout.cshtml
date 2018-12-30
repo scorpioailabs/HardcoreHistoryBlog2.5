@@ -17,78 +17,76 @@
 </head>
 
 
-<body style="padding-top: 70px;">
-    <div class="container-fluid">
+<body style="padding-top: 50px; width: 80%; margin: 0 auto;">
 
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top bg-dark" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/H.png" width="30" height="30" alt="" />
-                        Hardcore History
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="sr-only">Toggle navigation</span>
+    <nav class="navbar fixed-top  navbar-expand-sm navbar-dark justify-content-between py-0" style="background-color: #251B50;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    </button>
+            <!--Brand-->
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/H.png" width="30" height="30" alt="" />
+                Hardcore History
+            </a>
 
-                </div>
-
-                <div class="collapse navbar-collapse">
-
-                    <ul class="nav navbar-nav mr-auto">
-
+            <!--Tabs-->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link py-0" asp-area="" asp-controller="Posts" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item dropdown py-0">
+                        <a class="nav-link dropdown-toggle py-0" href="#" id="navbarDropdownMenuLink py-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu py-0" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item py-0" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a>
+                            <a class="dropdown-item py-0" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a>
+                            <a class="dropdown-item py-0" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a>
+                        </div>
+                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link scroll-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link py-0" asp-area="" asp-controller="Panel" asp-action="Index">Admin</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a>
-                        </li>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link scroll-link" asp-area="" asp-controller="Panel" asp-action="Index">Admin</a>
-                            </li>
-                        }
-                        <ul class="navbar-right">
-                            <li class="navbar-right">
-                                <partial name="_LoginPartial" />
-                            </li>
-                        </ul>
-
-                    </ul>
-                </div>
+                    }
+                </ul>
+                <ul class="navbar-nav py-0">
+                    <li class="nav-item py-0">
+                        <partial name="_LoginPartial" />
+                    </li>
+                </ul>
             </div>
-        </nav>
-
-        <div class="container-fluid body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Hardcore History Blog</p>
-            </footer>
         </div>
+    </nav>
 
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
+    <div class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Hardcore History Blog</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
 
 
 
-        @RenderSection("scripts", required: false)
-        <script src="~/startbootstrap-full-slider-gh-pages/vendor/jquery/jquery.js"></script>
-        <script src="~/startbootstrap-full-slider-gh-pages/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="~/startbootstrap-full-slider-gh-pages/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+    @RenderSection("scripts", required: false)
+    <script src="~/startbootstrap-full-slider-gh-pages/vendor/jquery/jquery.js"></script>
+    <script src="~/startbootstrap-full-slider-gh-pages/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/startbootstrap-full-slider-gh-pages/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
 
     </div>
 </body>

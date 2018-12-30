@@ -6,12 +6,12 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right mr-auto">
-            <li class="navbar-right">
-                <a a class="nav-link scroll-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+        <ul class="navbar-nav py-0">
+            <li class="nav-item py-0">
+                <a a class="nav-link scroll-link py-0" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item py-0">
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
             </li>
         </ul>
@@ -19,8 +19,8 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right mr-auto">
-        <li class ="nav-item"><a class="nav-link scroll-link"  asp-controller="Account" asp-action="Register">Register</a></li>
-        <li class ="nav-item"><a class="nav-link scroll-link" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    <ul class="navbar-nav py-0">
+        <li class="nav-item py-0"><a class="nav-link scroll-link py-0" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li class="nav-item py-0"><a class="nav-link scroll-link py-0" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
     </ul>
 }
