@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using HardcoreHistoryBlog.Data;
 using HardcoreHistoryBlog.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +37,6 @@ namespace HardcoreHistoryBlog.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
             if (!ModelState.IsValid)
