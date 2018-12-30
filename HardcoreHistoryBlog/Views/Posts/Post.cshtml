@@ -27,7 +27,6 @@
             <p><i class="fa fa-tags"></i>Tags: <span class="badge badge-info">@Model.Tags</span></p>
         </div>
 
-        <div class="row">
             <div class="col-lg-8">
 
                 @if (!String.IsNullOrEmpty(Model.Image))
@@ -53,31 +52,25 @@
                 <!-- the comment box -->
                 <div class="well">
                     <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
-                    </form>
+                    @{ await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 }); }
                 </div>
                 <script src="https://apis.google.com/js/plusone.js">
                 </script>
 
                 <hr>
                 <!-- the comments -->
-                <h3>
-                    @foreach (var c in Model.MainComments)
-                    {
 
-                        <i class="fa fa-comment"></i> @c.By <i>says:</i>
-                        <p>@c.Message</p>
-                        <small>@c.Edited</small>
+                @foreach (var c in Model.MainComments)
+                {
+                    <div class="well=sm">
+                        <h5>
+                            <p><i class="fa fa-comment"></i><strong>@c.By   </strong><i><small> @c.Edited</small></i></p>
+                            <p>@c.Message</p>
+                        </h5>    </div>
+                }
 
-                    }
-                </h3>
 
             </div>
-
             <!-- Sidebar Widgets Column -->
             <div class="col-lg-4">
                 <div class="well">

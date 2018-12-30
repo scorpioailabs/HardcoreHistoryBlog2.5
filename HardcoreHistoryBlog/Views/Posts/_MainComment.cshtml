@@ -8,14 +8,17 @@
 @{
 
 }
-<div>
-    <form method="post" asp-controller="Posts" asp-action="Comment">
+<div class="form-group">
+
+
+    <form role="form" asp-controller="Posts" asp-action="Comment">
         <input asp-for="PostId" type="hidden" />
 
         <input asp-for="MainCommentId" type="hidden" />
 
         <input asp-for="Message" />
-
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
     </form>
+
+    
 </div>
