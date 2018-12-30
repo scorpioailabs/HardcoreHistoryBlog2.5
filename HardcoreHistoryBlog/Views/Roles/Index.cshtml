@@ -20,20 +20,27 @@
             <td class="d-sm-table-cell">
                 @item.Name
             </td>
+            <td class="d-sm-table-cell">
+                <a asp-controller="Roles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+
+            <td class="d-sm-table-cell">
+                <a asp-controller="Roles" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
         </tr>
     }
 </table>
 </br>
 <section class="col-sm-6">
     <table class="table-bordered">
-        @Html.ActionLink("Create Role", "CreateRole", "Admin")
+        @Html.ActionLink("Create Role", "Create", "Roles")
     </table>
 
 </section>
 
 <section class="col-sm-6">
     <table class="table-bordered">
-        @Html.ActionLink("Assign Role to User", "AssignRole", "Admin")
+        @Html.ActionLink("Assign Role to User", "AssignRole", "Roles")
     </table>
 </section>
 

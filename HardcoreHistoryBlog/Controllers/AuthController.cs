@@ -24,37 +24,41 @@ namespace HardcoreHistoryBlog.Controllers
         {
             return View();
         }
-        
+
         [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Login()
+
+        public ActionResult Login(string returnUrl)
         {
-            return View(new LoginViewModel());
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, false, false);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View("Login");
-                }
+                return View(vm);
             }
-            else return View("Login");
+            var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, vm.RememberMe, false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Posts");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(vm);
+            }
         }
+
 
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

@@ -109,5 +109,15 @@ namespace HardcoreHistoryBlog.Core
             return _context.Roles.ToList();
         }
 
+        public void GetRole(string id)
+        {
+            _context.Roles.Find(id);
+        }
+
+        public void AddRole(ApplicationRole role)
+        {
+            _context.Roles.Add(role);
+        }
+
     }
 }

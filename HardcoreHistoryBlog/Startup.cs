@@ -29,11 +29,11 @@ namespace HardcoreHistoryBlog
      .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
-            //{
-            //    builder.AddUserSecrets<Startup>();
-            //}
+                //{
+                //    builder.AddUserSecrets<Startup>();
+                //}
 
-            Configuration = builder.Build();
+                Configuration = builder.Build();
         }
 
 
@@ -57,7 +57,7 @@ namespace HardcoreHistoryBlog
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
+
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IFileManager, FileManager>();
             services.AddMvc(config =>
@@ -77,13 +77,13 @@ namespace HardcoreHistoryBlog
             options.Conventions.AddPageRouteModelConvention("/Posts", model => { });
             options.AllowAreas = true;
             options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-            options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            options.Conventions.AuthorizeAreaFolder("/Auth", "/Logout");
         });
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/Identity/Account/Login";
-                options.LogoutPath = $"/Identity/Account/Logout";
+                options.LoginPath = $"/Auth/Login";
+                options.LogoutPath = $"/Auth/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
@@ -104,7 +104,7 @@ namespace HardcoreHistoryBlog
                 var roleExist = await RoleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new ApplicationRole (roleName));
+                    roleResult = await RoleManager.CreateAsync(new ApplicationRole(roleName));
                 }
             }
 
@@ -132,8 +132,8 @@ namespace HardcoreHistoryBlog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ApplicationDbContext 
-            context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole>roleManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ApplicationDbContext
+            context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

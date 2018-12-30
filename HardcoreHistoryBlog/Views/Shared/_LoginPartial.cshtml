@@ -1,15 +1,13 @@
 @using Microsoft.AspNetCore.Identity
 @using HardcoreHistoryBlog.Data
-
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
 @if (SignInManager.IsSignedIn(User))
 {
-    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+    <form class="form-inline" asp-controller="Auth" asp-action="Logout" method="post" id="logoutForm">
         <ul class="navbar-nav py-0">
             <li class="nav-item py-0">
-                <a a class="nav-link scroll-link py-0" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a a class="nav-link scroll-link py-0" asp-controller="Account" asp-action="Index"> Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li class="nav-item py-0">
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
@@ -21,6 +19,6 @@ else
 {
     <ul class="navbar-nav py-0">
         <li class="nav-item py-0"><a class="nav-link scroll-link py-0" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li class="nav-item py-0"><a class="nav-link scroll-link py-0" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+        <li class="nav-item py-0"><a class="nav-link scroll-link py-0" asp-controller="Auth" asp-action="Login">Login</a></li>
     </ul>
 }

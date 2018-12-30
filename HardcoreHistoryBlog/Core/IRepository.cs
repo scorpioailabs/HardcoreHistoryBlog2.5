@@ -27,6 +27,8 @@ namespace HardcoreHistoryBlog.Core
         void AddUser(ApplicationUser user);
         void UpdateUser(ApplicationUser user);
         List<ApplicationRole> AllRoles();
+        void GetRole(string id);
+        void AddRole(ApplicationRole role);
 
 
         Task<bool> SaveChangesAsync();

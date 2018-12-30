@@ -167,5 +167,11 @@ namespace HardcoreHistoryBlog.Controllers
             return View(vm);
         }
 
+        public IActionResult Roles()
+        {
+            var roles = _repo.AllRoles();
+            return View(roles);
+        }
+
     }
 }

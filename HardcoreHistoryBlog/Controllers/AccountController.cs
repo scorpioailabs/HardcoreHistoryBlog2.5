@@ -34,11 +34,20 @@ namespace HardcoreHistoryBlog.Controllers
             //_repoUser = repoUser;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        public IActionResult Index(UsersViewModel vm)
+        {
+            var user = _userManager.GetUserAsync(HttpContext.User).Result;
+            string mail = user?.Email;
+            string firstname = user?.FirstName;
+            string lastname = user?.LastName;
+            return View(new UsersViewModel
+            {
+                FirstName = firstname,
+                LastName = lastname,
+                Email = mail
+            });
+        }
 
         [AllowAnonymous]
         [HttpGet]
@@ -50,7 +59,7 @@ namespace HardcoreHistoryBlog.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register (RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (!ModelState.IsValid) return View(vm);
             {
@@ -68,7 +77,7 @@ namespace HardcoreHistoryBlog.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-                }
+            }
 
             return View(vm);
         }
