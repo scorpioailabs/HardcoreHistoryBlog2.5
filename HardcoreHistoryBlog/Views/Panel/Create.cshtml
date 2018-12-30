@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-<link href="~/Trumbowyg-master/Trumbowyg-master/dist/ui/trumbowyg.min.css" rel="stylesheet" />
+<link href="~/Trumbowyg-master/Trumbowyg-master/dist/ui/trumbowyg.css" rel="stylesheet" />
 <h2>Create a Post!</h2>
 
 <h4>Post</h4>
@@ -29,8 +29,9 @@
                 <input asp-for="Image" />
             </div>
             <div class="form-group">
+
                 <label asp-for="Content" class="control-label"></label>
-                <textarea id="editor" asp-for="Content" class="form-control"></textarea>
+                <textarea id="editor" input asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -59,13 +60,15 @@
 </div>
 
 @section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/Trumbowyg-master/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="~/Trumbowyg-master/Trumbowyg-master/dist/trumbowyg.min.js"></script>
     <script>
         $('#editor').trumbowyg();
-
     </script>
+
 }

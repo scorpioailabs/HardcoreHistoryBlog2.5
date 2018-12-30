@@ -74,9 +74,13 @@ namespace HardcoreHistoryBlog.Controllers
                 Content = vm.Content,
                 Short_Description = vm.Short_Description,
                 Category = vm.Category,
-                Tags = vm.Tags,
-                Image = await _fileManager.SaveImage(vm.Image)
+                Tags = vm.Tags
             };
+
+            if (vm.Image == null)
+                post.Image = vm.CurrentImage;
+            else
+                post.Image = await _fileManager.SaveImage(vm.Image);
 
             _repo.UpdatePost(post);
             await _repo.SaveChangesAsync();
