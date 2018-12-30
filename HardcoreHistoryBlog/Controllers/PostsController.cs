@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HardcoreHistoryBlog.Controllers
 {
+
     public class PostsController : Controller
     {
 
@@ -32,6 +33,7 @@ namespace HardcoreHistoryBlog.Controllers
 
         }
 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Index(string category)
         {
             var posts = string.IsNullOrEmpty(category) ? _repo.GetAllPosts() : _repo.GetAllPosts(category);
@@ -39,6 +41,7 @@ namespace HardcoreHistoryBlog.Controllers
             return View(posts);
         }
 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Post(int id)
         {
             var post = _repo.GetPost(id);
@@ -53,6 +56,7 @@ namespace HardcoreHistoryBlog.Controllers
         }
 
         [Authorize(Roles ="Customer,Blogger,Admin")]
+        [AutoValidateAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel vm)
         {
@@ -92,6 +96,8 @@ namespace HardcoreHistoryBlog.Controllers
             await _repo.SaveChangesAsync();
             return RedirectToAction("Post", new { id = vm.PostId });
         }
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> RemoveComment (int id)

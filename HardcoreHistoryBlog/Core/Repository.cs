@@ -92,8 +92,6 @@ namespace HardcoreHistoryBlog.Core
         {
             var customers = _userManager.GetUsersInRoleAsync("Customer").Result;
             var admins = _userManager.GetUsersInRoleAsync("Admin").Result;              
-
-
         }
 
         public void AddUser(ApplicationUser user)
@@ -105,5 +103,11 @@ namespace HardcoreHistoryBlog.Core
         {
             _context.Update(user);
         }
+
+        public List<ApplicationRole> AllRoles()
+        {
+            return _context.Roles.ToList();
+        }
+
     }
 }

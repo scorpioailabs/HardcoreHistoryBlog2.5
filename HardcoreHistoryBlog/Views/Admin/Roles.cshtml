@@ -1,0 +1,39 @@
+﻿@using HardcoreHistoryBlog.Data
+@model IEnumerable<ApplicationRole>
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h2>All Available Roles</h2>
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th class="d-sm-table-cell">
+            Role Name
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="d-sm-table-cell">
+                @item.Name
+            </td>
+        </tr>
+    }
+</table>
+</br>
+<section class="col-sm-6">
+    <table class="table-bordered">
+        @Html.ActionLink("Create Role", "CreateRole", "Admin")
+    </table>
+
+</section>
+
+<section class="col-sm-6">
+    <table class="table-bordered">
+        @Html.ActionLink("Assign Role to User", "AssignRole", "Admin")
+    </table>
+</section>
+

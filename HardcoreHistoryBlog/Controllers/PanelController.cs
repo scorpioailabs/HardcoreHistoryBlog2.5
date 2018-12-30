@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HardcoreHistoryBlog.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PanelController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -33,13 +34,14 @@ namespace HardcoreHistoryBlog.Controllers
 
         [Authorize(Roles ="Admin")]
 
-
+        [AutoValidateAntiforgeryToken]
         public IActionResult Index()
         {
             var posts = _repo.GetAllPosts();
             return View(posts);
         }
 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Post(int id)
         {
             var post = _repo.GetPost(id);
@@ -61,7 +63,7 @@ namespace HardcoreHistoryBlog.Controllers
                 Tags = post.Tags
             });
         }
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel vm)
         {
@@ -87,7 +89,7 @@ namespace HardcoreHistoryBlog.Controllers
         {
             return View(new PostViewModel());
         }              
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(PostViewModel vm)
         {
@@ -118,11 +120,13 @@ namespace HardcoreHistoryBlog.Controllers
             return RedirectToAction("Index");
         }
 
+        [AutoValidateAntiforgeryToken]
         public IActionResult Customers()    
         {
             return View();
         }
-        
+
+        [AutoValidateAntiforgeryToken]
         public IActionResult Admins()
         {
             return View();
@@ -134,6 +138,7 @@ namespace HardcoreHistoryBlog.Controllers
             return View(new UsersViewModel());
         }
 
+        [AutoValidateAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> CreateUser(UsersViewModel vm)   
         {

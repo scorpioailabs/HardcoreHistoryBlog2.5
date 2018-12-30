@@ -4,34 +4,79 @@
 
 }
 
-<h2>Hardcore History Admin</h2>
-<div>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-</div>
-<div>
-    <ul>
-        @foreach (var post in Model)
-        {
-            <li>
-                <a asp-controller="Panel" asp-action="Post" asp-route-id="@post.Id">
-                    @post.Title
-                </a>
-                <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
-                    Edit
-                </a>
-                <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
-                    Remove
-                </a>
+<h2>Hardcore History Admin Panel</h2>
 
+<div class="card my-4">
+    <h5 class="card-header">Manage Posts</h5>
+    <div class="card-body">
+        <ul class="list-unstyled mb-0">
+            <li>
+                <a asp-action="Create">Create New Post</a>
             </li>
-        }
-    </ul>
-    <a asp-controller="Panel" asp-action="Customers">
-        Customers
-    </a>
-    <a asp-controller="Panel" asp-action="Admins">
-        Admins
-    </a>
+            @foreach (var post in Model)
+            {
+                <li>
+                    <a asp-controller="Panel" asp-action="Post" asp-route-id="@post.Id">
+                        @post.Title
+                    </a>
+                    <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
+                        Edit
+                    </a>
+                    <a asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">
+                        Remove
+                    </a>
+
+                </li>
+            }
+        </ul>
+    </div>
 </div>
+
+<div class="card my-4">
+    <h5 class="card-header">Manage Users</h5>
+    <div class="card-body">
+        <ul class="list-unstyled mb-0">
+            <li>
+                <a asp-controller="Panel" asp-action="CreateUser">Create a new User</a>
+            </li>
+            <li>
+                <a asp-controller="Panel" asp-action="Customers">
+                    Customers
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Panel" asp-action="Admins">
+                    Admins
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="card my-4">
+    <h5 class="card-header">Manage Roles</h5>
+    <div class="card-body">
+        <ul class="list-unstyled mb-0">
+            <li>
+                <a asp-controller="Admin" asp-action="Roles">
+                    Create a New Role
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Roles">
+                    Assign Roles
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Roles">
+                    Available Roles
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+

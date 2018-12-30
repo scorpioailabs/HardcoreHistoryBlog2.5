@@ -12,24 +12,33 @@ using HardcoreHistoryBlog.ViewModels;
 
 namespace HardcoreHistoryBlog.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private IRepository _repo;
 
 
         public AdminController(UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager, IRepository repo)
 
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _repo = repo;
 
         }
 
-        public IActionResult Index()
+
+        public IActionResult Roles()
         {
-            return View();
+            var roles = _repo.AllRoles();
+            return View(roles);
         }
+
+
+
     }
 }

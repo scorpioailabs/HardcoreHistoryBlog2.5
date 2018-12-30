@@ -8,6 +8,7 @@ using HardcoreHistoryBlog.Models;
 
 namespace HardcoreHistoryBlog.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
         public IActionResult Index()
