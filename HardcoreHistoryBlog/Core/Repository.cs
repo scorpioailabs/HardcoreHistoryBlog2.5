@@ -119,5 +119,11 @@ namespace HardcoreHistoryBlog.Core
             _context.Roles.Add(role);
         }
 
+        public void UpdateRole(ApplicationRole role)
+        {
+            _context.Entry(role).State = EntityState.Modified;
+        }
+
+
     }
 }

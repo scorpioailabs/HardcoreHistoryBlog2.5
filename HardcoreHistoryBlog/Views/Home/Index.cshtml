@@ -2,55 +2,46 @@
     ViewBag.Title = "Home";
 }
 
+<link href="~/Trumbowyg-master/Trumbowyg-master/docs/css/full.css" rel="stylesheet" />
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/1.jpg" alt="Ancient History" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <h4>
-                    Learn about History, the Hardcore way!
-                    <a class="btn btn-default" asp-controller="Posts" asp-action="Index">
-                        Learn More
-                    </a>
-                </h4>
+<body>
+    <div class="container-fluid">
+        <header>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active" style="background-image: url('https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiS2O_U8cffAhVvxYUKHc9UCQkQjRx6BAgBEAU&url=https%3A%2F%2Faustraliantvstuff.weebly.com%2Fseven-network.html&psig=AOvVaw1M81dyeNGFD4XSdXUai1Cq&ust=1546270776902830')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 style="color: whitesmoke"><a asp-controller="Posts" asp-action="Index">Learn about History, the Hardcore way!</a></h3>
+                        </div>
+                    </div>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" style="background-image: url('https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiS2O_U8cffAhVvxYUKHc9UCQkQjRx6BAgBEAU&url=https%3A%2F%2Faustraliantvstuff.weebly.com%2Fseven-network.html&psig=AOvVaw1M81dyeNGFD4XSdXUai1Cq&ust=1546270776902830')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3><a asp-controller="Posts" asp-action="Index"> See what became of those who dared revolt against the Assyrians.</a></h3>
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" style="background-image: url('https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiS2O_U8cffAhVvxYUKHc9UCQkQjRx6BAgBEAU&url=https%3A%2F%2Faustraliantvstuff.weebly.com%2Fseven-network.html&psig=AOvVaw1M81dyeNGFD4XSdXUai1Cq&ust=1546270776902830')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3><a asp-controller="Posts" asp-action="Index">If you think the Assyrians were not <b>Hardcore</b> enough, read about the Mongols!</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </div>
-        <div class="item">
-            <img src="~/images/2.jpg" alt="Medieval History" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <h4>
-                    See what became of those who dared revolt against the Assyrians.
-                    <a class="btn btn-default" asp-controller="Posts" asp-action="Index">
-                        Learn More
-                    </a>
-                </h4>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/3.jpg" alt="The Mongols" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <h4>
-                    If you think the Assyrians were not <b>Hardcore</b> enough, read about the Mongols!
-                    <a class="btn btn-default" asp-controller="Posts" asp-action="Index">
-                        Learn More
-                    </a>
-                </h4>
-            </div>
-        </div>
+        </header>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="fa-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="fa-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
+</body>

@@ -20,6 +20,39 @@
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Content\blog\" />
     <Folder Include="Content\static\" />
+    <Folder Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\.gitignore" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\.travis.yml" />
+    <None Include="wwwroot\Trumbowyg-master\Trumbowyg-master\docs\css\full.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\gulpfile.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\index.html" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\LICENSE" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\README.md" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap-grid.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\startbootstrap-full-gh-pages\startbootstrap-full-gh-pages\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
   <ItemGroup>

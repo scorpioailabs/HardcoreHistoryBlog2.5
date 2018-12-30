@@ -26,6 +26,7 @@ namespace HardcoreHistoryBlog.Data
             public DbSet<Post> Posts { get; set; }
             public DbSet<MainComment> MainComments { get; set; }
             public DbSet<SubComment> SubComments { get; set; } 
+            public DbSet<ApplicationUserRole> UserRoles { get; set; }
             public DbSet<HardcoreHistoryBlog.Models.RegisterViewModel> RegisterViewModel { get; set; }
 
 

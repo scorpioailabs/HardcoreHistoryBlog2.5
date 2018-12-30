@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -32,7 +33,7 @@ namespace HardcoreHistoryBlog.Controllers
             _context = context;
 
         }
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             var roles = _repo.AllRoles();
             return View(roles);
@@ -57,8 +58,9 @@ namespace HardcoreHistoryBlog.Controllers
             return View();
         }
 
+        [AutoValidateAntiforgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Create(RoleViewModel vm) 
+        public async Task<IActionResult> Create(RoleViewModel vm)
         {
             if (!ModelState.IsValid)
                 return View(vm);
@@ -80,30 +82,25 @@ namespace HardcoreHistoryBlog.Controllers
             }
         }
 
-
         [HttpGet]
-        public ActionResult Edit(string Id)
+        public ActionResult Delete(string Id)
         {
-            var role = _roleManager.GetRoleIdAsync();
-            if (roles == null)
+            var role = _context.Roles.Find(Id);
+            if (role == null)
             {
-                return RedirectToAction("Index", "Panel");
+                return RedirectToAction("Index");
             }
-            return View(roles);
-
+            return View(role);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<ActionResult> EditRole(RoleViewModel vm)
+        public async Task<ActionResult> Delete([Bind(include: "Id,Name")]ApplicationRole myRole)
         {
-            var role = new ApplicationRole
-            {
-                Name = vm.Name
-            };
-            await _repo.SaveChangesAsync();
-            return View(vm);
-
+            ApplicationRole role = _context.Roles.Find(myRole.Id);
+            _context.Roles.Remove(role);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
 
