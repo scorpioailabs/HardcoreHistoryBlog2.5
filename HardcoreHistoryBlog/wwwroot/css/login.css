@@ -1,13 +1,14 @@
 ﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 
 body {
-    width: 100%;
-    padding-top: 0px;
+
+    background:t center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
+
 
 .login-block {
     background: #325895; /* fallback for old browsers */
@@ -103,11 +104,12 @@ body {
 }
 
 .banner-text {
-    width: 50%;
+    width: 75%;
     height: auto;
     position: center;
-    bottom: 40px;
-    padding-left: 20px;
+    padding-top: 2em;
+    padding-bottom: 20PX;
+    padding-left: 150px;
 }
 
     .banner-text h2 {
@@ -121,10 +123,11 @@ body {
             height: 5px;
             background: #FFF;
             display: block;
-            margin-top: 20px;
+            margin-top: 30px;
             border-radius: 3px;
         }
 
     .banner-text p {
+        padding-top: 100px;
         color: #fff;
     }

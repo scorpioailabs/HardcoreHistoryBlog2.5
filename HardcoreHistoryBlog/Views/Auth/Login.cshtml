@@ -9,51 +9,55 @@
 <link href="~/Login_v17/Login_v17/css/util.css" rel="stylesheet" />
 <link href="~/Login_v17/Login_v17/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
 <link href="~/Login_v17/Login_v17/vendor/animsition/css/animsition.min.css" rel="stylesheet" />
-
 <link href="~/css/login.css" rel="stylesheet" />
-<body style="width: 100%; margin: 0 auto;">
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <form class="login100-form validate-form" asp-controller="Auth" asp-action="Login" method="post">
-                    <span class="login100-form-title p-b-34">
-                        Account Login
-                    </span>
 
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="input100" />
-                        <span asp-validation-for="Email" class="focus-input100"></span>
-                    </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
-                        <label asp-for="Password"></label>
-                        <input asp-for="Password" class="input100" />
-                        <span asp-validation-for="Password" class="text-uppercase"></span>
-                    </div>
-                    <div class="form-check">
-                        <div class="checkbox">
-                            <label asp-for="RememberMe"></label>
-                            <input asp-for="RememberMe" />
-                            <span asp-validation-for="RememberMe" class="form-check-input"></span>
-                        </div>
-                    </div>
-                    <div class="container-login100-form-btn">
-                        <input type="submit" value="Log in" class="login100-form-btn" />
-                    </div>
-                </form>
+<body>
+    <div class="container">
+        <div class="split left">
 
-                <div class="w-full text-center">
-                    <a asp-controller="Account" asp-action="Register" class="txt3">
-                        Register as a new user
-                    </a>
+            <form class="login100-form validate-form" asp-controller="Auth" asp-action="Login" method="post">
+                <span class="login100-form-title p-b-34">
+                    Account Login
+                </span>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="input100" />
+                    <span asp-validation-for="Email" class="focus-input100"></span>
                 </div>
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="input100" />
+                    <span asp-validation-for="Password" class="text-uppercase"></span>
+                </div>
+                <div class="form-check">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe"></label>
+                        <input asp-for="RememberMe" />
+                        <span asp-validation-for="RememberMe" class="form-check-input"></span>
+                    </div>
+                </div>
+                <div class="container-login100-form-btn">
+                    <input type="submit" value="Log in" class="login100-form-btn" />
+                </div>
+            </form>
 
-                <!-- End of Login section -->
-                <!-- Carousel Section-->
+            <div class="w-full text-center">
+                <a asp-controller="Account" asp-action="Register" class="txt3">
+                    Register as a new user
+                </a>
+            </div>
 
+        </div>
+
+        <!-- End of Login section -->
+        <!-- Carousel Section-->
+
+        <div class="split right">
+            <div class="well">
                 <div class="login100-more" id="mycarousellog"></div>
-                <div class="carousel slide" data-ride="carousel">
+                <div class="carousel slide" data-ride="carousel" data-interval="8000">
                     <ol class="carousel-indicators">
                         <li data-target="#mycarousellog" data-slide-to="0" class="active"></li>
                         <li data-target="#mycarousellog" data-slide-to="1"></li>
@@ -64,11 +68,11 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
                             <img class="d-block img-fluid" src="~/images/image1login.jpg" alt="First slide">
-                            
+
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="banner-text">
                                     <h2>Avid fan of Medieval History?</h2>
-                                    <p>We share with you some great facts from the Medieval period!</p>
+                                    <h4>We share with you some great facts from the Medieval period!</h4>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +81,7 @@
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="banner-text">
                                     <h2>Glories of Rome</h2>
-                                    <p>How has Roman civilization affected the Modern Day Economy of today?</p>
+                                    <h4>How has Roman civilization affected the Modern Day Economy of today?</h4>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +90,7 @@
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="banner-text">
                                     <h2>The Silkroad of Blogs</h2>
-                                    <p>This blog navigates through a long winding road of history, we look at the Ancient Far East to the Modern Day West. Find out the pivotal roles Civilizations played to get to where are today!</p>
+                                    <h4>This blog navigates through a long winding road of history, we look at the Ancient Far East to the Modern Day West. Find out the pivotal roles Civilizations played to get to where are today!</h4>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +99,7 @@
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="banner-text">
                                     <h2>Who were the Seljuks? Who was Ertugrul Gazi And how did they Influence Modern day Turkey?</h2>
-                                    <p>To all the fans of Turkish Mega Series Dirilis Ertugrul, we delve into the facts of this renowned historical figure. Sign up to find out more!</p>
+                                    <h4>To all the fans of Turkish Mega Series Dirilis Ertugrul, we delve into the facts of this renowned historical figure. Sign up to find out more!</h4>
                                 </div>
                             </div>
                         </div>
@@ -110,6 +114,8 @@
     }
     <script src="~/Login_v17/Login_v17/vendor/animsition/js/animsition.min.js"></script>
     <script src="~/Login_v17/Login_v17/vendor/countdowntime/countdowntime.js"></script>
+
+
 </body>
 
 
