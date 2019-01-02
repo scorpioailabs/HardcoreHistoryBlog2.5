@@ -101,7 +101,13 @@ namespace HardcoreHistoryBlog.Core
 
         public void UpdateUser(ApplicationUser user) 
         {
-            _context.Update(user);
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public ApplicationUser GetUser(string Id)
+        {
+            return _context.Users.Find(Id);
         }
 
         public List<ApplicationRole> AllRoles()
@@ -122,8 +128,8 @@ namespace HardcoreHistoryBlog.Core
         public void UpdateRole(ApplicationRole role)
         {
             _context.Entry(role).State = EntityState.Modified;
+            _context.SaveChanges();
         }
-
 
     }
 }

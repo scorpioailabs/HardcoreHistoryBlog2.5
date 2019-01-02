@@ -23,6 +23,8 @@ namespace HardcoreHistoryBlog.Data
         {
 
         }
+            public virtual DbSet<ApplicationUser> Users { get; set; }
+
             public DbSet<Post> Posts { get; set; }
             public DbSet<MainComment> MainComments { get; set; }
             public DbSet<SubComment> SubComments { get; set; } 

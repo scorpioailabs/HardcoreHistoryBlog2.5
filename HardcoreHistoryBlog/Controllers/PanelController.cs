@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 using PagedList;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HardcoreHistoryBlog.Controllers
 {
@@ -167,11 +168,50 @@ namespace HardcoreHistoryBlog.Controllers
             return View(vm);
         }
 
-        public IActionResult Roles()
+        [HttpGet]
+        public IActionResult EditUser(string Id)
         {
-            var roles = _repo.AllRoles();
-            return View(roles);
+            var user = _repo.GetUser((string)Id);
+            return View(new UsersViewModel
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UsersViewModel vm) 
+        {
+            var user = await _userManager.FindByIdAsync(vm.UserId);
+
+            if (vm.FirstName != user.FirstName)
+            {
+                user.FirstName = vm.FirstName;
+            }
+            if (vm.LastName != user.LastName)
+            {
+                user.LastName = vm.LastName;
+            }
+            if (vm.Username != user.UserName)
+            {
+                user.UserName = vm.Username;
+            }
+            if (vm.Email != user.Email) 
+            {
+                user.Email = vm.Email;
+            }
+
+
+            var result = _userManager.UpdateAsync(user).Result;
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Customers", "Panel");
+            }
+            else return View(vm);
+           
+        }
     }
 }
