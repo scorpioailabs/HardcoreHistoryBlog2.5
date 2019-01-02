@@ -14,6 +14,9 @@
             Role Name
         </th>
         <th class="d-sm-table-cell">
+            Description
+        </th>
+        <th class="d-sm-table-cell">
             Number of Users
         </th>
 
@@ -23,6 +26,9 @@
     <tr>
         <td class="d-sm-table-cell">
             @item.RoleName
+        </td>
+        <td class="d-sm-table-cell">
+           @item.Description
         </td>
         <td class="d-sm-table-cell">
             @Html.DisplayFor(modelItem => item.NumberOfUsers)

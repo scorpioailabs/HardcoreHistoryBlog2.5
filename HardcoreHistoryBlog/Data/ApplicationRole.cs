@@ -15,5 +15,6 @@ namespace HardcoreHistoryBlog.Data
             : base(name)
         { }
         public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public string Description { get; set; }  
     }
 }

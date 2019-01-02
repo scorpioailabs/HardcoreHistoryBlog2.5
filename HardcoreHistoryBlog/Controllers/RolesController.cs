@@ -39,6 +39,7 @@ namespace HardcoreHistoryBlog.Controllers
             model = _roleManager.Roles.Select(r => new RoleListViewModel
             {
                 RoleName = r.Name,
+                Description = r.Description,
                 Id = r.Id,
                 NumberOfUsers = r.UserRoles.Count
             }).ToList();
@@ -118,7 +119,7 @@ namespace HardcoreHistoryBlog.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View(new RoleViewModel { Id = role.Id, Name = role.Name });
+            return View(new RoleViewModel { Id = role.Id, Name = role.Name, Description = role.Description });
         }
 
         [HttpPost]
@@ -128,6 +129,10 @@ namespace HardcoreHistoryBlog.Controllers
             if (vm.Name != role.Name)
             {
                 role.Name = vm.Name;
+            }
+            if(vm.Description != role.Description)
+            {
+                role.Description = vm.Description;
             }
             var result = _roleManager.UpdateAsync(role).Result;
 
