@@ -80,42 +80,33 @@
         <div class="col-lg-4">
             <div class="well">
                 <!-- ADDED HERE-->
-                <!-- Search Widget -->
-                <h5 class="card-header">Search</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
             <!-- Categories Widget -->
             <div class="card my-4">
                 <h5 class="card-header">Categories</h5>
                 <div class="card-body">
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#">Medieval History</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Medieval History">Medieval History</a>
                         </li>
                         <li>
-                            <a href="#">Ancient Civilizations</a>
+                            <a  asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Ancient History">Ancient History</a>
                         </li>
                         <li>
-                            <a href="#">Modern History</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Modern History">Modern History</a>
                         </li>
                     </ul>
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#">Far Eastern Civ</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Far Eastern Civ">Far Eastern Civ</a>
+
                         </li>
                         <li>
-                            <a href="#">Hardcore Trivia</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Hardcore Trivia">Hardcore Trivia</a>
+
                         </li>
                         <li>
-                            <a href="#">Books</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="Index" asp-route-category="Books">Books</a>
                         </li>
                     </ul>
                 </div>

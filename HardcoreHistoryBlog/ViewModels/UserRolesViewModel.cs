@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HardcoreHistoryBlog.ViewModels
 {
-    public class UserRolesViewModel 
-    {
-        [Key]
-        public string Id { get; set; }
-        public List<EmailAddressAttribute> UsersList { get; set; }
-        public int UsersListVal { get; set; }
-    }
+    //public class UserRolesViewModel 
+    //{
+    //    [Key]
+    //    public string Id { get; set; }
+    //    public List<EmailAddressAttribute> UsersList { get; set; }
+    //    public int UsersListVal { get; set; }
+    //}
 }

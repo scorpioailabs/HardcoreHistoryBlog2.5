@@ -26,19 +26,25 @@ namespace HardcoreHistoryBlog.Controllers
         {
             return View();
         }
+        public string ReturnUrl { get; set; }
+
 
         [AllowAnonymous]
-
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
+            ReturnUrl = returnUrl;
             return View();
         }
 
+        
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
+            returnUrl = returnUrl ?? Url.Content("~/");
             if (!ModelState.IsValid)
             {
                 return View(vm);
@@ -46,7 +52,7 @@ namespace HardcoreHistoryBlog.Controllers
             var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, vm.RememberMe, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Posts");
+                return LocalRedirect(returnUrl);
             }
             else
             {

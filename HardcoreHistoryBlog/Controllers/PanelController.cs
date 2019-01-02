@@ -20,17 +20,20 @@ namespace HardcoreHistoryBlog.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private IRepository _repo;
-        private IFileManager _fileManager;  
+        private IFileManager _fileManager;
+        private ApplicationDbContext _context;
 
         public PanelController(
             IFileManager fileManager,
             IRepository repo,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context
             ) 
         {
             _fileManager = fileManager;
             _repo = repo;
             _userManager = userManager;
+            _context = context;
         }
 
         [Authorize(Roles ="Admin")]
@@ -227,6 +230,31 @@ namespace HardcoreHistoryBlog.Controllers
                 LastName = user.LastName
             });
         }
+
+        public IActionResult Analytics()
+        {
+            List<AnalyticsViewModel> model = new List<AnalyticsViewModel>();
+            model = _context.Posts.Select(p => new AnalyticsViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                NumberOfComments = p.MainComments.Count
+            }).ToList();
+            return View(model);
+        }
+
+        public IActionResult UserComments() 
+        {
+            List<AnalyticsViewModel> model = new List<AnalyticsViewModel>();
+            model = _context.Users.Select(u => new AnalyticsViewModel
+            {
+                Username = u.UserName,
+                UserId = u.Id,
+                NumberOfComments = u.Comments.Count
+            }).ToList();
+            return View(model);
+        }
+
 
     }
 }
