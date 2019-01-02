@@ -246,11 +246,10 @@ namespace HardcoreHistoryBlog.Controllers
         public IActionResult UserComments() 
         {
             List<AnalyticsViewModel> model = new List<AnalyticsViewModel>();
-            model = _context.Users.Select(u => new AnalyticsViewModel
+            model = _context.Posts.Select(p => new AnalyticsViewModel 
             {
-                Username = u.UserName,
-                UserId = u.Id,
-                NumberOfComments = u.Comments.Count
+                Id = p.Id,
+                UserId = p.UserId
             }).ToList();
             return View(model);
         }

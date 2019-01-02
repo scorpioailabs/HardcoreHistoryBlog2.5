@@ -20,6 +20,7 @@ namespace HardcoreHistoryBlog.Data
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
         public virtual ICollection<IdentityUserToken<string>> Tokens { get; set; }
         public virtual IEnumerable<ApplicationRole> Roles { get; set; }
-        public ICollection<ApplicationUserRole> UserRoles { get; set; } 
+        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public ICollection<MainComment> MainComments { get; set; }   
     }
 }
