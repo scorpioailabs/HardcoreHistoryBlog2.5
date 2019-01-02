@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace HardcoreHistoryBlog.ViewModels
 {
-    public class UserRoleViewModel
+    public class RoleListViewModel 
     {
-        public List<int> SelectedRoleIds { get; set; }
-
-        public IEnumerable<SelectListItem> RoleChoices { get; set; }
-
+        public string Id { get; set; }
+        public string RoleName { get; set; }
+        public int NumberOfUsers { get; set; }
     }
 }

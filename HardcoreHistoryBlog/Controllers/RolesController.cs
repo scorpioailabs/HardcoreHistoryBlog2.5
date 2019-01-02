@@ -35,15 +35,21 @@ namespace HardcoreHistoryBlog.Controllers
         }
         public IActionResult Index()
         {
-            var roles = _repo.AllRoles();
-            return View(roles);
+            List<RoleListViewModel> model = new List<RoleListViewModel>();
+            model = _roleManager.Roles.Select(r => new RoleListViewModel
+            {
+                RoleName = r.Name,
+                Id = r.Id,
+                NumberOfUsers = r.UserRoles.Count
+            }).ToList();
+            return View(model);
         }
 
         [AutoValidateAntiforgeryToken]
 
         public ActionResult Details(string id)
         {
-            var role = _context.Roles.Find(id);
+            var role = _repo.GetRole((string)id);
             if (role == null)
             {
                 return RedirectToAction("Index");
@@ -102,6 +108,49 @@ namespace HardcoreHistoryBlog.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(string Id)
+        {
+            var role = _repo.GetRole((string)Id);
+            if (role == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(new RoleViewModel { Id = role.Id, Name = role.Name });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(RoleViewModel vm)
+        {
+            var role = await _roleManager.FindByIdAsync(vm.Id);
+            if (vm.Name != role.Name)
+            {
+                role.Name = vm.Name;
+            }
+            var result = _roleManager.UpdateAsync(role).Result;
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Roles");
+            }
+            else return View(vm);
+        }
+
+        //[HttpGet]
+        //public IActionResult AssignRole()
+        //{
+
+        //}
+        
+        //[AutoValidateAntiforgeryToken]
+        //[HttpPost]
+        //public async Task<IActionResult> AssignRole()
+        //{
+
+        //}
+
 
 
     }

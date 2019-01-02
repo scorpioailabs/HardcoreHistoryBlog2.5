@@ -99,10 +99,9 @@ namespace HardcoreHistoryBlog.Core
             _context.Add(user);
         }
 
-        public void UpdateUser(ApplicationUser user) 
+        public void RemoveUser(ApplicationUser user)
         {
-            _context.Entry(user).State = EntityState.Modified;
-            _context.SaveChanges();
+            _context.Users.Remove(user);
         }
 
         public ApplicationUser GetUser(string Id)
@@ -115,9 +114,9 @@ namespace HardcoreHistoryBlog.Core
             return _context.Roles.ToList();
         }
 
-        public void GetRole(string id)
+        public ApplicationRole GetRole(string id)
         {
-            _context.Roles.Find(id);
+            return _context.Roles.Find(id);
         }
 
         public void AddRole(ApplicationRole role)

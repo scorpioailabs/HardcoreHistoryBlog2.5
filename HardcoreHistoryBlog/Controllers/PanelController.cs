@@ -182,6 +182,7 @@ namespace HardcoreHistoryBlog.Controllers
             });
         }
 
+        [AutoValidateAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> EditUser(UsersViewModel vm) 
         {
@@ -210,8 +211,22 @@ namespace HardcoreHistoryBlog.Controllers
             {
                 return RedirectToAction("Customers", "Panel");
             }
-            else return View(vm);
-           
+            else return View(vm);           
         }
+
+        [AutoValidateAntiforgeryToken]
+        public IActionResult UserDetails(string Id)
+        {
+            var user = _repo.GetUser((string)Id);
+            return View(new UsersViewModel
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            });
+        }
+
     }
 }

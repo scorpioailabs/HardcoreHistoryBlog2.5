@@ -25,14 +25,11 @@ namespace HardcoreHistoryBlog.Core
         void RemoveComment(int id);
         void GetUsers();
         void AddUser(ApplicationUser user);
-        void UpdateUser(ApplicationUser user);
         List<ApplicationRole> AllRoles();
-        void GetRole(string id);
+        ApplicationRole GetRole(string id);
         void AddRole(ApplicationRole role);
         void UpdateRole(ApplicationRole role);
         ApplicationUser GetUser(string Id);
-
-
         Task<bool> SaveChangesAsync();
     }
 }

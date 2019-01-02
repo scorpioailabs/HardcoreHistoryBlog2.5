@@ -1,11 +1,11 @@
 ﻿@using HardcoreHistoryBlog.Data
-@model IEnumerable<ApplicationRole>
+@model IEnumerable<HardcoreHistoryBlog.ViewModels.RoleListViewModel>
 
 @{
     ViewData["Title"] = "Roles";
 }
 
-<h2>All Available Roles</h2>
+<h2>Available Roles</h2>
 
 
 <table class="table table-bordered table-hover">
@@ -13,16 +13,25 @@
         <th class="d-sm-table-cell">
             Role Name
         </th>
+        <th class="d-sm-table-cell">
+            Number of Users
+        </th>
+
     </tr>
     @foreach (var item in Model)
     {
     <tr>
         <td class="d-sm-table-cell">
-            @item.Name
+            @item.RoleName
         </td>
-
+        <td class="d-sm-table-cell">
+            @Html.DisplayFor(modelItem => item.NumberOfUsers)
+        </td>
         <td class="d-sm-table-cell">
             <a asp-controller="Roles" asp-action="Details" asp-route-id="@item.Id">Details</a>
+        </td>
+        <td class="d-sm-table-cell">
+            <a asp-controller="Roles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
         </td>
         <td class="d-sm-table-cell">
             <a asp-controller="Roles" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
