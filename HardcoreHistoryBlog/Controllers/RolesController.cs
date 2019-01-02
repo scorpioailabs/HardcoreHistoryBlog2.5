@@ -144,19 +144,25 @@ namespace HardcoreHistoryBlog.Controllers
         }
 
         //[HttpGet]
-        //public IActionResult AssignRole()
+        //public async Task<IActionResult> AssignRole(string Id)
         //{
-
+        //    List<UserRolesViewModel> model = new List<UserRolesViewModel>();
+        //    model = _userManager.Users.Select(r => new UserRolesViewModel
+        //    {
+        //        Email = u.Email,
+        //        Description = r.Description,
+        //        Id = r.Id,
+        //        NumberOfUsers = r.UserRoles.Count
+        //    }).ToList();
+        //    return View(model);
         //}
-        
+
         //[AutoValidateAntiforgeryToken]
         //[HttpPost]
-        //public async Task<IActionResult> AssignRole()
+        //public async Task<IActionResult> AssignRole(UserRolesViewModel vm)
         //{
 
         //}
-
-
-
+                        
     }
 }
