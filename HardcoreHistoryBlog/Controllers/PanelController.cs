@@ -67,6 +67,7 @@ namespace HardcoreHistoryBlog.Controllers
                 Tags = post.Tags
             });
         }
+        //Edit a post
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel vm)
@@ -90,7 +91,7 @@ namespace HardcoreHistoryBlog.Controllers
             await _repo.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
+        // Create a post
         [HttpGet]
         public IActionResult Create()
 
@@ -119,7 +120,7 @@ namespace HardcoreHistoryBlog.Controllers
             else
                 return View(post);
         }
-
+        //Remove a post
         [HttpGet]
         public async Task<IActionResult> Remove(int id)
         {
@@ -139,7 +140,7 @@ namespace HardcoreHistoryBlog.Controllers
         {
             return View();
         }
-        
+        //Create a user
         [HttpGet]
         public IActionResult CreateUser()
         {
@@ -170,7 +171,7 @@ namespace HardcoreHistoryBlog.Controllers
 
             return View(vm);
         }
-
+        //Edit a user
         [HttpGet]
         public IActionResult EditUser(string Id)
         {
@@ -216,7 +217,7 @@ namespace HardcoreHistoryBlog.Controllers
             }
             else return View(vm);           
         }
-
+        //Get user details
         [AutoValidateAntiforgeryToken]
         public IActionResult UserDetails(string Id)
         {

@@ -149,6 +149,7 @@ namespace HardcoreHistoryBlog.Controllers
             List<UserRolesViewModel> model = (from u in _context.Users
                                               join ur in _context.UserRoles on u.Id equals ur.UserId
                                               join r in _context.Roles on ur.RoleId equals r.Id
+                                              orderby u.Email
                                               select new UserRolesViewModel
                                               {
                                                   Id = u.Id,
@@ -175,6 +176,7 @@ namespace HardcoreHistoryBlog.Controllers
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Assign(UserRolesViewModel vm)
         {
@@ -187,5 +189,28 @@ namespace HardcoreHistoryBlog.Controllers
             }
             return View(vm);
         }
+
+        [HttpGet]
+        public ActionResult Remove(string Id) 
+        {
+            var user = _repo.GetUser((string)Id);
+            return View(new UserRolesViewModel
+            { Email = user.Email });
+        }
+
+        //[HttpPost]
+        //public async Task Remove(List<string> deleteList, string Id) 
+        //{
+        //    var user = _repo.GetUser((string)Id);
+        //    var role = _userManager.GetRolesAsync(user);
+        //    roleName = role.ToAsyncEnumerable<roleNamse>            
+
+
+        //    foreach (var roleName in deleteList)
+        //    {
+        //        var result = await _userManager.RemoveFromRoleAsync(user, roleName);                
+        //    }
+            
+        //}
     }
 }

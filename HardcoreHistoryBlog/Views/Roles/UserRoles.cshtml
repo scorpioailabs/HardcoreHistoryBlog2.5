@@ -22,7 +22,7 @@
                 @Html.DisplayFor(modelItem => item.Rolename)
             </td>
             <td class="d-sm-table-cell">
-                <a asp-action="Assign" asp-route-id="@item.Id">Change/Assign</a>
+                <a asp-action="Remove" asp-route-id="@item.Id">Remove from Role</a>
             </td>
         </tr>
     }

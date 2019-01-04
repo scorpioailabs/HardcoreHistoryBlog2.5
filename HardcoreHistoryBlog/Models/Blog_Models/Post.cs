@@ -33,19 +33,4 @@ namespace HardcoreHistoryBlog.Models.Blog_Models
         public string UserId { get; set; }
     }
 
-    public class Client : ApplicationUser
-    {
-        public virtual ApplicationUser Author { get; set; }
-        public virtual ApplicationRole Role { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
-    }
-
-    public class Customer : ApplicationUser
-    {
-        public virtual ApplicationRole Role { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<Like> Likes { get; set; } 
-        public virtual ICollection<Comment> Comments { get; set; }
-    }
-
 }

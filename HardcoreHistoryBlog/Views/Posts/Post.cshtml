@@ -72,8 +72,20 @@
                         <p>@c.Message</p>
                     </h5>
                 </div>
-            }
-
+                <div class="well-sm" style="margin-right">
+                    <h4>Replies</h4>
+                    @{ 
+                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id });
+                    }
+                    @foreach (var sc in c.SubComments)
+                    {
+                        <h6>
+                            <p><i class="fa fa comment"></i><strong>@sc.By  </strong><i><small>  @sc.Edited</small></i></p>
+                            <p>@sc.Message</p>
+                        </h6>
+                    }
+                </div>
+                        }
 
         </div>
         <!-- Sidebar Widgets Column -->

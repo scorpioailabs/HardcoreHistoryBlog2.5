@@ -11,6 +11,6 @@ namespace HardcoreHistoryBlog.Models.Comments
     {
         [Required]
         public int MainCommentId { get; set; }  //1-many relationship with maincomment
-
+        public string UserId { get; internal set; }
     }
 }

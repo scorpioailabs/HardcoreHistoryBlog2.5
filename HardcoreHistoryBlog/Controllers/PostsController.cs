@@ -55,7 +55,7 @@ namespace HardcoreHistoryBlog.Controllers
             return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
         }
 
-        [Authorize(Roles ="Customer,Blogger,Admin")]
+        [Authorize(Roles ="Customer, Admin")]
         [AutoValidateAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel vm)
@@ -84,12 +84,16 @@ namespace HardcoreHistoryBlog.Controllers
             }
             else
             {
+                var user = await _userManager.GetUserAsync(User);
+                var email = user.Email;
                 var comment = new SubComment
                 {
                     MainCommentId = vm.MainCommentId,
                     Message = vm.Message,
                     Created = DateTime.Now,
-                    Edited = DateTime.Now
+                    Edited = DateTime.Now,
+                    By = user.FirstName,
+                    UserId = user.Id
                 };
                 _repo.AddSubComment(comment);
             }
