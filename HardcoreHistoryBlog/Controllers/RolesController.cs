@@ -164,19 +164,21 @@ namespace HardcoreHistoryBlog.Controllers
         [HttpGet]
         public IActionResult Assign(string Id)
         {
-            var user = _repo.GetUser((string)Id);
+            List<SelectListItem> ulist = new List<SelectListItem>();
+            foreach(var user in _userManager.Users)
+                ulist.Add(new SelectListItem() { Value = user.Email, Text = user.Email });
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var role in _roleManager.Roles)
                 list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
             ViewBag.Roles = list;
-            return View(new UserRolesViewModel
-            { Email = user.Email});
+            ViewBag.Users = ulist;
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Assign(UserRolesViewModel vm)
         {
-            var user = await _userManager.FindByIdAsync(vm.Id);
+            var user = await _userManager.FindByEmailAsync(vm.Email);
             var result = _userManager.AddToRoleAsync(user, vm.Rolename).Result;
             if (result.Succeeded)
             {
