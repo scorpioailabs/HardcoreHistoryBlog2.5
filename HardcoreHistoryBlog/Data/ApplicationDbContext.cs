@@ -60,5 +60,8 @@ namespace HardcoreHistoryBlog.Data
 
 
         public DbSet<HardcoreHistoryBlog.ViewModels.RoleListViewModel> UserRoleViewModel { get; set; }
+
+
+        public DbSet<HardcoreHistoryBlog.ViewModels.UserRolesViewModel> UserRolesViewModel { get; set; }
     }
 }

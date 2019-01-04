@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HardcoreHistoryBlog.ViewModels.UserRolesViewModel>
+
+
+<h3>Assign a new role</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th class="d-sm-table-cell">
+            User
+        </th>
+        <th class="d-sm-table-cell">
+            Role
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="d-sm-table-cell">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td class="d-sm-table-cell">
+                @Html.DisplayFor(modelItem => item.Rolename)
+            </td>
+            <td class="d-sm-table-cell">
+                <a asp-action="Assign" asp-route-id="@item.Id">Change/Assign</a>
+            </td>
+        </tr>
+    }
+</table>

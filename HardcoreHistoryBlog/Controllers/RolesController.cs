@@ -143,26 +143,47 @@ namespace HardcoreHistoryBlog.Controllers
             else return View(vm);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> AssignRole(string Id)
-        //{
-        //    List<UserRolesViewModel> model = new List<UserRolesViewModel>();
-        //    model = _userManager.Users.Select(r => new UserRolesViewModel
-        //    {
-        //        Email = u.Email,
-        //        Description = r.Description,
-        //        Id = r.Id,
-        //        NumberOfUsers = r.UserRoles.Count
-        //    }).ToList();
-        //    return View(model);
-        //}
+        [HttpGet]
+        public IActionResult UserRoles(string Id)
+        {
+            List<UserRolesViewModel> model = (from u in _context.Users
+                                              join ur in _context.UserRoles on u.Id equals ur.UserId
+                                              join r in _context.Roles on ur.RoleId equals r.Id
+                                              select new UserRolesViewModel
+                                              {
+                                                  Id = u.Id,
+                                                  Email = u.Email,
+                                                  Rolename = r.Name,
+                                                  RoleId = ur.RoleId
+                                              }).ToList();
 
-        //[AutoValidateAntiforgeryToken]
-        //[HttpPost]
-        //public async Task<IActionResult> AssignRole(UserRolesViewModel vm)
-        //{
+            return View(model);
+        }
 
-        //}
-                        
+
+        [HttpGet]
+        public IActionResult Assign(string Id)
+        {
+            var user = _repo.GetUser((string)Id);
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in _roleManager.Roles)
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = list;
+            return View(new UserRolesViewModel
+            { Email = user.Email});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Assign(UserRolesViewModel vm)
+        {
+            var user = await _userManager.FindByIdAsync(vm.Id);
+            var result = _userManager.AddToRoleAsync(user, vm.Rolename).Result;
+            if (result.Succeeded)
+            {
+                await _userManager.UpdateAsync(user);
+                return RedirectToAction("UserRoles");
+            }
+            return View(vm);
+        }
     }
 }
