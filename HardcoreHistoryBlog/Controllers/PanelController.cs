@@ -104,7 +104,6 @@ namespace HardcoreHistoryBlog.Controllers
         {
             var post = new Post
             {
-                Id = vm.Id,
                 Title = vm.Title,
                 Content = vm.Content,
                 Short_Description = vm.Short_Description,
@@ -246,15 +245,15 @@ namespace HardcoreHistoryBlog.Controllers
 
         public IActionResult UserComments() 
         {
-            List<AnalyticsViewModel> model = new List<AnalyticsViewModel>();
-            model = _context.Posts.Select(p => new AnalyticsViewModel 
-            {
-                Id = p.Id,
-                UserId = p.UserId
-            }).ToList();
+            List<AnalyticsViewModel> model = (from u in _context.Users
+                                              join c in _context.MainComments on u.Id equals c.UserId
+                                              select new AnalyticsViewModel
+                                              {
+                                                  UserId = u.Id,
+                                                  Username = u.Email,
+                                                  NumberOfComments = u.MainComments.Count()
+                                              }).ToList();
             return View(model);
         }
-
-
     }
 }

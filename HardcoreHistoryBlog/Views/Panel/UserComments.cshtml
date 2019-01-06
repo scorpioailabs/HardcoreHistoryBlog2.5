@@ -1,31 +1,30 @@
-﻿@using HardcoreHistoryBlog.Data
-@model IEnumerable<HardcoreHistoryBlog.ViewModels.AnalyticsViewModel>
+﻿@model IEnumerable<HardcoreHistoryBlog.ViewModels.AnalyticsViewModel>
 
-
-<h2>Comments by Post</h2>
-
-
-<table class="table table-bordered table-hover">
-    <tr>
-        <th class="d-sm-table-cell">
-            User
-        </th>
-        <th class="d-sm-table-cell">
-            Number of Comments
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
-            <td class="d-sm-table-cell">
-                @Html.DisplayFor(modelItem => item.Username)
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                Commment Count
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a  asp-action="UserDetails" asp-route-id="@item.UserId">@Html.DisplayFor(modelItem => item.Username)</a>
             </td>
-            <td class="d-sm-table-cell">
+            <td>
                 @Html.DisplayFor(modelItem => item.NumberOfComments)
             </td>
         </tr>
-    }
+}
+    </tbody>
 </table>
-<div>
-    <a asp-action="Index">Back to Panel</a>
-</div>

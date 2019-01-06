@@ -40,7 +40,7 @@ namespace HardcoreHistoryBlog.Controllers
             // if no categories then get all posts, otherwise get all posts BY category
             return View(posts);
         }
-
+        //Get single post
         [AutoValidateAntiforgeryToken]
         public IActionResult Post(int id)
         {

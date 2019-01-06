@@ -40,11 +40,11 @@
 
             </p>
             @*<div class="well-sm">
-                <h4>
-                <i class="fa fa fa-thumbs-up"></i>
-                <i class="fa fa fa-thumbs-down"></i>
-                    </h4>
-                    </div>*@
+        <h4>
+        <i class="fa fa fa-thumbs-up"></i>
+        <i class="fa fa fa-thumbs-down"></i>
+            </h4>
+            </div>*@
 
             <div class="well-sm">
                 <h4><i class="fa fa-fire"></i> Popular Posts:</h4>
@@ -72,11 +72,14 @@
                         <p>@c.Message</p>
                     </h5>
                 </div>
-                <div class="well-sm" style="margin-right">
-                    <h4>Replies</h4>
-                    @{ 
-                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id });
-                    }
+                <div class="well-sm" style="margin-left: 20px;">
+
+                    <div id="reply" data-toggle="collapse in">
+                        @{
+                            await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id });
+                        }
+                    </div>
+
                     @foreach (var sc in c.SubComments)
                     {
                         <h6>
@@ -85,7 +88,8 @@
                         </h6>
                     }
                 </div>
-                        }
+                
+            }
 
         </div>
         <!-- Sidebar Widgets Column -->
