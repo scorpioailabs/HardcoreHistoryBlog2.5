@@ -18,7 +18,7 @@ namespace HardcoreHistoryBlog.Data
         public static void SeedDb
             (ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            context.Database.Migrate();
+            context.Database.EnsureCreated();
             {
                 
 

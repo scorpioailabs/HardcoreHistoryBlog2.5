@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<HardcoreHistoryBlog.ViewModels.AnalyticsViewModel>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -10,21 +9,26 @@
                 @Html.DisplayNameFor(model => model.Username)
             </th>
             <th>
-                Commment Count
+                Total Commment Count
+            </th>
+            <th>
+                Has Commented On
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a  asp-action="UserDetails" asp-route-id="@item.UserId">@Html.DisplayFor(modelItem => item.Username)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfComments)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="UserDetails" asp-route-id="@item.UserId">@Html.DisplayFor(modelItem => item.Username)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfComments)
+                </td>
+                <a asp-controller="Posts" asp-action="Post" asp-route-id="@item.PostId">@Html.DisplayNameFor(modelItem => item.PostId)</a>
+            </tr>
+        }
     </tbody>
 </table>

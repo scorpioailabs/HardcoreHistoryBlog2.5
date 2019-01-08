@@ -243,15 +243,18 @@ namespace HardcoreHistoryBlog.Controllers
             return View(model);
         }
 
-        public IActionResult UserComments() 
+        public IActionResult UserComments()
         {
             List<AnalyticsViewModel> model = (from u in _context.Users
                                               join c in _context.MainComments on u.Id equals c.UserId
+                                              join p in _context.Posts on c.PostId equals p.Id
                                               select new AnalyticsViewModel
                                               {
                                                   UserId = u.Id,
                                                   Username = u.Email,
-                                                  NumberOfComments = u.MainComments.Count()
+                                                  NumberOfComments = u.MainComments.Count(),
+                                                  Title = p.Title,
+                                                  PostId = p.Id
                                               }).ToList();
             return View(model);
         }

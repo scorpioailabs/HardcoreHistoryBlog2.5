@@ -13,5 +13,6 @@ namespace HardcoreHistoryBlog.ViewModels
         public string Username { get; set; }
         public int NumberOfComments { get; set; }
         public int NumberOfUsers { get; set; }
+        public int PostId { get; set; }
     }
 }

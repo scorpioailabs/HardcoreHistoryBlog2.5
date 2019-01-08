@@ -9,5 +9,6 @@ namespace HardcoreHistoryBlog.Models.Comments
     {
         public List<SubComment> SubComments { get; set; }
         public string UserId { get; internal set; }
+        public int PostId { get; set; }
     }
 }
