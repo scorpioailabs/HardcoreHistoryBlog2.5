@@ -27,7 +27,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberOfComments)
                 </td>
-                <a asp-controller="Posts" asp-action="Post" asp-route-id="@item.PostId">@Html.DisplayNameFor(modelItem => item.PostId)</a>
+                <td>
+                    <a asp-controller="Posts" asp-action="Post" asp-route-id="@item.PostId">@item.Title</a>
+                </td>
+                
             </tr>
         }
     </tbody>
