@@ -163,7 +163,7 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Message");
 
-                    b.Property<int?>("PostId");
+                    b.Property<int>("PostId");
 
                     b.Property<string>("UserId");
 
@@ -192,11 +192,15 @@ namespace HardcoreHistoryBlog.Migrations
 
                     b.Property<string>("Message");
 
+                    b.Property<int?>("PostId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MainCommentId");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -223,6 +227,29 @@ namespace HardcoreHistoryBlog.Migrations
                     b.HasKey("FirstName");
 
                     b.ToTable("RegisterViewModel");
+                });
+
+            modelBuilder.Entity("HardcoreHistoryBlog.ViewModels.AnalyticsViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NumberOfComments");
+
+                    b.Property<int>("NumberOfUsers");
+
+                    b.Property<int>("PostId");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AnalyticsViewModel");
                 });
 
             modelBuilder.Entity("HardcoreHistoryBlog.ViewModels.RoleListViewModel", b =>
@@ -415,9 +442,10 @@ namespace HardcoreHistoryBlog.Migrations
 
             modelBuilder.Entity("HardcoreHistoryBlog.Models.Comments.MainComment", b =>
                 {
-                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post")
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
                         .WithMany("MainComments")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "User")
                         .WithMany("MainComments")
@@ -430,6 +458,10 @@ namespace HardcoreHistoryBlog.Migrations
                         .WithMany("SubComments")
                         .HasForeignKey("MainCommentId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HardcoreHistoryBlog.Models.Blog_Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId");
 
                     b.HasOne("HardcoreHistoryBlog.Data.ApplicationUser", "User")
                         .WithMany()
