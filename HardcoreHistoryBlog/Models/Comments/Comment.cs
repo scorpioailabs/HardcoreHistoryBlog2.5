@@ -15,5 +15,6 @@ namespace HardcoreHistoryBlog.Models.Comments
         public DateTime Edited { get; set; }
         public virtual ApplicationUser User { get; set; }
         public string By { get; set; }
+        public virtual Post Post { get; set; }
     }
 }
