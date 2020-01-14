@@ -79,15 +79,14 @@ namespace HardcoreHistoryBlog
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.AddPageRouteModelConvention("/Account", model => { });
-            options.Conventions.AddPageRouteModelConvention("/Posts", model => { });
-            options.AllowAreas = true;
-            options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-            options.Conventions.AuthorizeAreaFolder("/Auth", "/Logout");
-        });
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                options.Conventions.AuthorizeAreaPage("Admin", "/Index");
+                options.Conventions.AuthorizeAreaFolder("Admin", "/Users");
+            })
+                .AddNewtonsoftJson();
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -153,20 +152,24 @@ namespace HardcoreHistoryBlog
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            using (var loggerFactor = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+                builder.AddDebug();
+            }))
 
             app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseAuthentication();
 
             DBSeeder.SeedDb(context, userManager, roleManager);
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                  name: "default",
-                  template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+
             CreateRoles(serviceProvider).Wait();
         }
     }

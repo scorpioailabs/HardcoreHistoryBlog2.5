@@ -20,8 +20,6 @@ namespace HardcoreHistoryBlog.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        //private readonly IRepository _repo;
-        //private readonly IUserRepository _repoUser;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
@@ -30,8 +28,6 @@ namespace HardcoreHistoryBlog.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            //_repo = repo;
-            //_repoUser = repoUser;
         }
 
 
