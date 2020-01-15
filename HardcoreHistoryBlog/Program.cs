@@ -18,32 +18,29 @@ namespace HardcoreHistoryBlog
 {
     public class Program
     {
+        private const string MY_VAULT = "hardcore-history-dev-kv";
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-             .ConfigureWebHostDefaults(webBuilder =>
-             {
-                 webBuilder.UseStartup<Startup>();
-             })
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                if (context.HostingEnvironment.IsProduction())
-                {
-                    var root = config.Build();
-                    var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                    var keyVaultClient = new KeyVaultClient(
-                        new KeyVaultClient.AuthenticationCallback(
-                            azureServiceTokenProvider.KeyVaultTokenCallback));
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+                WebHost.CreateDefaultBuilder(args)
+                    .ConfigureAppConfiguration((ctx, builder) =>
+                    {
+                        var keyVaultEndpoint = GetKeyVaultEndpoint();
+                        if (!string.IsNullOrEmpty(keyVaultEndpoint))
+                        {
+                            var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                            var keyVaultClient = new KeyVaultClient(
+                                new KeyVaultClient.AuthenticationCallback(
+                                    azureServiceTokenProvider.KeyVaultTokenCallback));
+                            builder.AddAzureKeyVault(
+                                keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
+                        }
+                    }
+                 ).UseStartup<Startup>();
 
-                    config.AddAzureKeyVault(
-                        $"https://{root["KeyVault:Vault"]}.vault.azure.net/",
-                        keyVaultClient,
-                        new DefaultKeyVaultSecretManager());
-                }
-            });
+        private static string GetKeyVaultEndpoint() => $"https://{MY_VAULT}.vault.azure.net";
     }
 }
