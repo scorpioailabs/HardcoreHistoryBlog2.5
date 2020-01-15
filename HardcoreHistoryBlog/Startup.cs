@@ -22,11 +22,11 @@ namespace HardcoreHistoryBlog
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-     .SetBasePath(env.ContentRootPath)
-     .AddJsonFile("appsettings.json",
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json",
                   optional: false,
                   reloadOnChange: true)
-     .AddEnvironmentVariables();
+            .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
             {
@@ -167,6 +167,7 @@ namespace HardcoreHistoryBlog
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 

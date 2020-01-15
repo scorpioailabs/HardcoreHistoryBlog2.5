@@ -20,11 +20,15 @@ namespace HardcoreHistoryBlog
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+             .ConfigureWebHostDefaults(webBuilder =>
+             {
+                 webBuilder.UseStartup<Startup>();
+             })
             .ConfigureAppConfiguration((context, config) =>
             {
                 if (context.HostingEnvironment.IsProduction())
@@ -40,10 +44,6 @@ namespace HardcoreHistoryBlog
                         keyVaultClient,
                         new DefaultKeyVaultSecretManager());
                 }
-            })
-             .ConfigureWebHostDefaults(webBuilder =>
-             {
-                 webBuilder.UseStartup<Startup>();
-             });
+            });
     }
 }
